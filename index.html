@@ -519,7 +519,7 @@ footer p { color: var(--muted); font-size: 0.85rem; }
       <span class="module-tag">Advanced</span>
       <span class="module-arrow">Open Trading Lab →</span>
     </div>
-    <div class="module-card" onclick="openTradingLab('daytrading')" style="--card-accent: var(--purple); --icon-bg: rgba(155,93,229,0.12); --tag-bg: rgba(155,93,229,0.08); --tag-color: var(--purple); cursor:pointer;">
+    <div class="module-card" onclick="openTradingLab('chart')" style="--card-accent: var(--purple); --icon-bg: rgba(155,93,229,0.12); --tag-bg: rgba(155,93,229,0.08); --tag-color: var(--purple); cursor:pointer;">
       <div class="module-icon">🚀</div>
       <h3>Starting a Business</h3>
       <p>From idea to launch — how to validate, brand, market, and scale a business with little to no money.</p>
@@ -659,7 +659,6 @@ footer p { color: var(--muted); font-size: 0.85rem; }
       <div class="header-btns">
         <div class="live-badge"><div class="live-dot"></div> 24/7 Live Feed</div>
         <button onclick="openTradingLab('chart')" class="trading-lab-btn">🔬 Trading Lab</button>
-        <button onclick="openTradingLab('daytrading')" class="day-trading-btn">📊 Day Trading</button>
       </div>
     </div>
     <div class="sym-selector" id="symSelector">
@@ -684,7 +683,6 @@ footer p { color: var(--muted); font-size: 0.85rem; }
     </div>
     <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;align-items:center;">
       <button onclick="openTradingLab('chart')" class="trading-lab-btn" style="font-size:0.88rem;padding:12px 26px;">🔬 Open Full Trading Lab — Live Charts + Quiz</button>
-      <button onclick="openTradingLab('daytrading')" class="day-trading-btn" style="font-size:0.88rem;padding:12px 26px;">📊 Day Trading Section →</button>
       <span style="color:var(--muted);font-size:0.82rem;">Charts powered by TradingView · Real-time 24/7</span>
     </div>
   </div>
@@ -743,7 +741,7 @@ footer p { color: var(--muted); font-size: 0.85rem; }
   <div class="resources-grid">
     <div class="resource-card fade-in"><div class="resource-icon" style="background:rgba(201,241,53,0.12)">📖</div><div><h4>Rich Dad Poor Dad</h4><p>Robert Kiyosaki's classic on assets vs liabilities and financial independence mindset.</p><div class="resource-type" style="color:var(--lime)">📚 Book</div></div></div>
     <div class="resource-card fade-in"><div class="resource-icon" style="background:rgba(0,229,195,0.12)">📖</div><div><h4>The Psychology of Money</h4><p>Morgan Housel explains how your mindset about money matters more than any strategy.</p><div class="resource-type" style="color:var(--teal)">📚 Book</div></div></div>
-    <div class="resource-card fade-in" onclick="openTradingLab('chart')" style="cursor:pointer;"><div class="resource-icon" style="background:rgba(155,93,229,0.12)">🔬</div><div><h4>MoneyMoves Trading Lab</h4><p>Live TradingView charts, day trading section, advanced quiz — 24/7 live market data.</p><div class="resource-type" style="color:var(--purple)">🛠️ Free Tool — Open Now!</div></div></div>
+    <div class="resource-card fade-in" onclick="openTradingLab('chart')" style="cursor:pointer;"><div class="resource-icon" style="background:rgba(155,93,229,0.12)">🔬</div><div><h4>MoneyMoves Trading Lab</h4><p>Live TradingView charts, advanced quiz — 24/7 live market data.</p><div class="resource-type" style="color:var(--purple)">🛠️ Free Tool — Open Now!</div></div></div>
     <div class="resource-card fade-in"><div class="resource-icon" style="background:rgba(255,107,53,0.12)">🎥</div><div><h4>Khan Academy Finance</h4><p>Free in-depth courses on personal finance, investing, and economics.</p><div class="resource-type" style="color:var(--orange)">🎓 Free Course</div></div></div>
     <div class="resource-card fade-in"><div class="resource-icon" style="background:rgba(247,37,133,0.12)">📱</div><div><h4>Fidelity Youth Account</h4><p>Beginner investing app for teens under 18 with parental approval. Start with $1.</p><div class="resource-type" style="color:var(--pink)">📱 App</div></div></div>
     <div class="resource-card fade-in" onclick="openTradingLab('glossary')" style="cursor:pointer;"><div class="resource-icon" style="background:rgba(255,214,10,0.12)">📖</div><div><h4>MoneyMoves Dictionary</h4><p>100+ financial terms with real definitions, examples, formulas, and context.</p><div class="resource-type" style="color:var(--yellow)">📖 Free Reference</div></div></div>
@@ -785,9 +783,6 @@ footer p { color: var(--muted); font-size: 0.85rem; }
     <div class="tl-tabs">
       <button class="tl-tab active" id="tlTabChart" onclick="tlSetTab('chart',this)">
         <div class="tl-dot" style="background:#5c8df6"></div> Chart
-      </button>
-      <button class="tl-tab" id="tlTabDaytrading" onclick="tlSetTab('daytrading',this)">
-        <div class="tl-dot" style="background:#ff6b35"></div> Day Trading
       </button>
       <button class="tl-tab" id="tlTabQuiz" onclick="tlSetTab('quiz',this)">
         <div class="tl-dot" style="background:#c9f135"></div> Quiz
@@ -899,10 +894,9 @@ footer p { color: var(--muted); font-size: 0.85rem; }
       <!-- Bottom section -->
       <div class="tl-bottom">
         <div class="tl-bs-tabs">
-          <button class="tl-bs-tab active" id="tlBsTabDaytrading" onclick="tlSetBsTab('daytrading',this)">📊 Day Trading</button>
           <button class="tl-bs-tab" id="tlBsTabQuiz" onclick="tlSetBsTab('quiz',this)">🧠 Quiz</button>
           <button class="tl-bs-tab" id="tlBsTabScreener" onclick="tlSetBsTab('screener',this)">🔍 Screener</button>
-          <button class="tl-bs-tab" id="tlBsTabGlossary" onclick="tlSetBsTab('glossary',this)">📖 Glossary</button>
+          <button class="tl-bs-tab active" id="tlBsTabGlossary" onclick="tlSetBsTab('glossary',this)">📖 Glossary</button>
         </div>
         <div class="tl-bs-body" id="tlBsBody"></div>
       </div>
@@ -958,7 +952,7 @@ function loadMiniChart(sym) {
     wrap.innerHTML = `
       <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:420px;gap:16px;color:#7a7a9a;text-align:center;padding:20px;">
         <div style="font-size:2.5rem">📈</div>
-        <div style="font-size:1rem;color:#f0f0f8;font-weight:600">Live Chart — ${sym}</div>
+        <div style="font-size:1rem;color:#f0f3fa;font-weight:600">Live Chart — ${sym}</div>
         <div style="font-size:0.85rem;">Chart requires an internet connection and ad-blocker off for TradingView.</div>
         <button onclick="openTradingLab('chart')" style="background:#c9f135;color:#0a0a0f;padding:10px 22px;border-radius:50px;border:none;font-weight:700;font-size:0.85rem;cursor:pointer;font-family:'Syne',sans-serif;">Open Trading Lab →</button>
       </div>`;
@@ -1079,7 +1073,7 @@ let tlCurrentSym = 'NASDAQ:AAPL';
 let tlCurrentInterval = 'D';
 let tlCurrentType = '1';
 let tlRpTab = 'watchlist';
-let tlBsTab = 'daytrading';
+let tlBsTab = 'quiz';
 let tlLqCurrent = 0, tlLqScore = 0, tlLqAnswered = false, tlLqQuestions = [];
 let tlChartLoaded = false;
  
@@ -1089,22 +1083,20 @@ function openTradingLab(section) {
   document.body.style.overflow = 'hidden';
  
   // Activate the right tab
-  const tabMap = { chart:'tlTabChart', daytrading:'tlTabDaytrading', quiz:'tlTabQuiz', screener:'tlTabScreener', glossary:'tlTabGlossary' };
+  const tabMap = { chart:'tlTabChart', quiz:'tlTabQuiz', screener:'tlTabScreener', glossary:'tlTabGlossary' };
   document.querySelectorAll('.tl-tab').forEach(t => t.classList.remove('active'));
   const tabEl = document.getElementById(tabMap[section] || 'tlTabChart');
   if (tabEl) tabEl.classList.add('active');
  
   if (section === 'chart') {
-    // Load chart on first open
     if (!tlChartLoaded) {
       setTimeout(() => { tlLoadChart(tlCurrentSym, tlCurrentInterval, tlCurrentType); tlChartLoaded = true; }, 200);
     }
   } else {
-    // For non-chart tabs, load chart in background and switch bottom tab
     if (!tlChartLoaded) {
       setTimeout(() => { tlLoadChart(tlCurrentSym, tlCurrentInterval, tlCurrentType); tlChartLoaded = true; }, 200);
     }
-    const bsTabMap = { daytrading:'tlBsTabDaytrading', quiz:'tlBsTabQuiz', screener:'tlBsTabScreener', glossary:'tlBsTabGlossary' };
+    const bsTabMap = { quiz:'tlBsTabQuiz', screener:'tlBsTabScreener', glossary:'tlBsTabGlossary' };
     if (bsTabMap[section]) {
       tlBsTab = section;
       document.querySelectorAll('.tl-bs-tab').forEach(t => t.classList.remove('active'));
@@ -1115,7 +1107,7 @@ function openTradingLab(section) {
     }
   }
   tlRenderRpBody();
-  if (section === 'chart' || section === 'daytrading') tlRenderBsBody();
+  if (section === 'chart') tlRenderBsBody();
 }
  
 function closeTradingLab() {
@@ -1130,9 +1122,9 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTrading
 function tlSetTab(section, el) {
   document.querySelectorAll('.tl-tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
-  if (section === 'chart') { /* chart always visible */ }
+  if (section === 'chart') { }
   else {
-    const bsTabMap = { daytrading:'tlBsTabDaytrading', quiz:'tlBsTabQuiz', screener:'tlBsTabScreener', glossary:'tlBsTabGlossary' };
+    const bsTabMap = { quiz:'tlBsTabQuiz', screener:'tlBsTabScreener', glossary:'tlBsTabGlossary' };
     if (bsTabMap[section]) {
       tlBsTab = section;
       document.querySelectorAll('.tl-bs-tab').forEach(t => t.classList.remove('active'));
@@ -1284,14 +1276,6 @@ function tlSwitchByWl(sym) {
 }
  
 // ── BOTTOM SECTION ──
-const tlDayTradingCards = [
-  { title:'Opening Range Breakout (ORB)', tag:'STRATEGY', tagBg:'rgba(41,98,255,0.15)', tagColor:'#5c8df6', desc:'Wait for the first 5-30 minutes of market open. Mark the high and low. Enter when price breaks above (long) or below (short) this range with volume confirmation.', stats:[{val:'9:30–10AM',lbl:'Setup Window'},{val:'1:2',lbl:'Min R:R'},{val:'HIGH VOL',lbl:'Confirmation'}] },
-  { title:'Momentum Trading', tag:'STRATEGY', tagBg:'rgba(38,166,154,0.15)', tagColor:'#26a69a', desc:'Find stocks up 5%+ premarket with a catalyst (earnings, news, FDA). Enter on the first pullback to VWAP or key support after the initial surge.', stats:[{val:'+5% PRE',lbl:'Min Move'},{val:'VWAP',lbl:'Key Level'},{val:'CATALYST',lbl:'Required'}] },
-  { title:'Risk Management Rules', tag:'MUST KNOW', tagBg:'rgba(239,83,80,0.15)', tagColor:'#ef5350', desc:'Never risk more than 1-2% of your account per trade. Always set a stop loss before entering. Size your position based on your stop distance, not gut feeling.', stats:[{val:'1-2%',lbl:'Max Risk/Trade'},{val:'ALWAYS',lbl:'Set Stop First'},{val:'3:1',lbl:'Target R:R'}] },
-  { title:'VWAP — Volume Weighted Average Price', tag:'INDICATOR', tagBg:'rgba(201,241,53,0.1)', tagColor:'#c9f135', desc:'VWAP is the average price weighted by volume. Institutions use it as a benchmark. Price above VWAP = bullish intraday. Below = bearish. Look for bounces.', stats:[{val:'INTRADAY',lbl:'Time Frame'},{val:'INST.',lbl:'Used By'},{val:'PIVOT',lbl:'Role'}] },
-  { title:'The 3 Biggest Day Trading Mistakes', tag:'WARNING', tagBg:'rgba(255,107,53,0.15)', tagColor:'#ff6b35', desc:'1) Revenge trading after a loss. 2) No stop loss "because it will come back". 3) Overtrading — taking 20 mediocre setups instead of 3 great ones.', stats:[{val:'STOP',lbl:'Revenge Trade'},{val:'ALWAYS',lbl:'Use Stops'},{val:'<5',lbl:'Trades/Day'}] },
-  { title:'Pre-Market Preparation', tag:'ROUTINE', tagBg:'rgba(155,93,229,0.15)', tagColor:'#9b5de5', desc:'Scan for gappers (stocks moving 5%+ premarket). Check earnings calendar. Mark key levels on charts. Know your max daily loss before markets open.', stats:[{val:'8:00AM',lbl:'Start Prep'},{val:'GAPPERS',lbl:'First Scan'},{val:'MAX LOSS',lbl:'Set Daily'}] },
-];
 const tlScreenerData = [
   { sym:'NVDA', name:'NVIDIA', price:'892.35', chgUp:true, chg:'3.12', vol:'48.2M', mktcap:'$2.19T', pe:'65.2', pct:85 },
   { sym:'TSLA', name:'Tesla', price:'178.20', chgUp:false, chg:'1.45', vol:'112.5M', mktcap:'$568B', pe:'38.1', pct:38 },
@@ -1354,124 +1338,6 @@ function tlSetBsTab(tab, el) {
 function tlRenderBsBody() {
   const body = document.getElementById('tlBsBody');
   if (!body) return;
-  if (tlBsTab === 'daytrading') {
-    body.innerHTML = `<div class="tl-dt-grid">${tlDayTradingCards.map(c => `
-      <div class="tl-dt-card">
-        <div class="tl-dt-hdr">
-          <div class="tl-dt-title">${c.title}</div>
-          <span class="tl-dt-tag" style="background:${c.tagBg};color:${c.tagColor}">${c.tag}</span>
-        </div>
-        <p>${c.desc}</p>
-        <div class="tl-dt-stats">${c.stats.map(s => `
-          <div class="tl-dt-stat">
-            <div class="tl-dt-stat-val" style="color:${c.tagColor}">${s.val}</div>
-            <div class="tl-dt-stat-lbl">${s.lbl}</div>
-          </div>`).join('')}
-        </div>
-      </div>`).join('')}</div>`;
-  } else if (tlBsTab === 'quiz') {
+  if (tlBsTab === 'quiz') {
     body.innerHTML = `<div class="tl-quiz" id="tlLabQuiz">
-      <div class="tl-lq-progress"><div class="tl-lq-fill" id="tlLqFill" style="width:0%"></div></div>
-      <div class="tl-lq-q" id="tlLqQ"></div>
-      <div class="tl-lq-opts" id="tlLqOpts"></div>
-      <div class="tl-lq-fb" id="tlLqFb"></div>
-      <div class="tl-lq-nav">
-        <button class="tl-lq-next" id="tlLqNext" onclick="tlLqNext()">Next →</button>
-        <span class="tl-lq-score">Score: <span id="tlLqScoreDisp">0</span>/15</span>
-      </div>
-    </div>`;
-    tlStartQuiz();
-  } else if (tlBsTab === 'screener') {
-    body.innerHTML = `<div style="overflow-x:auto">
-      <table class="tl-screener">
-        <thead><tr><th>Symbol</th><th>Price</th><th>Change %</th><th>Volume</th><th>Market Cap</th><th>P/E</th><th>52W Range</th></tr></thead>
-        <tbody>${tlScreenerData.map(s => `<tr>
-          <td><div class="tl-scr-sym">${s.sym}</div><div class="tl-scr-name">${s.name}</div></td>
-          <td style="color:var(--tl-bright)">$${s.price}</td>
-          <td class="${s.chgUp?'tl-up':'tl-down'}">${s.chgUp?'+':'-'}${s.chg}%</td>
-          <td style="color:var(--tl-muted)">${s.vol}</td>
-          <td style="color:var(--tl-muted)">${s.mktcap}</td>
-          <td style="color:var(--tl-muted)">${s.pe}</td>
-          <td><div class="tl-minibar"><div class="tl-minibar-fill" style="width:${s.pct}%;background:${s.chgUp?'var(--tl-green)':'var(--tl-red)'}"></div></div></td>
-        </tr>`).join('')}</tbody>
-      </table>
-      <div style="margin-top:12px;font-size:0.7rem;color:var(--tl-muted)">* Educational reference only. Not real-time. Not financial advice.</div>
-    </div>`;
-  } else if (tlBsTab === 'glossary') {
-    body.innerHTML = `<div class="tl-gls-grid">${tlGlossary.map(t => `
-      <div class="tl-gls-item">
-        <div class="tl-gls-term">${t.term}</div>
-        <div class="tl-gls-def">${t.def}</div>
-      </div>`).join('')}</div>`;
-  }
-}
- 
-// ── TL QUIZ ──
-function tlStartQuiz() {
-  tlLqCurrent = 0; tlLqScore = 0; tlLqAnswered = false;
-  tlLqQuestions = [...tlQuizBank].sort(() => Math.random()-0.5);
-  tlRenderLqQ();
-}
-function tlRenderLqQ() {
-  if (tlLqCurrent >= tlLqQuestions.length) { tlShowLqResult(); return; }
-  const q = tlLqQuestions[tlLqCurrent];
-  const total = tlLqQuestions.length;
-  const fill = document.getElementById('tlLqFill');
-  if (fill) fill.style.width = (tlLqCurrent/total*100)+'%';
-  const qEl = document.getElementById('tlLqQ');
-  if (qEl) qEl.innerHTML = `<strong style="color:var(--tl-muted);font-size:0.72rem;font-family:'JetBrains Mono',monospace">Q${tlLqCurrent+1}/${total}</strong><br>${q.q}`;
-  const optsEl = document.getElementById('tlLqOpts');
-  if (optsEl) optsEl.innerHTML = q.opts.map((o,i) => `<button class="tl-lq-opt" onclick="tlLqAnswer(${i})">${o}</button>`).join('');
-  const fb = document.getElementById('tlLqFb');
-  if (fb) fb.className = 'tl-lq-fb';
-  const nxt = document.getElementById('tlLqNext');
-  if (nxt) nxt.style.display = 'none';
-  tlLqAnswered = false;
-}
-function tlLqAnswer(idx) {
-  if (tlLqAnswered) return;
-  tlLqAnswered = true;
-  const q = tlLqQuestions[tlLqCurrent];
-  document.querySelectorAll('.tl-lq-opt').forEach((o,i) => {
-    o.style.pointerEvents = 'none';
-    if (i===q.ans) o.classList.add('correct');
-    else if (i===idx && idx!==q.ans) o.classList.add('wrong');
-  });
-  const fb = document.getElementById('tlLqFb');
-  if (idx===q.ans) {
-    tlLqScore++;
-    const sd = document.getElementById('tlLqScoreDisp');
-    if (sd) sd.textContent = tlLqScore;
-    fb.className = 'tl-lq-fb show good';
-    fb.textContent = '✅ '+q.exp;
-  } else {
-    fb.className = 'tl-lq-fb show bad';
-    fb.textContent = '❌ '+q.exp;
-  }
-  const nxt = document.getElementById('tlLqNext');
-  if (nxt) nxt.style.display = 'inline-block';
-}
-function tlLqNext() { tlLqCurrent++; tlRenderLqQ(); }
-function tlShowLqResult() {
-  const pct = tlLqScore/tlLqQuestions.length;
-  let emoji='🌱',title='Keep practicing!';
-  if (pct>=0.9){emoji='🏆';title='Trading Expert!';}
-  else if (pct>=0.7){emoji='🎯';title='Solid Knowledge!';}
-  else if (pct>=0.5){emoji='📚';title='Getting There!';}
-  const quiz = document.getElementById('tlLabQuiz');
-  if (quiz) quiz.innerHTML = `
-    <div style="text-align:center;padding:24px 0">
-      <div style="font-size:2.5rem;margin-bottom:12px">${emoji}</div>
-      <div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--tl-bright);margin-bottom:8px">${title}</div>
-      <div style="color:var(--tl-muted);font-size:0.82rem;margin-bottom:18px">You scored ${tlLqScore}/${tlLqQuestions.length} — ${Math.round(pct*100)}%</div>
-      <button onclick="tlStartQuiz()" style="background:var(--tl-blue);color:white;border:none;padding:9px 22px;border-radius:5px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer;">Try Again 🔄</button>
-    </div>`;
-}
- 
-// Init TL render (no chart yet — loads on open)
-tlRenderRpBody();
-tlRenderBsBody();
- 
-</script>
-</body>
-</html>
+      <div class="tl-lq-progress"><div class="tl-lq-fill" id="tlLqFill" style="widt…
