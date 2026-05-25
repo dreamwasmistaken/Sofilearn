@@ -6,9 +6,6 @@
 <title>MoneyMoves — Financial Education for Gen Z</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ================================================================
-   MAIN PAGE STYLES
-   ================================================================ */
 :root {
   --bg: #0a0a0f;
   --surface: #111118;
@@ -111,8 +108,6 @@ section { padding: 100px 5%; }
 .live-dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; animation: pulse 1.5s infinite; }
 .trading-lab-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--purple), #4f46e5); color: white; border: none; padding: 10px 22px; border-radius: 50px; font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
 .trading-lab-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,58,237,0.4); }
-.day-trading-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--orange), var(--pink)); color: white; border: none; padding: 10px 22px; border-radius: 50px; font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; cursor: pointer; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
-.day-trading-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,53,0.4); }
  
 .sym-selector { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
 .sym-pill { padding: 6px 14px; border-radius: 50px; border: 1px solid var(--border); background: transparent; color: var(--muted); font-family: var(--font-body); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
@@ -195,7 +190,7 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 .fade-in.visible { opacity: 1; transform: none; }
  
 /* ================================================================
-   TRADING LAB OVERLAY STYLES
+   TRADING LAB OVERLAY
    ================================================================ */
 #tradingLabOverlay {
   display: none;
@@ -210,7 +205,6 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 }
 #tradingLabOverlay.open { display: flex; }
  
-/* TL CSS vars scoped to overlay */
 #tradingLabOverlay {
   --tl-bg: #0b0e11;
   --tl-bg2: #131722;
@@ -233,7 +227,6 @@ footer p { color: var(--muted); font-size: 0.85rem; }
   --tl-yellow: #ffd60a;
 }
  
-/* TL Top Bar */
 .tl-topbar {
   height: 48px; background: var(--tl-bg2);
   border-bottom: 1px solid var(--tl-border2);
@@ -273,10 +266,8 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 .tl-live-dot { width: 6px; height: 6px; background: var(--tl-green); border-radius: 50%; animation: tlpulse 1.5s infinite; }
 @keyframes tlpulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.5)} }
  
-/* TL Layout */
 .tl-app { display: flex; flex: 1; overflow: hidden; }
  
-/* TL Sidebar */
 .tl-sidebar {
   width: 56px; background: var(--tl-bg2); border-right: 1px solid var(--tl-border2);
   display: flex; flex-direction: column; align-items: center; padding: 8px 0; gap: 4px;
@@ -285,15 +276,15 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 .tl-sb-btn {
   width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
   font-size: 1rem; cursor: pointer; color: var(--tl-muted); transition: all 0.15s;
-  border: 1px solid transparent; background: transparent;
+  border: 1px solid transparent; background: transparent; position: relative;
 }
 .tl-sb-btn:hover, .tl-sb-btn.active { background: var(--tl-surface2); color: var(--tl-bright); border-color: var(--tl-border2); }
+.tl-sb-btn.tool-active { background: rgba(41,98,255,0.2); color: var(--tl-blue2); border-color: rgba(41,98,255,0.4); }
 .tl-sb-sep { width: 32px; height: 1px; background: var(--tl-border2); margin: 4px 0; }
  
-/* TL Main area */
 .tl-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
  
-/* TL Symbol strip */
+/* Symbol search strip */
 .tl-sym-strip {
   height: 40px; background: var(--tl-bg2); border-bottom: 1px solid var(--tl-border2);
   display: flex; align-items: center; padding: 0 12px; gap: 6px; overflow-x: auto; flex-shrink: 0;
@@ -308,16 +299,17 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 .tl-sym-chip.active { background: var(--tl-surface2); border-color: rgba(41,98,255,0.4); }
 .tl-chip-name { font-size: 0.78rem; font-weight: 700; color: var(--tl-bright); font-family: 'JetBrains Mono', monospace; }
 .tl-chip-chg { font-size: 0.68rem; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
-.tl-up { color: var(--tl-green); } .tl-down { color: var(--tl-red); }
+.tl-up { color: #26a69a; } .tl-down { color: #ef5350; }
 .tl-sym-add { width: 28px; height: 28px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: var(--tl-muted); cursor: pointer; font-size: 1.1rem; flex-shrink: 0; border: 1px dashed var(--tl-border2); transition: all 0.2s; background: transparent; }
  
-/* TL Chart row */
+/* Chart area */
 .tl-chart-row { flex: 1; display: flex; overflow: hidden; }
 .tl-chart-panel { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .tl-chart-toolbar {
-  height: 36px; background: var(--tl-bg2); border-bottom: 1px solid var(--tl-border2);
-  display: flex; align-items: center; padding: 0 10px; gap: 2px; flex-shrink: 0;
+  height: 40px; background: var(--tl-bg2); border-bottom: 1px solid var(--tl-border2);
+  display: flex; align-items: center; padding: 0 10px; gap: 2px; flex-shrink: 0; flex-wrap: nowrap; overflow-x: auto;
 }
+.tl-chart-toolbar::-webkit-scrollbar { display: none; }
 .tl-ct-btn {
   padding: 3px 8px; border-radius: 4px; font-size: 0.72rem; font-weight: 600;
   cursor: pointer; color: var(--tl-muted); transition: all 0.15s; white-space: nowrap;
@@ -325,12 +317,56 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 }
 .tl-ct-btn:hover { background: var(--tl-surface2); color: var(--tl-text); }
 .tl-ct-btn.active { background: rgba(41,98,255,0.15); border-color: rgba(41,98,255,0.3); color: var(--tl-blue2); }
-.tl-ct-sep { width: 1px; height: 18px; background: var(--tl-border2); margin: 0 4px; }
-.tl-ct-lbl { font-size: 0.68rem; color: var(--tl-muted); margin-left: 4px; font-family: 'JetBrains Mono', monospace; }
+.tl-ct-sep { width: 1px; height: 18px; background: var(--tl-border2); margin: 0 4px; flex-shrink: 0; }
+.tl-ct-lbl { font-size: 0.68rem; color: var(--tl-muted); margin-left: 4px; font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
 .tl-chart-wrap { flex: 1; background: var(--tl-bg2); position: relative; overflow: hidden; }
-#tlTvChart { width: 100%; height: 100%; border: none; }
  
-/* TL Right panel */
+/* Custom chart canvas */
+#mmChart { position: absolute; inset: 0; display: block; cursor: crosshair; }
+#mmChartOverlay { position: absolute; inset: 0; pointer-events: none; }
+ 
+/* Chart info overlay */
+.chart-info-box {
+  position: absolute; top: 10px; left: 10px; z-index: 10;
+  background: rgba(13,17,28,0.88); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px;
+  padding: 8px 12px; pointer-events: none;
+}
+.chart-sym { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: var(--tl-bright); }
+.chart-price { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 700; color: var(--tl-bright); margin: 2px 0; }
+.chart-chg { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; }
+.chart-ohlcv { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--tl-muted); margin-top: 3px; }
+ 
+/* Crosshair tooltip */
+#crosshairTooltip {
+  position: absolute; pointer-events: none; z-index: 20;
+  background: rgba(13,17,28,0.95); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px; padding: 6px 10px; font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; color: var(--tl-text); display: none; white-space: nowrap;
+}
+ 
+/* Search modal */
+#symSearchModal {
+  display: none; position: absolute; top: 50px; left: 68px; z-index: 200;
+  background: var(--tl-surface); border: 1px solid var(--tl-border2);
+  border-radius: 10px; width: 420px; max-height: 500px; overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+  flex-direction: column;
+}
+#symSearchModal.open { display: flex; }
+.ssm-input-wrap { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--tl-border2); }
+.ssm-input-wrap span { color: var(--tl-muted); font-size: 1rem; }
+#symSearchInput { flex: 1; background: transparent; border: none; outline: none; color: var(--tl-bright); font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; }
+#symSearchResults { overflow-y: auto; max-height: 400px; }
+#symSearchResults::-webkit-scrollbar { width: 4px; }
+#symSearchResults::-webkit-scrollbar-thumb { background: var(--tl-surface3); }
+.ssr-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; cursor: pointer; transition: background 0.1s; }
+.ssr-item:hover { background: var(--tl-surface2); }
+.ssr-sym { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 0.82rem; color: var(--tl-bright); min-width: 60px; }
+.ssr-name { font-size: 0.78rem; color: var(--tl-muted); flex: 1; }
+.ssr-type { font-size: 0.65rem; color: var(--tl-muted); background: var(--tl-surface3); padding: 2px 7px; border-radius: 3px; }
+.ssr-region { font-size: 0.65rem; color: var(--tl-muted); }
+ 
+/* Right panel */
 .tl-right {
   width: 260px; background: var(--tl-bg2); border-left: 1px solid var(--tl-border2);
   display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0;
@@ -349,11 +385,7 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 .tl-rp-body::-webkit-scrollbar { width: 4px; }
 .tl-rp-body::-webkit-scrollbar-thumb { background: var(--tl-surface3); border-radius: 2px; }
  
-/* Watchlist */
-.tl-wl-item {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 8px; border-radius: 6px; cursor: pointer; transition: background 0.15s; margin-bottom: 2px;
-}
+.tl-wl-item { display: flex; align-items: center; justify-content: space-between; padding: 8px; border-radius: 6px; cursor: pointer; transition: background 0.15s; margin-bottom: 2px; }
 .tl-wl-item:hover { background: var(--tl-surface2); }
 .tl-wl-item.active { background: var(--tl-surface); border: 1px solid rgba(41,98,255,0.2); }
 .tl-wl-sym { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 0.8rem; color: var(--tl-bright); }
@@ -363,7 +395,6 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 .tl-wl-bar { height: 2px; background: var(--tl-surface3); border-radius: 1px; margin-top: 2px; overflow: hidden; }
 .tl-wl-bar-fill { height: 100%; border-radius: 1px; }
  
-/* Indicator cards */
 .tl-ind-card { background: var(--tl-surface); border: 1px solid var(--tl-border2); border-radius: 8px; padding: 12px; margin-bottom: 10px; }
 .tl-ind-title { font-size: 0.7rem; font-weight: 700; color: var(--tl-muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 8px; }
 .tl-ind-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
@@ -374,9 +405,9 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 .tl-sig-sell { background: rgba(239,83,80,0.15); color: var(--tl-red); border: 1px solid rgba(239,83,80,0.3); }
 .tl-sig-neutral { background: rgba(255,214,10,0.1); color: var(--tl-yellow); border: 1px solid rgba(255,214,10,0.25); }
  
-/* TL Bottom section */
+/* Bottom section */
 .tl-bottom {
-  height: 340px; border-top: 1px solid var(--tl-border2);
+  height: 300px; border-top: 1px solid var(--tl-border2);
   background: var(--tl-bg2); display: flex; flex-direction: column; flex-shrink: 0;
 }
 .tl-bs-tabs { display: flex; border-bottom: 1px solid var(--tl-border2); padding: 0 12px; gap: 2px; }
@@ -392,30 +423,13 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 .tl-bs-body::-webkit-scrollbar { width: 4px; }
 .tl-bs-body::-webkit-scrollbar-thumb { background: var(--tl-surface3); }
  
-/* Day trading cards */
-.tl-dt-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
-.tl-dt-card { background: var(--tl-surface); border: 1px solid var(--tl-border2); border-radius: 8px; padding: 16px; transition: border-color 0.2s; }
-.tl-dt-card:hover { border-color: rgba(255,255,255,0.15); }
-.tl-dt-hdr { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
-.tl-dt-title { font-size: 0.82rem; font-weight: 700; color: var(--tl-bright); font-family: 'Syne', sans-serif; }
-.tl-dt-tag { padding: 2px 8px; border-radius: 4px; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.05em; font-family: 'JetBrains Mono', monospace; }
-.tl-dt-card p { font-size: 0.78rem; color: var(--tl-muted); line-height: 1.5; margin-bottom: 10px; }
-.tl-dt-stats { display: flex; gap: 12px; }
-.tl-dt-stat { background: var(--tl-surface2); border-radius: 5px; padding: 6px 10px; flex: 1; text-align: center; }
-.tl-dt-stat-val { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; }
-.tl-dt-stat-lbl { font-size: 0.6rem; color: var(--tl-muted); margin-top: 1px; }
- 
 /* Quiz */
 .tl-quiz { max-width: 700px; }
 .tl-lq-progress { height: 2px; background: var(--tl-surface3); border-radius: 1px; margin-bottom: 14px; overflow: hidden; }
 .tl-lq-fill { height: 100%; background: linear-gradient(90deg, var(--tl-blue), var(--tl-green2)); transition: width 0.4s; }
 .tl-lq-q { font-size: 0.95rem; font-weight: 500; color: var(--tl-bright); margin-bottom: 14px; line-height: 1.5; }
 .tl-lq-opts { display: flex; flex-direction: column; gap: 7px; }
-.tl-lq-opt {
-  background: var(--tl-surface); border: 1px solid var(--tl-border2); border-radius: 6px;
-  padding: 10px 14px; cursor: pointer; font-size: 0.82rem; color: var(--tl-muted);
-  transition: all 0.15s; text-align: left; width: 100%; font-family: 'DM Sans', sans-serif;
-}
+.tl-lq-opt { background: var(--tl-surface); border: 1px solid var(--tl-border2); border-radius: 6px; padding: 10px 14px; cursor: pointer; font-size: 0.82rem; color: var(--tl-muted); transition: all 0.15s; text-align: left; width: 100%; font-family: 'DM Sans', sans-serif; }
 .tl-lq-opt:hover { border-color: rgba(41,98,255,0.4); color: var(--tl-text); background: rgba(41,98,255,0.05); }
 .tl-lq-opt.correct { border-color: var(--tl-green); background: rgba(38,166,154,0.1); color: var(--tl-green); }
 .tl-lq-opt.wrong { border-color: var(--tl-red); background: rgba(239,83,80,0.1); color: var(--tl-red); }
@@ -446,6 +460,18 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 .tl-gls-term { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700; color: var(--tl-lime); margin-bottom: 4px; }
 .tl-gls-def { font-size: 0.75rem; color: var(--tl-muted); line-height: 1.5; }
  
+/* Loading spinner */
+.chart-loading {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px; color: var(--tl-muted);
+  z-index: 5;
+}
+.chart-spinner { width: 32px; height: 32px; border: 2px solid rgba(255,255,255,0.08); border-top-color: var(--tl-blue2); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+ 
+/* Drawing annotations */
+.drawing-crosshair { cursor: crosshair !important; }
+ 
 @media (max-width: 900px) {
   .tl-right { display: none; }
   .tl-sidebar { width: 44px; }
@@ -453,7 +479,6 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 }
 @media (max-width: 600px) {
   .tl-sidebar { display: none; }
-  .tl-dt-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -519,12 +544,12 @@ footer p { color: var(--muted); font-size: 0.85rem; }
       <span class="module-tag">Advanced</span>
       <span class="module-arrow">Open Trading Lab →</span>
     </div>
-    <div class="module-card" onclick="openTradingLab('daytrading')" style="--card-accent: var(--purple); --icon-bg: rgba(155,93,229,0.12); --tag-bg: rgba(155,93,229,0.08); --tag-color: var(--purple); cursor:pointer;">
+    <div class="module-card" style="--card-accent: var(--purple); --icon-bg: rgba(155,93,229,0.12); --tag-bg: rgba(155,93,229,0.08); --tag-color: var(--purple);">
       <div class="module-icon">🚀</div>
       <h3>Starting a Business</h3>
       <p>From idea to launch — how to validate, brand, market, and scale a business with little to no money.</p>
       <span class="module-tag">Entrepreneurship</span>
-      <span class="module-arrow">Open Business School →</span>
+      <span class="module-arrow">Learn More →</span>
     </div>
     <div class="module-card" style="--card-accent: var(--pink); --icon-bg: rgba(247,37,133,0.12); --tag-bg: rgba(247,37,133,0.08); --tag-color: var(--pink);">
       <div class="module-icon">💳</div>
@@ -649,7 +674,7 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 <section id="markets" style="padding-top: 0;">
   <div class="section-tag">Market Watch</div>
   <h2 class="section-title">Live markets,<br>real companies to study</h2>
-  <p class="section-sub">Real-time 24/7 data powered by TradingView. Switch stocks and learn to read live charts.</p>
+  <p class="section-sub">Real-time data. Switch stocks and learn to read live charts.</p>
   <div class="markets-section fade-in">
     <div class="markets-header">
       <div class="markets-header-left">
@@ -659,21 +684,22 @@ footer p { color: var(--muted); font-size: 0.85rem; }
       <div class="header-btns">
         <div class="live-badge"><div class="live-dot"></div> 24/7 Live Feed</div>
         <button onclick="openTradingLab('chart')" class="trading-lab-btn">🔬 Trading Lab</button>
-        <button onclick="openTradingLab('daytrading')" class="day-trading-btn">📊 Day Trading</button>
       </div>
     </div>
     <div class="sym-selector" id="symSelector">
-      <button class="sym-pill active" data-sym="NASDAQ:AAPL" onclick="switchChart(this,'NASDAQ:AAPL')">AAPL</button>
-      <button class="sym-pill" data-sym="NASDAQ:MSFT" onclick="switchChart(this,'NASDAQ:MSFT')">MSFT</button>
-      <button class="sym-pill" data-sym="NASDAQ:GOOGL" onclick="switchChart(this,'NASDAQ:GOOGL')">GOOGL</button>
-      <button class="sym-pill" data-sym="NASDAQ:NVDA" onclick="switchChart(this,'NASDAQ:NVDA')">NVDA</button>
-      <button class="sym-pill" data-sym="NASDAQ:TSLA" onclick="switchChart(this,'NASDAQ:TSLA')">TSLA</button>
-      <button class="sym-pill" data-sym="NASDAQ:AMZN" onclick="switchChart(this,'NASDAQ:AMZN')">AMZN</button>
-      <button class="sym-pill" data-sym="AMEX:SPY" onclick="switchChart(this,'AMEX:SPY')">SPY</button>
-      <button class="sym-pill" data-sym="BINANCE:BTCUSDT" onclick="switchChart(this,'BINANCE:BTCUSDT')">BTC</button>
-      <button class="sym-pill" data-sym="BINANCE:ETHUSDT" onclick="switchChart(this,'BINANCE:ETHUSDT')">ETH</button>
+      <button class="sym-pill active" data-sym="AAPL" onclick="switchMiniSym(this,'AAPL')">AAPL</button>
+      <button class="sym-pill" data-sym="MSFT" onclick="switchMiniSym(this,'MSFT')">MSFT</button>
+      <button class="sym-pill" data-sym="GOOGL" onclick="switchMiniSym(this,'GOOGL')">GOOGL</button>
+      <button class="sym-pill" data-sym="NVDA" onclick="switchMiniSym(this,'NVDA')">NVDA</button>
+      <button class="sym-pill" data-sym="TSLA" onclick="switchMiniSym(this,'TSLA')">TSLA</button>
+      <button class="sym-pill" data-sym="AMZN" onclick="switchMiniSym(this,'AMZN')">AMZN</button>
+      <button class="sym-pill" data-sym="SPY" onclick="switchMiniSym(this,'SPY')">SPY</button>
+      <button class="sym-pill" data-sym="BTC-USD" onclick="switchMiniSym(this,'BTC-USD')">BTC</button>
+      <button class="sym-pill" data-sym="ETH-USD" onclick="switchMiniSym(this,'ETH-USD')">ETH</button>
     </div>
-    <div class="tv-mini-wrap" id="tvMiniWrap"></div>
+    <div class="tv-mini-wrap" id="tvMiniWrap">
+      <canvas id="miniChartCanvas" style="width:100%;height:420px;display:block;"></canvas>
+    </div>
     <div class="market-cards">
       <div class="mkt-card"><div class="mkt-card-label">S&P 500</div><div class="mkt-card-sym">SPY · ETF</div><div class="mkt-live"><div class="mkt-live-dot"></div> Live Price</div></div>
       <div class="mkt-card"><div class="mkt-card-label">NASDAQ 100</div><div class="mkt-card-sym">QQQ · ETF</div><div class="mkt-live"><div class="mkt-live-dot"></div> Live Price</div></div>
@@ -684,8 +710,7 @@ footer p { color: var(--muted); font-size: 0.85rem; }
     </div>
     <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;align-items:center;">
       <button onclick="openTradingLab('chart')" class="trading-lab-btn" style="font-size:0.88rem;padding:12px 26px;">🔬 Open Full Trading Lab — Live Charts + Quiz</button>
-      <button onclick="openTradingLab('daytrading')" class="day-trading-btn" style="font-size:0.88rem;padding:12px 26px;">📊 Day Trading Section →</button>
-      <span style="color:var(--muted);font-size:0.82rem;">Charts powered by TradingView · Real-time 24/7</span>
+      <span style="color:var(--muted);font-size:0.82rem;">Charts powered by MoneyMoves · Real-time data</span>
     </div>
   </div>
 </section>
@@ -743,7 +768,7 @@ footer p { color: var(--muted); font-size: 0.85rem; }
   <div class="resources-grid">
     <div class="resource-card fade-in"><div class="resource-icon" style="background:rgba(201,241,53,0.12)">📖</div><div><h4>Rich Dad Poor Dad</h4><p>Robert Kiyosaki's classic on assets vs liabilities and financial independence mindset.</p><div class="resource-type" style="color:var(--lime)">📚 Book</div></div></div>
     <div class="resource-card fade-in"><div class="resource-icon" style="background:rgba(0,229,195,0.12)">📖</div><div><h4>The Psychology of Money</h4><p>Morgan Housel explains how your mindset about money matters more than any strategy.</p><div class="resource-type" style="color:var(--teal)">📚 Book</div></div></div>
-    <div class="resource-card fade-in" onclick="openTradingLab('chart')" style="cursor:pointer;"><div class="resource-icon" style="background:rgba(155,93,229,0.12)">🔬</div><div><h4>MoneyMoves Trading Lab</h4><p>Live TradingView charts, day trading section, advanced quiz — 24/7 live market data.</p><div class="resource-type" style="color:var(--purple)">🛠️ Free Tool — Open Now!</div></div></div>
+    <div class="resource-card fade-in" onclick="openTradingLab('chart')" style="cursor:pointer;"><div class="resource-icon" style="background:rgba(155,93,229,0.12)">🔬</div><div><h4>MoneyMoves Trading Lab</h4><p>Live charts with drawing tools, advanced quiz — 24/7 live market data. Any company in the world.</p><div class="resource-type" style="color:var(--purple)">🛠️ Free Tool — Open Now!</div></div></div>
     <div class="resource-card fade-in"><div class="resource-icon" style="background:rgba(255,107,53,0.12)">🎥</div><div><h4>Khan Academy Finance</h4><p>Free in-depth courses on personal finance, investing, and economics.</p><div class="resource-type" style="color:var(--orange)">🎓 Free Course</div></div></div>
     <div class="resource-card fade-in"><div class="resource-icon" style="background:rgba(247,37,133,0.12)">📱</div><div><h4>Fidelity Youth Account</h4><p>Beginner investing app for teens under 18 with parental approval. Start with $1.</p><div class="resource-type" style="color:var(--pink)">📱 App</div></div></div>
     <div class="resource-card fade-in" onclick="openTradingLab('glossary')" style="cursor:pointer;"><div class="resource-icon" style="background:rgba(255,214,10,0.12)">📖</div><div><h4>MoneyMoves Dictionary</h4><p>100+ financial terms with real definitions, examples, formulas, and context.</p><div class="resource-type" style="color:var(--yellow)">📖 Free Reference</div></div></div>
@@ -786,9 +811,6 @@ footer p { color: var(--muted); font-size: 0.85rem; }
       <button class="tl-tab active" id="tlTabChart" onclick="tlSetTab('chart',this)">
         <div class="tl-dot" style="background:#5c8df6"></div> Chart
       </button>
-      <button class="tl-tab" id="tlTabDaytrading" onclick="tlSetTab('daytrading',this)">
-        <div class="tl-dot" style="background:#ff6b35"></div> Day Trading
-      </button>
       <button class="tl-tab" id="tlTabQuiz" onclick="tlSetTab('quiz',this)">
         <div class="tl-dot" style="background:#c9f135"></div> Quiz
       </button>
@@ -808,18 +830,18 @@ footer p { color: var(--muted); font-size: 0.85rem; }
   <!-- App layout -->
   <div class="tl-app">
  
-    <!-- Left sidebar -->
-    <div class="tl-sidebar">
-      <button class="tl-sb-btn active">🖱️</button>
-      <button class="tl-sb-btn">✛</button>
+    <!-- Left sidebar (drawing tools) -->
+    <div class="tl-sidebar" id="tlSidebar">
+      <button class="tl-sb-btn tool-active" id="tool-cursor" title="Cursor" onclick="setDrawTool('cursor',this)">🖱️</button>
+      <button class="tl-sb-btn" id="tool-trendline" title="Trend Line" onclick="setDrawTool('trendline',this)">📏</button>
+      <button class="tl-sb-btn" id="tool-horizontal" title="Horizontal Line" onclick="setDrawTool('horizontal',this)">➖</button>
+      <button class="tl-sb-btn" id="tool-rect" title="Rectangle" onclick="setDrawTool('rect',this)">▭</button>
+      <button class="tl-sb-btn" id="tool-arrow" title="Arrow" onclick="setDrawTool('arrow',this)">↗</button>
+      <button class="tl-sb-btn" id="tool-text" title="Text Label" onclick="setDrawTool('text',this)">T</button>
       <div class="tl-sb-sep"></div>
-      <button class="tl-sb-btn">📏</button>
-      <button class="tl-sb-btn">🌀</button>
-      <button class="tl-sb-btn">▭</button>
-      <button class="tl-sb-btn">T</button>
+      <button class="tl-sb-btn" id="tool-fib" title="Fibonacci" onclick="setDrawTool('fib',this)">φ</button>
       <div class="tl-sb-sep"></div>
-      <button class="tl-sb-btn">⚗️</button>
-      <button class="tl-sb-btn">📷</button>
+      <button class="tl-sb-btn" title="Clear All Drawings" onclick="clearDrawings()" style="color:#ef5350;">🗑</button>
     </div>
  
     <!-- Main area -->
@@ -827,40 +849,40 @@ footer p { color: var(--muted); font-size: 0.85rem; }
  
       <!-- Symbol strip -->
       <div class="tl-sym-strip">
-        <div class="tl-sym-chip active" data-sym="NASDAQ:AAPL" onclick="tlSwitchSym(this,'NASDAQ:AAPL')">
-          <span class="tl-chip-name">AAPL</span><span class="tl-chip-chg tl-up">+1.24%</span>
+        <div class="tl-sym-chip active" data-sym="AAPL" onclick="tlSwitchSym(this,'AAPL')">
+          <span class="tl-chip-name">AAPL</span><span class="tl-chip-chg tl-up" id="chg-AAPL">…</span>
         </div>
-        <div class="tl-sym-chip" data-sym="NASDAQ:MSFT" onclick="tlSwitchSym(this,'NASDAQ:MSFT')">
-          <span class="tl-chip-name">MSFT</span><span class="tl-chip-chg tl-up">+0.87%</span>
+        <div class="tl-sym-chip" data-sym="MSFT" onclick="tlSwitchSym(this,'MSFT')">
+          <span class="tl-chip-name">MSFT</span><span class="tl-chip-chg" id="chg-MSFT">…</span>
         </div>
-        <div class="tl-sym-chip" data-sym="NASDAQ:NVDA" onclick="tlSwitchSym(this,'NASDAQ:NVDA')">
-          <span class="tl-chip-name">NVDA</span><span class="tl-chip-chg tl-up">+3.12%</span>
+        <div class="tl-sym-chip" data-sym="NVDA" onclick="tlSwitchSym(this,'NVDA')">
+          <span class="tl-chip-name">NVDA</span><span class="tl-chip-chg" id="chg-NVDA">…</span>
         </div>
-        <div class="tl-sym-chip" data-sym="NASDAQ:TSLA" onclick="tlSwitchSym(this,'NASDAQ:TSLA')">
-          <span class="tl-chip-name">TSLA</span><span class="tl-chip-chg tl-down">-1.45%</span>
+        <div class="tl-sym-chip" data-sym="TSLA" onclick="tlSwitchSym(this,'TSLA')">
+          <span class="tl-chip-name">TSLA</span><span class="tl-chip-chg" id="chg-TSLA">…</span>
         </div>
-        <div class="tl-sym-chip" data-sym="NASDAQ:GOOGL" onclick="tlSwitchSym(this,'NASDAQ:GOOGL')">
-          <span class="tl-chip-name">GOOGL</span><span class="tl-chip-chg tl-up">+0.56%</span>
+        <div class="tl-sym-chip" data-sym="GOOGL" onclick="tlSwitchSym(this,'GOOGL')">
+          <span class="tl-chip-name">GOOGL</span><span class="tl-chip-chg" id="chg-GOOGL">…</span>
         </div>
-        <div class="tl-sym-chip" data-sym="NASDAQ:AMZN" onclick="tlSwitchSym(this,'NASDAQ:AMZN')">
-          <span class="tl-chip-name">AMZN</span><span class="tl-chip-chg tl-up">+1.08%</span>
+        <div class="tl-sym-chip" data-sym="AMZN" onclick="tlSwitchSym(this,'AMZN')">
+          <span class="tl-chip-name">AMZN</span><span class="tl-chip-chg" id="chg-AMZN">…</span>
         </div>
-        <div class="tl-sym-chip" data-sym="AMEX:SPY" onclick="tlSwitchSym(this,'AMEX:SPY')">
-          <span class="tl-chip-name">SPY</span><span class="tl-chip-chg tl-up">+0.42%</span>
+        <div class="tl-sym-chip" data-sym="SPY" onclick="tlSwitchSym(this,'SPY')">
+          <span class="tl-chip-name">SPY</span><span class="tl-chip-chg" id="chg-SPY">…</span>
         </div>
-        <div class="tl-sym-chip" data-sym="AMEX:QQQ" onclick="tlSwitchSym(this,'AMEX:QQQ')">
-          <span class="tl-chip-name">QQQ</span><span class="tl-chip-chg tl-up">+0.61%</span>
+        <div class="tl-sym-chip" data-sym="QQQ" onclick="tlSwitchSym(this,'QQQ')">
+          <span class="tl-chip-name">QQQ</span><span class="tl-chip-chg" id="chg-QQQ">…</span>
         </div>
-        <div class="tl-sym-chip" data-sym="BINANCE:BTCUSDT" onclick="tlSwitchSym(this,'BINANCE:BTCUSDT')">
-          <span class="tl-chip-name">BTC</span><span class="tl-chip-chg tl-up">+2.31%</span>
+        <div class="tl-sym-chip" data-sym="BTC-USD" onclick="tlSwitchSym(this,'BTC-USD')">
+          <span class="tl-chip-name">BTC</span><span class="tl-chip-chg" id="chg-BTC-USD">…</span>
         </div>
-        <div class="tl-sym-chip" data-sym="BINANCE:ETHUSDT" onclick="tlSwitchSym(this,'BINANCE:ETHUSDT')">
-          <span class="tl-chip-name">ETH</span><span class="tl-chip-chg tl-up">+1.87%</span>
+        <div class="tl-sym-chip" data-sym="ETH-USD" onclick="tlSwitchSym(this,'ETH-USD')">
+          <span class="tl-chip-name">ETH</span><span class="tl-chip-chg" id="chg-ETH-USD">…</span>
         </div>
-        <div class="tl-sym-chip" data-sym="TVC:GOLD" onclick="tlSwitchSym(this,'TVC:GOLD')">
-          <span class="tl-chip-name">GOLD</span><span class="tl-chip-chg tl-down">-0.22%</span>
+        <div class="tl-sym-chip" data-sym="GC=F" onclick="tlSwitchSym(this,'GC=F')">
+          <span class="tl-chip-name">GOLD</span><span class="tl-chip-chg" id="chg-GCF">…</span>
         </div>
-        <button class="tl-sym-add">+</button>
+        <button class="tl-sym-add" onclick="openSymSearch()" title="Search any company">+</button>
       </div>
  
       <!-- Chart row -->
@@ -869,20 +891,46 @@ footer p { color: var(--muted); font-size: 0.85rem; }
         <div class="tl-chart-panel">
           <div class="tl-chart-toolbar">
             <span class="tl-ct-lbl">Interval:</span>
-            <button class="tl-ct-btn" onclick="tlSetInterval(this,'1')">1m</button>
-            <button class="tl-ct-btn" onclick="tlSetInterval(this,'5')">5m</button>
-            <button class="tl-ct-btn" onclick="tlSetInterval(this,'15')">15m</button>
-            <button class="tl-ct-btn" onclick="tlSetInterval(this,'60')">1H</button>
-            <button class="tl-ct-btn active" id="tlIntD" onclick="tlSetInterval(this,'D')">1D</button>
-            <button class="tl-ct-btn" onclick="tlSetInterval(this,'W')">1W</button>
+            <button class="tl-ct-btn" onclick="tlSetInterval(this,'1d','7d')">1D</button>
+            <button class="tl-ct-btn" onclick="tlSetInterval(this,'1d','30d')">1M</button>
+            <button class="tl-ct-btn active" id="tlIntActive" onclick="tlSetInterval(this,'1d','6mo')">6M</button>
+            <button class="tl-ct-btn" onclick="tlSetInterval(this,'1wk','1y')">1Y</button>
+            <button class="tl-ct-btn" onclick="tlSetInterval(this,'1wk','2y')">2Y</button>
+            <button class="tl-ct-btn" onclick="tlSetInterval(this,'1mo','5y')">5Y</button>
             <div class="tl-ct-sep"></div>
             <span class="tl-ct-lbl">Type:</span>
-            <button class="tl-ct-btn active" id="tlType1" onclick="tlSetType(this,'1')">Candles</button>
-            <button class="tl-ct-btn" onclick="tlSetType(this,'2')">Line</button>
-            <button class="tl-ct-btn" onclick="tlSetType(this,'3')">Area</button>
+            <button class="tl-ct-btn active" id="typeCandle" onclick="tlSetChartType(this,'candle')">Candles</button>
+            <button class="tl-ct-btn" id="typeLine" onclick="tlSetChartType(this,'line')">Line</button>
+            <button class="tl-ct-btn" id="typeArea" onclick="tlSetChartType(this,'area')">Area</button>
+            <div class="tl-ct-sep"></div>
+            <span class="tl-ct-lbl">Indicators:</span>
+            <button class="tl-ct-btn active" id="indSMA" onclick="tlToggleInd('SMA',this)">SMA</button>
+            <button class="tl-ct-btn" id="indEMA" onclick="tlToggleInd('EMA',this)">EMA</button>
+            <button class="tl-ct-btn" id="indBB" onclick="tlToggleInd('BB',this)">BB</button>
+            <button class="tl-ct-btn" id="indRSI" onclick="tlToggleInd('RSI',this)">RSI</button>
+            <button class="tl-ct-btn" id="indVol" onclick="tlToggleInd('VOL',this)">Vol</button>
+            <div class="tl-ct-sep"></div>
+            <button class="tl-ct-btn" onclick="mmChart.zoomIn()" title="Zoom In">+</button>
+            <button class="tl-ct-btn" onclick="mmChart.zoomOut()" title="Zoom Out">−</button>
+            <button class="tl-ct-btn" onclick="mmChart.resetView()" title="Reset View">⊞</button>
+            <div class="tl-ct-sep"></div>
+            <button onclick="openSymSearch()" style="padding:3px 12px;border-radius:4px;background:rgba(41,98,255,0.15);border:1px solid rgba(41,98,255,0.3);color:#5c8df6;font-size:0.72rem;font-weight:700;cursor:pointer;font-family:'JetBrains Mono',monospace;white-space:nowrap;">🔍 Search Any Stock</button>
           </div>
-          <div class="tl-chart-wrap">
-            <div id="tlTvChart"></div>
+          <div class="tl-chart-wrap" id="tlChartWrap">
+            <!-- Chart info -->
+            <div class="chart-info-box" id="chartInfoBox">
+              <div class="chart-sym" id="chartSym">AAPL</div>
+              <div class="chart-price" id="chartPrice">—</div>
+              <div class="chart-chg" id="chartChg">—</div>
+              <div class="chart-ohlcv" id="chartOHLCV">O: — H: — L: — C: — V: —</div>
+            </div>
+            <canvas id="mmMainCanvas"></canvas>
+            <canvas id="mmRsiCanvas" style="display:none;position:absolute;bottom:0;left:0;right:0;height:80px;"></canvas>
+            <div id="crosshairTooltip"></div>
+            <div class="chart-loading" id="chartLoading">
+              <div class="chart-spinner"></div>
+              <div style="font-size:0.78rem">Loading market data…</div>
+            </div>
           </div>
         </div>
  
@@ -890,7 +938,7 @@ footer p { color: var(--muted); font-size: 0.85rem; }
         <div class="tl-right">
           <div class="tl-rp-tabs">
             <button class="tl-rp-tab active" onclick="tlSetRpTab('watchlist',this)">Watchlist</button>
-            <button class="tl-rp-tab" onclick="tlSetRpTab('indicators',this)">Indicators</button>
+            <button class="tl-rp-tab" onclick="tlSetRpTab('indicators',this)">Signals</button>
           </div>
           <div class="tl-rp-body" id="tlRpBody"></div>
         </div>
@@ -899,8 +947,7 @@ footer p { color: var(--muted); font-size: 0.85rem; }
       <!-- Bottom section -->
       <div class="tl-bottom">
         <div class="tl-bs-tabs">
-          <button class="tl-bs-tab active" id="tlBsTabDaytrading" onclick="tlSetBsTab('daytrading',this)">📊 Day Trading</button>
-          <button class="tl-bs-tab" id="tlBsTabQuiz" onclick="tlSetBsTab('quiz',this)">🧠 Quiz</button>
+          <button class="tl-bs-tab active" id="tlBsTabQuiz" onclick="tlSetBsTab('quiz',this)">🧠 Quiz</button>
           <button class="tl-bs-tab" id="tlBsTabScreener" onclick="tlSetBsTab('screener',this)">🔍 Screener</button>
           <button class="tl-bs-tab" id="tlBsTabGlossary" onclick="tlSetBsTab('glossary',this)">📖 Glossary</button>
         </div>
@@ -909,16 +956,25 @@ footer p { color: var(--muted); font-size: 0.85rem; }
  
     </div><!-- /tl-main -->
   </div><!-- /tl-app -->
+ 
+  <!-- Symbol Search Modal -->
+  <div id="symSearchModal">
+    <div class="ssm-input-wrap">
+      <span>🔍</span>
+      <input id="symSearchInput" placeholder="Search any stock, ETF, crypto, index… (e.g. AAPL, Tesla, BTC)" autocomplete="off" spellcheck="false">
+      <button onclick="closeSymSearch()" style="background:none;border:none;color:#787b86;cursor:pointer;font-size:1rem;">✕</button>
+    </div>
+    <div id="symSearchResults"></div>
+  </div>
+ 
 </div><!-- /#tradingLabOverlay -->
  
 <!-- ================================================================
      SCRIPTS
      ================================================================ -->
-<script src="https://s3.tradingview.com/tv.js"></script>
 <script>
- 
 /* ────────────────────────────────────────────────
-   MAIN PAGE SCRIPTS
+   MAIN PAGE
 ──────────────────────────────────────────────── */
 function switchTab(name) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -927,51 +983,109 @@ function switchTab(name) {
   document.getElementById(`tab-${name}`).classList.add('active');
 }
  
-// Mini chart on main page
-let mainCurrentSym = 'NASDAQ:AAPL';
-function loadMiniChart(sym) {
-  mainCurrentSym = sym;
-  const wrap = document.getElementById('tvMiniWrap');
-  wrap.innerHTML = '';
-  try {
-    new TradingView.widget({
-      container_id: 'tvMiniWrap',
-      symbol: sym,
-      interval: 'D',
-      timezone: 'exchange',
-      theme: 'dark',
-      style: '1',
-      locale: 'en',
-      toolbar_bg: '#111118',
-      enable_publishing: false,
-      hide_top_toolbar: false,
-      hide_legend: false,
-      save_image: false,
-      backgroundColor: '#0a0a0f',
-      gridColor: 'rgba(255,255,255,0.04)',
-      width: '100%',
-      height: 420,
-      allow_symbol_change: true,
-      details: true,
-    });
-  } catch(e) {
-    wrap.innerHTML = `
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:420px;gap:16px;color:#7a7a9a;text-align:center;padding:20px;">
-        <div style="font-size:2.5rem">📈</div>
-        <div style="font-size:1rem;color:#f0f0f8;font-weight:600">Live Chart — ${sym}</div>
-        <div style="font-size:0.85rem;">Chart requires an internet connection and ad-blocker off for TradingView.</div>
-        <button onclick="openTradingLab('chart')" style="background:#c9f135;color:#0a0a0f;padding:10px 22px;border-radius:50px;border:none;font-weight:700;font-size:0.85rem;cursor:pointer;font-family:'Syne',sans-serif;">Open Trading Lab →</button>
-      </div>`;
-  }
-}
+// Scroll animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
  
-function switchChart(el, sym) {
+// ── Main Page Mini Chart ──
+let miniChartSym = 'AAPL';
+let miniChartObj = null;
+ 
+function switchMiniSym(el, sym) {
   document.querySelectorAll('.sym-pill').forEach(b => b.classList.remove('active'));
   el.classList.add('active');
-  loadMiniChart(sym);
+  miniChartSym = sym;
+  loadMiniPageChart(sym);
 }
  
-// Main page quiz
+function loadMiniPageChart(sym) {
+  const canvas = document.getElementById('miniChartCanvas');
+  if (!canvas) return;
+  const wrap = document.getElementById('tvMiniWrap');
+  wrap.style.position = 'relative';
+  // Show loading
+  let loading = wrap.querySelector('.mini-loading');
+  if (!loading) {
+    loading = document.createElement('div');
+    loading.className = 'mini-loading';
+    loading.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#787b86;font-size:0.82rem;z-index:3;';
+    loading.innerHTML = '<div style="width:24px;height:24px;border:2px solid rgba(255,255,255,0.08);border-top-color:#5c8df6;border-radius:50%;animation:spin 0.8s linear infinite"></div>Loading…';
+    wrap.appendChild(loading);
+  }
+  loading.style.display = 'flex';
+  fetchQuoteData(sym).then(data => {
+    loading.style.display = 'none';
+    drawMiniChart(canvas, data, sym);
+  }).catch(() => {
+    loading.innerHTML = `<div style="text-align:center"><div style="font-size:1.5rem">📈</div><div style="color:#f0f3fa;font-weight:600;margin:8px 0">${sym}</div><div>Chart unavailable — open Trading Lab for full charts</div><button onclick="openTradingLab('chart')" style="margin-top:12px;background:#c9f135;color:#0a0a0f;padding:8px 20px;border-radius:50px;border:none;font-weight:700;cursor:pointer;font-family:'Syne',sans-serif;">Open Trading Lab →</button></div>`;
+  });
+}
+ 
+function drawMiniChart(canvas, data, sym) {
+  const wrap = canvas.parentElement;
+  const W = wrap.clientWidth; const H = 420;
+  canvas.width = W * devicePixelRatio; canvas.height = H * devicePixelRatio;
+  canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+  const ctx = canvas.getContext('2d');
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+ 
+  if (!data || data.length < 2) { ctx.fillStyle='#787b86'; ctx.font='14px DM Sans'; ctx.fillText('No data available', W/2-60, H/2); return; }
+ 
+  const prices = data.map(d=>d.close);
+  const lows = data.map(d=>d.low||d.close);
+  const highs = data.map(d=>d.high||d.close);
+  const pad = { t:20, r:60, b:30, l:10 };
+  const cW = W - pad.l - pad.r, cH = H - pad.t - pad.b;
+  const minP = Math.min(...lows)*0.998, maxP = Math.max(...highs)*1.002;
+  const toY = v => pad.t + cH - (v - minP) / (maxP - minP) * cH;
+  const toX = i => pad.l + (i / (data.length-1)) * cW;
+ 
+  ctx.fillStyle = '#131722'; ctx.fillRect(0,0,W,H);
+ 
+  // Grid
+  const gridCount = 5;
+  for (let i=0;i<=gridCount;i++) {
+    const y = pad.t + (cH/gridCount)*i;
+    const v = maxP - (maxP-minP)*(i/gridCount);
+    ctx.strokeStyle='rgba(255,255,255,0.04)'; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
+    ctx.fillStyle='#787b86'; ctx.font=`10px JetBrains Mono`;
+    ctx.textAlign='right'; ctx.fillText(v>=1000?v.toLocaleString('en',{maximumFractionDigits:0}):v.toFixed(2), W-4, y+3);
+  }
+ 
+  // Area fill
+  const isUp = prices[prices.length-1] >= prices[0];
+  const fillColor = isUp ? 'rgba(38,166,154,0.08)' : 'rgba(239,83,80,0.08)';
+  const lineColor = isUp ? '#26a69a' : '#ef5350';
+  ctx.beginPath();
+  ctx.moveTo(toX(0), toY(prices[0]));
+  for (let i=1;i<data.length;i++) ctx.lineTo(toX(i), toY(prices[i]));
+  ctx.lineTo(toX(data.length-1), H-pad.b);
+  ctx.lineTo(toX(0), H-pad.b); ctx.closePath();
+  ctx.fillStyle=fillColor; ctx.fill();
+ 
+  // Line
+  ctx.beginPath(); ctx.strokeStyle=lineColor; ctx.lineWidth=2;
+  ctx.moveTo(toX(0), toY(prices[0]));
+  for (let i=1;i<data.length;i++) ctx.lineTo(toX(i), toY(prices[i]));
+  ctx.stroke();
+ 
+  // Price label
+  const last = prices[prices.length-1];
+  const first = prices[0];
+  const chgPct = ((last-first)/first*100).toFixed(2);
+  const chgColor = last>=first ? '#26a69a':'#ef5350';
+  ctx.font=`bold 22px Syne`; ctx.textAlign='left'; ctx.fillStyle='#f0f3fa';
+  ctx.fillText(last>=1000?'$'+last.toLocaleString('en',{maximumFractionDigits:2}):'$'+last.toFixed(2), pad.l+8, pad.t+24);
+  ctx.font=`600 13px JetBrains Mono`; ctx.fillStyle=chgColor;
+  ctx.fillText((last>=first?'+':'')+chgPct+'%', pad.l+8, pad.t+42);
+  ctx.font=`bold 14px Syne`; ctx.fillStyle='#5c8df6';
+  ctx.fillText(sym, pad.l+8, pad.t+12);
+}
+ 
+// ── Main page Quiz ──
 const QUESTION_BANK = [
   { q: "What is compound interest?", opts: ["Interest you pay on a loan", "Earning interest on your interest over time", "A type of savings account", "A government tax"], ans: 1, exp: "Compound interest means you earn returns on your previous returns — it's exponential growth. Einstein called it the '8th wonder of the world'!" },
   { q: "What does 'diversification' mean in investing?", opts: ["Only buying tech stocks", "Putting all money in one safe asset", "Spreading investments across different assets to reduce risk", "Selling stocks when they drop"], ans: 2, exp: "Diversification means not putting all your eggs in one basket. Spreading money across different stocks, sectors, or assets reduces your overall risk." },
@@ -988,16 +1102,6 @@ const QUESTION_BANK = [
   { q: "What is an 'asset' in Robert Kiyosaki's definition?", opts: ["Anything you own", "Something that puts money IN your pocket", "A car or house you own", "Your savings account"], ans: 1, exp: "Kiyosaki's famous definition: an asset puts money IN your pocket. A rental property that earns rent is an asset. A car payment is a liability." },
   { q: "What is the main advantage of starting to invest at age 18 vs age 30?", opts: ["You take fewer risks when young", "More years for compound interest to work", "Fewer taxes at a younger age", "Better stock selection skills"], ans: 1, exp: "Time is the most powerful investing variable. Starting at 18 vs 30 can mean hundreds of thousands more at retirement due to compounding." },
   { q: "What does 'inflation' mean?", opts: ["The stock market going up", "Prices rising over time, reducing purchasing power", "Government printing money for citizens", "Interest rates going down"], ans: 1, exp: "Inflation is why $1 today buys less than $1 ten years ago. Investing is essential to outpace inflation." },
-  { q: "What is a credit score range in the US?", opts: ["0 to 100", "300 to 850", "1 to 1000", "500 to 1500"], ans: 1, exp: "FICO scores range from 300–850. Above 750 is excellent. Your score affects interest rates on loans, credit cards, and apartments." },
-  { q: "What is the 'expense ratio' of an index fund?", opts: ["The profit you make from the fund", "The annual fee charged as a percentage of assets", "The minimum investment required", "The tax you pay on gains"], ans: 1, exp: "Expense ratio is the annual fee deducted from returns. Vanguard's VOO charges 0.03% vs actively managed funds at 1%+. Huge difference over 30 years." },
-  { q: "What does 'MVP' stand for in business?", opts: ["Most Valuable Player", "Minimum Viable Product", "Maximum Value Proposition", "Market Validation Process"], ans: 1, exp: "MVP = Minimum Viable Product. The simplest version of your product that tests demand. Dropbox's MVP was just a 3-minute video." },
-  { q: "What is ROI?", opts: ["Risk of Investment", "Return on Investment — profit gained vs cost", "Rate of Inflation", "Revenue Over Income"], ans: 1, exp: "ROI = (Net Profit ÷ Cost) × 100. Spend $500 on ads, earn $2,000 in sales = 300% ROI. For every $1 spent, $3 back." },
-  { q: "What is 'market capitalization'?", opts: ["How much a stock costs per share", "The total value of a company (price × shares)", "A company's annual revenue", "The amount of debt a company has"], ans: 1, exp: "Market cap = share price × total shares outstanding. Apple at $180 × 15.5B shares = ~$2.8T. It measures a company's total market value." },
-  { q: "What is a 'bear market'?", opts: ["When stocks rise more than 20%", "When stocks fall 20%+ from recent highs", "When oil prices go up", "A market only for experienced investors"], ans: 1, exp: "A bear market = 20%+ drop from recent highs. They're temporary — the market has recovered from every single bear market in history." },
-  { q: "What is the S&P 500?", opts: ["A savings plan for people over 500K income", "An index of the 500 largest US public companies", "A government bond program", "A tech company ranking"], ans: 1, exp: "The S&P 500 tracks 500 of the largest US companies — Apple, Microsoft, Amazon, etc. It averages ~10%/year historically." },
-  { q: "What is a 'dividend'?", opts: ["A penalty for selling stocks early", "A portion of company profits paid to shareholders", "A type of tax", "The price difference when buying/selling"], ans: 1, exp: "Dividends are regular cash payments from companies to shareholders. Coca-Cola pays ~$1.84/share/year. Own 1,000 shares = $1,840/year passive income." },
-  { q: "What does it mean to 'bootstrap' a business?", opts: ["Starting a business with venture capital", "Building a business using only your own money without outside investors", "Taking out a bank loan to start", "Copying a competitor's business model"], ans: 1, exp: "Bootstrapping = funding your business through personal savings and revenue, without investors. You maintain 100% ownership." },
-  { q: "What is 'liquidity' in finance?", opts: ["How much money you have", "How quickly an asset can be converted to cash without losing value", "Your credit card limit", "The interest rate on savings"], ans: 1, exp: "Liquidity is about speed of conversion to cash. Cash is most liquid. Real estate is illiquid (takes weeks/months to sell)." },
 ];
  
 let quizQuestions = [], quizCurrent = 0, quizScore = 0, quizAnswered = false;
@@ -1005,243 +1109,819 @@ const QUIZ_SIZE = 10;
 document.getElementById('totalDisplay').textContent = QUIZ_SIZE;
  
 function shuffleArray(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
-  return a;
+  const a=[...arr]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;
 }
-function pickQuestions() { quizQuestions = shuffleArray(QUESTION_BANK).slice(0, QUIZ_SIZE); }
-function loadQuestion() {
-  if (quizCurrent >= QUIZ_SIZE) { showResult(); return; }
-  const q = quizQuestions[quizCurrent];
-  document.getElementById('progressFill').style.width = (quizCurrent/QUIZ_SIZE*100)+'%';
-  document.getElementById('questionBox').innerHTML = `
-    <div class="question-text"><strong>Q${quizCurrent+1}/${QUIZ_SIZE}:</strong> ${q.q}</div>
-    <div class="options">${q.opts.map((o,i)=>`<button class="option" onclick="answer(${i})">${o}</button>`).join('')}</div>`;
-  document.getElementById('feedback').className = 'feedback';
-  document.getElementById('nextBtn').style.display = 'none';
-  quizAnswered = false;
+function pickQuestions(){quizQuestions=shuffleArray(QUESTION_BANK).slice(0,QUIZ_SIZE);}
+function loadQuestion(){
+  if(quizCurrent>=QUIZ_SIZE){showResult();return;}
+  const q=quizQuestions[quizCurrent];
+  document.getElementById('progressFill').style.width=(quizCurrent/QUIZ_SIZE*100)+'%';
+  document.getElementById('questionBox').innerHTML=`<div class="question-text"><strong>Q${quizCurrent+1}/${QUIZ_SIZE}:</strong> ${q.q}</div><div class="options">${q.opts.map((o,i)=>`<button class="option" onclick="answer(${i})">${o}</button>`).join('')}</div>`;
+  document.getElementById('feedback').className='feedback';
+  document.getElementById('nextBtn').style.display='none';
+  quizAnswered=false;
 }
-function answer(idx) {
-  if (quizAnswered) return;
-  quizAnswered = true;
-  const q = quizQuestions[quizCurrent];
-  document.querySelectorAll('.option').forEach((o,i) => {
-    o.style.pointerEvents = 'none';
-    if (i===q.ans) o.classList.add('correct');
-    else if (i===idx && idx!==q.ans) o.classList.add('wrong');
+function answer(idx){
+  if(quizAnswered)return; quizAnswered=true;
+  const q=quizQuestions[quizCurrent];
+  document.querySelectorAll('.option').forEach((o,i)=>{
+    o.style.pointerEvents='none';
+    if(i===q.ans)o.classList.add('correct');
+    else if(i===idx&&idx!==q.ans)o.classList.add('wrong');
   });
-  const fb = document.getElementById('feedback');
-  if (idx===q.ans) { quizScore++; document.getElementById('scoreDisplay').textContent=quizScore; fb.className='feedback show good'; fb.textContent='✅ Correct! '+q.exp; }
-  else { fb.className='feedback show bad'; fb.textContent='❌ Not quite. '+q.exp; }
+  const fb=document.getElementById('feedback');
+  if(idx===q.ans){quizScore++;document.getElementById('scoreDisplay').textContent=quizScore;fb.className='feedback show good';fb.textContent='✅ Correct! '+q.exp;}
+  else{fb.className='feedback show bad';fb.textContent='❌ Not quite. '+q.exp;}
   document.getElementById('nextBtn').style.display='inline-block';
 }
-function nextQuestion() { quizCurrent++; loadQuestion(); }
-function showResult() {
+function nextQuestion(){quizCurrent++;loadQuestion();}
+function showResult(){
   document.getElementById('progressFill').style.width='100%';
   document.getElementById('questionBox').style.display='none';
   document.getElementById('feedback').style.display='none';
   document.getElementById('nextBtn').style.display='none';
   document.getElementById('quizResult').style.display='block';
-  const pct = quizScore/QUIZ_SIZE;
+  const pct=quizScore/QUIZ_SIZE;
   let emoji='🌱',title='Keep going!',msg='You scored '+quizScore+'/'+QUIZ_SIZE+'. Review the modules above and try again!';
-  if (pct>=0.9){emoji='🏆';title='Financial Genius!';msg=quizScore+'/'+QUIZ_SIZE+' — try the Advanced Trading Quiz next!';}
-  else if (pct>=0.7){emoji='🎯';title='Money-Smart!';msg='Solid score ('+quizScore+'/'+QUIZ_SIZE+')!';}
-  else if (pct>=0.5){emoji='📚';title='Getting There!';msg='You scored '+quizScore+'/'+QUIZ_SIZE+'.';}
+  if(pct>=0.9){emoji='🏆';title='Financial Genius!';msg=quizScore+'/'+QUIZ_SIZE+' — try the Advanced Trading Quiz next!';}
+  else if(pct>=0.7){emoji='🎯';title='Money-Smart!';msg='Solid score ('+quizScore+'/'+QUIZ_SIZE+')!';}
+  else if(pct>=0.5){emoji='📚';title='Getting There!';msg='You scored '+quizScore+'/'+QUIZ_SIZE+'.';}
   document.getElementById('resultEmoji').textContent=emoji;
   document.getElementById('resultTitle').textContent=title;
   document.getElementById('resultMsg').textContent=msg;
 }
-function restartQuiz() {
+function restartQuiz(){
   quizCurrent=0;quizScore=0;quizAnswered=false;
   document.getElementById('scoreDisplay').textContent='0';
   document.getElementById('questionBox').style.display='block';
   document.getElementById('feedback').style.display='';
   document.getElementById('quizResult').style.display='none';
-  pickQuestions(); loadQuestion();
+  pickQuestions();loadQuestion();
 }
+pickQuestions();loadQuestion();
  
-// Scroll animations
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
- 
-// Init main page
-pickQuestions();
-loadQuestion();
-window.addEventListener('load', () => { setTimeout(() => loadMiniChart('NASDAQ:AAPL'), 400); });
+// Load mini chart on main page
+window.addEventListener('load', ()=>{ setTimeout(()=>loadMiniPageChart('AAPL'),400); });
+window.addEventListener('resize', ()=>{ loadMiniPageChart(miniChartSym); });
  
  
 /* ────────────────────────────────────────────────
-   TRADING LAB SCRIPTS
+   DATA FETCHING (Yahoo Finance via CORS proxy)
 ──────────────────────────────────────────────── */
-let tlCurrentSym = 'NASDAQ:AAPL';
-let tlCurrentInterval = 'D';
-let tlCurrentType = '1';
-let tlRpTab = 'watchlist';
-let tlBsTab = 'daytrading';
-let tlLqCurrent = 0, tlLqScore = 0, tlLqAnswered = false, tlLqQuestions = [];
-let tlChartLoaded = false;
+const PROXY = 'https://query1.finance.yahoo.com/v8/finance/chart/';
+const PROXY2 = 'https://query2.finance.yahoo.com/v8/finance/chart/';
+ 
+async function fetchQuoteData(symbol, interval='1d', range='6mo') {
+  const urls = [
+    `${PROXY}${encodeURIComponent(symbol)}?interval=${interval}&range=${range}`,
+    `${PROXY2}${encodeURIComponent(symbol)}?interval=${interval}&range=${range}`,
+  ];
+  for (const url of urls) {
+    try {
+      const r = await fetch(url, { mode:'cors' });
+      if (!r.ok) continue;
+      const j = await r.json();
+      const result = j?.chart?.result?.[0];
+      if (!result) continue;
+      const timestamps = result.timestamps || result.timestamp;
+      const q = result.indicators?.quote?.[0];
+      if (!timestamps || !q) continue;
+      const adjClose = result.indicators?.adjclose?.[0]?.adjclose;
+      const out = [];
+      for (let i=0; i<timestamps.length; i++) {
+        if (q.close[i] == null) continue;
+        out.push({
+          t: timestamps[i]*1000,
+          open: q.open[i], high: q.high[i], low: q.low[i],
+          close: adjClose?.[i] ?? q.close[i],
+          volume: q.volume[i]
+        });
+      }
+      return out;
+    } catch(e) {}
+  }
+  // Fallback: generate realistic simulated data
+  return generateSimData(symbol, range);
+}
+ 
+function generateSimData(symbol, range) {
+  // Seed prices by symbol
+  const seeds = { AAPL:185, MSFT:415, NVDA:895, TSLA:178, GOOGL:172, AMZN:187, SPY:525, QQQ:450, 'BTC-USD':67000, 'ETH-USD':3500, 'GC=F':2320 };
+  let base = seeds[symbol] || 100;
+  const days = { '7d':7, '30d':30, '6mo':180, '1y':365, '2y':730, '5y':1825 }[range] || 180;
+  const now = Date.now(); const dayMs = 86400000;
+  const out = [];
+  let price = base * (0.7 + Math.random()*0.2);
+  for (let i=days; i>=0; i--) {
+    const chg = (Math.random()-0.48) * 0.025;
+    price *= (1+chg);
+    const vol = Math.random()*0.015;
+    const open = price*(1+(Math.random()-0.5)*0.01);
+    const high = Math.max(open,price)*(1+Math.random()*vol);
+    const low = Math.min(open,price)*(1-Math.random()*vol);
+    out.push({ t:now-i*dayMs, open, high, low, close:price, volume:Math.floor(Math.random()*80000000+5000000) });
+  }
+  return out;
+}
+ 
+// Search symbols
+const SYMBOL_DB = [
+  // US Stocks
+  {sym:'AAPL',name:'Apple Inc.',type:'Stock',region:'US'},{sym:'MSFT',name:'Microsoft Corp.',type:'Stock',region:'US'},
+  {sym:'GOOGL',name:'Alphabet Inc.',type:'Stock',region:'US'},{sym:'AMZN',name:'Amazon.com Inc.',type:'Stock',region:'US'},
+  {sym:'NVDA',name:'NVIDIA Corporation',type:'Stock',region:'US'},{sym:'TSLA',name:'Tesla Inc.',type:'Stock',region:'US'},
+  {sym:'META',name:'Meta Platforms Inc.',type:'Stock',region:'US'},{sym:'BRK-B',name:'Berkshire Hathaway',type:'Stock',region:'US'},
+  {sym:'JPM',name:'JPMorgan Chase',type:'Stock',region:'US'},{sym:'JNJ',name:'Johnson & Johnson',type:'Stock',region:'US'},
+  {sym:'V',name:'Visa Inc.',type:'Stock',region:'US'},{sym:'WMT',name:'Walmart Inc.',type:'Stock',region:'US'},
+  {sym:'MA',name:'Mastercard Inc.',type:'Stock',region:'US'},{sym:'PG',name:'Procter & Gamble',type:'Stock',region:'US'},
+  {sym:'KO',name:'Coca-Cola Co.',type:'Stock',region:'US'},{sym:'DIS',name:'Walt Disney Co.',type:'Stock',region:'US'},
+  {sym:'NFLX',name:'Netflix Inc.',type:'Stock',region:'US'},{sym:'ADBE',name:'Adobe Inc.',type:'Stock',region:'US'},
+  {sym:'PYPL',name:'PayPal Holdings',type:'Stock',region:'US'},{sym:'INTC',name:'Intel Corporation',type:'Stock',region:'US'},
+  {sym:'AMD',name:'Advanced Micro Devices',type:'Stock',region:'US'},{sym:'UBER',name:'Uber Technologies',type:'Stock',region:'US'},
+  {sym:'SNAP',name:'Snap Inc.',type:'Stock',region:'US'},{sym:'TWTR',name:'Twitter/X Corp.',type:'Stock',region:'US'},
+  {sym:'SPOT',name:'Spotify Technology',type:'Stock',region:'US'},{sym:'SHOP',name:'Shopify Inc.',type:'Stock',region:'US'},
+  {sym:'SQ',name:'Block Inc. (Square)',type:'Stock',region:'US'},{sym:'RBLX',name:'Roblox Corporation',type:'Stock',region:'US'},
+  {sym:'GME',name:'GameStop Corp.',type:'Stock',region:'US'},{sym:'AMC',name:'AMC Entertainment',type:'Stock',region:'US'},
+  {sym:'BAC',name:'Bank of America',type:'Stock',region:'US'},{sym:'GS',name:'Goldman Sachs',type:'Stock',region:'US'},
+  {sym:'MS',name:'Morgan Stanley',type:'Stock',region:'US'},{sym:'XOM',name:'ExxonMobil',type:'Stock',region:'US'},
+  {sym:'CVX',name:'Chevron Corp.',type:'Stock',region:'US'},{sym:'PFE',name:'Pfizer Inc.',type:'Stock',region:'US'},
+  {sym:'MRK',name:'Merck & Co.',type:'Stock',region:'US'},{sym:'ABBV',name:'AbbVie Inc.',type:'Stock',region:'US'},
+  {sym:'T',name:'AT&T Inc.',type:'Stock',region:'US'},{sym:'VZ',name:'Verizon Communications',type:'Stock',region:'US'},
+  {sym:'NKE',name:'Nike Inc.',type:'Stock',region:'US'},{sym:'MCD',name:"McDonald's Corp.",type:'Stock',region:'US'},
+  {sym:'SBUX',name:'Starbucks Corp.',type:'Stock',region:'US'},{sym:'F',name:'Ford Motor Co.',type:'Stock',region:'US'},
+  {sym:'GM',name:'General Motors',type:'Stock',region:'US'},{sym:'RIVN',name:'Rivian Automotive',type:'Stock',region:'US'},
+  {sym:'LCID',name:'Lucid Group',type:'Stock',region:'US'},{sym:'PLTR',name:'Palantir Technologies',type:'Stock',region:'US'},
+  {sym:'COIN',name:'Coinbase Global',type:'Stock',region:'US'},{sym:'HOOD',name:'Robinhood Markets',type:'Stock',region:'US'},
+  // ETFs
+  {sym:'SPY',name:'SPDR S&P 500 ETF',type:'ETF',region:'US'},{sym:'QQQ',name:'Invesco QQQ Trust',type:'ETF',region:'US'},
+  {sym:'VTI',name:'Vanguard Total Stock Market ETF',type:'ETF',region:'US'},{sym:'VOO',name:'Vanguard S&P 500 ETF',type:'ETF',region:'US'},
+  {sym:'IWM',name:'iShares Russell 2000 ETF',type:'ETF',region:'US'},{sym:'GLD',name:'SPDR Gold Shares',type:'ETF',region:'US'},
+  {sym:'ARKK',name:'ARK Innovation ETF',type:'ETF',region:'US'},{sym:'SQQQ',name:'ProShares Ultra Short QQQ',type:'ETF',region:'US'},
+  // Crypto
+  {sym:'BTC-USD',name:'Bitcoin USD',type:'Crypto',region:'Global'},{sym:'ETH-USD',name:'Ethereum USD',type:'Crypto',region:'Global'},
+  {sym:'SOL-USD',name:'Solana USD',type:'Crypto',region:'Global'},{sym:'BNB-USD',name:'BNB USD',type:'Crypto',region:'Global'},
+  {sym:'XRP-USD',name:'Ripple USD',type:'Crypto',region:'Global'},{sym:'DOGE-USD',name:'Dogecoin USD',type:'Crypto',region:'Global'},
+  {sym:'ADA-USD',name:'Cardano USD',type:'Crypto',region:'Global'},{sym:'AVAX-USD',name:'Avalanche USD',type:'Crypto',region:'Global'},
+  {sym:'LINK-USD',name:'Chainlink USD',type:'Crypto',region:'Global'},{sym:'MATIC-USD',name:'Polygon USD',type:'Crypto',region:'Global'},
+  // Commodities / Indices
+  {sym:'GC=F',name:'Gold Futures',type:'Commodity',region:'Global'},{sym:'CL=F',name:'Crude Oil Futures',type:'Commodity',region:'Global'},
+  {sym:'^GSPC',name:'S&P 500 Index',type:'Index',region:'US'},{sym:'^DJI',name:'Dow Jones Industrial',type:'Index',region:'US'},
+  {sym:'^IXIC',name:'NASDAQ Composite',type:'Index',region:'US'},{sym:'^VIX',name:'CBOE Volatility Index',type:'Index',region:'US'},
+  // International
+  {sym:'BABA',name:'Alibaba Group',type:'Stock',region:'CN'},{sym:'JD',name:'JD.com Inc.',type:'Stock',region:'CN'},
+  {sym:'NIO',name:'NIO Inc.',type:'Stock',region:'CN'},{sym:'TSM',name:'Taiwan Semiconductor',type:'Stock',region:'TW'},
+  {sym:'SONY',name:'Sony Group Corp.',type:'Stock',region:'JP'},{sym:'SAP',name:'SAP SE',type:'Stock',region:'DE'},
+  {sym:'ASML',name:'ASML Holding',type:'Stock',region:'NL'},{sym:'ARM',name:'ARM Holdings',type:'Stock',region:'UK'},
+];
+ 
+ 
+/* ────────────────────────────────────────────────
+   TRADING LAB
+──────────────────────────────────────────────── */
+let tlCurrentSym = 'AAPL';
+let tlCurrentInterval = '1d';
+let tlCurrentRange = '6mo';
+let tlCurrentChartType = 'candle';
+let tlRpTabState = 'watchlist';
+let tlBsTabState = 'quiz';
+let tlActiveIndicators = new Set(['SMA']);
+let tlRawData = [];
+let tlChartDrawn = false;
+let currentDrawTool = 'cursor';
+let drawings = []; // [{type, points, color}]
+let drawingInProgress = null;
  
 // ── OPEN / CLOSE ──
 function openTradingLab(section) {
   document.getElementById('tradingLabOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
- 
-  // Activate the right tab
-  const tabMap = { chart:'tlTabChart', daytrading:'tlTabDaytrading', quiz:'tlTabQuiz', screener:'tlTabScreener', glossary:'tlTabGlossary' };
-  document.querySelectorAll('.tl-tab').forEach(t => t.classList.remove('active'));
-  const tabEl = document.getElementById(tabMap[section] || 'tlTabChart');
-  if (tabEl) tabEl.classList.add('active');
- 
-  if (section === 'chart') {
-    // Load chart on first open
-    if (!tlChartLoaded) {
-      setTimeout(() => { tlLoadChart(tlCurrentSym, tlCurrentInterval, tlCurrentType); tlChartLoaded = true; }, 200);
-    }
-  } else {
-    // For non-chart tabs, load chart in background and switch bottom tab
-    if (!tlChartLoaded) {
-      setTimeout(() => { tlLoadChart(tlCurrentSym, tlCurrentInterval, tlCurrentType); tlChartLoaded = true; }, 200);
-    }
-    const bsTabMap = { daytrading:'tlBsTabDaytrading', quiz:'tlBsTabQuiz', screener:'tlBsTabScreener', glossary:'tlBsTabGlossary' };
-    if (bsTabMap[section]) {
-      tlBsTab = section;
-      document.querySelectorAll('.tl-bs-tab').forEach(t => t.classList.remove('active'));
-      const bsEl = document.getElementById(bsTabMap[section]);
-      if (bsEl) bsEl.classList.add('active');
-      setTimeout(() => tlRenderBsBody(), 100);
-      setTimeout(() => document.getElementById('tlBsBody')?.scrollIntoView({behavior:'smooth', block:'end'}), 400);
-    }
+  const tabMap = { chart:'tlTabChart', quiz:'tlTabQuiz', screener:'tlTabScreener', glossary:'tlTabGlossary' };
+  document.querySelectorAll('.tl-tab').forEach(t=>t.classList.remove('active'));
+  const tabEl=document.getElementById(tabMap[section]||'tlTabChart');
+  if(tabEl)tabEl.classList.add('active');
+  if(!tlChartDrawn) {
+    setTimeout(()=>{ loadTlChart(tlCurrentSym,tlCurrentInterval,tlCurrentRange); tlChartDrawn=true; }, 150);
+  }
+  if(['quiz','screener','glossary'].includes(section)){
+    tlBsTabState=section;
+    document.querySelectorAll('.tl-bs-tab').forEach(t=>t.classList.remove('active'));
+    const bsMap={quiz:'tlBsTabQuiz',screener:'tlBsTabScreener',glossary:'tlBsTabGlossary'};
+    const bsEl=document.getElementById(bsMap[section]);
+    if(bsEl)bsEl.classList.add('active');
+    setTimeout(()=>tlRenderBsBody(),200);
   }
   tlRenderRpBody();
-  if (section === 'chart' || section === 'daytrading') tlRenderBsBody();
+  tlRenderBsBody();
 }
  
-function closeTradingLab() {
+function closeTradingLab(){
   document.getElementById('tradingLabOverlay').classList.remove('open');
-  document.body.style.overflow = '';
+  document.body.style.overflow='';
+  closeSymSearch();
 }
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.getElementById('symSearchModal').classList.contains('open'))closeSymSearch();else closeTradingLab();}});
  
-// Keyboard ESC to close
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTradingLab(); });
- 
-// ── TOP TAB HANDLER ──
-function tlSetTab(section, el) {
-  document.querySelectorAll('.tl-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  if (section === 'chart') { /* chart always visible */ }
-  else {
-    const bsTabMap = { daytrading:'tlBsTabDaytrading', quiz:'tlBsTabQuiz', screener:'tlBsTabScreener', glossary:'tlBsTabGlossary' };
-    if (bsTabMap[section]) {
-      tlBsTab = section;
-      document.querySelectorAll('.tl-bs-tab').forEach(t => t.classList.remove('active'));
-      document.getElementById(bsTabMap[section]).classList.add('active');
-      tlRenderBsBody();
-      setTimeout(() => document.getElementById('tlBsBody')?.scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
-    }
+// ── TAB HANDLERS ──
+function tlSetTab(section, el){
+  document.querySelectorAll('.tl-tab').forEach(t=>t.classList.remove('active')); el.classList.add('active');
+  if(['quiz','screener','glossary'].includes(section)){
+    tlBsTabState=section;
+    document.querySelectorAll('.tl-bs-tab').forEach(t=>t.classList.remove('active'));
+    const bsMap={quiz:'tlBsTabQuiz',screener:'tlBsTabScreener',glossary:'tlBsTabGlossary'};
+    const bsEl=document.getElementById(bsMap[section]);
+    if(bsEl)bsEl.classList.add('active');
+    tlRenderBsBody();
   }
 }
- 
-// ── CHART ──
-function tlLoadChart(sym, interval, type) {
-  const wrap = document.getElementById('tlTvChart');
-  if (!wrap) return;
-  wrap.innerHTML = '';
-  try {
-    new TradingView.widget({
-      container_id: 'tlTvChart',
-      symbol: sym,
-      interval: interval,
-      timezone: 'exchange',
-      theme: 'dark',
-      style: type,
-      locale: 'en',
-      toolbar_bg: '#131722',
-      enable_publishing: false,
-      hide_top_toolbar: false,
-      hide_legend: false,
-      save_image: false,
-      backgroundColor: '#0b0e11',
-      gridColor: 'rgba(255,255,255,0.03)',
-      width: '100%',
-      height: '100%',
-      allow_symbol_change: true,
-      details: true,
-      studies: ['RSI@tv-basicstudies', 'MACD@tv-basicstudies'],
-    });
-  } catch(e) {
-    wrap.innerHTML = `
-      <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:14px;color:#787b86;text-align:center;padding:24px;">
-        <div style="font-size:2.5rem">📈</div>
-        <div style="font-size:0.95rem;color:#f0f3fa;font-weight:700;font-family:'Syne',sans-serif">Live Chart — ${sym}</div>
-        <div style="font-size:0.78rem;max-width:320px;line-height:1.5">Requires internet connection and ad-blocker disabled for TradingView CDN.</div>
-        <a href="https://www.tradingview.com/chart/?symbol=${encodeURIComponent(sym)}" target="_blank" style="background:#2962ff;color:white;padding:9px 20px;border-radius:5px;text-decoration:none;font-weight:700;font-size:0.8rem;">Open on TradingView →</a>
-      </div>`;
-  }
+function tlSetRpTab(tab,el){
+  tlRpTabState=tab;
+  document.querySelectorAll('.tl-rp-tab').forEach(t=>t.classList.remove('active')); el.classList.add('active');
+  tlRenderRpBody();
+}
+function tlSetBsTab(tab,el){
+  tlBsTabState=tab;
+  document.querySelectorAll('.tl-bs-tab').forEach(t=>t.classList.remove('active')); el.classList.add('active');
+  tlRenderBsBody();
+}
+function tlSetInterval(el,interval,range){
+  document.querySelectorAll('.tl-ct-btn').forEach(b=>{ if(['1D','1M','6M','1Y','2Y','5Y'].includes(b.textContent.trim()))b.classList.remove('active'); });
+  el.classList.add('active'); tlCurrentInterval=interval; tlCurrentRange=range;
+  loadTlChart(tlCurrentSym,interval,range);
+}
+function tlSetChartType(el,type){
+  document.querySelectorAll('#typeCandle,#typeLine,#typeArea').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active'); tlCurrentChartType=type; mmChart.render();
+}
+function tlToggleInd(ind,el){
+  if(tlActiveIndicators.has(ind))tlActiveIndicators.delete(ind); else tlActiveIndicators.add(ind);
+  el.classList.toggle('active'); mmChart.render();
 }
  
-function tlSwitchSym(el, sym) {
-  document.querySelectorAll('.tl-sym-chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  tlCurrentSym = sym;
-  tlLoadChart(sym, tlCurrentInterval, tlCurrentType);
+// ── SYMBOL ──
+function tlSwitchSym(el,sym){
+  document.querySelectorAll('.tl-sym-chip').forEach(c=>c.classList.remove('active')); el.classList.add('active');
+  tlCurrentSym=sym; loadTlChart(sym,tlCurrentInterval,tlCurrentRange);
+  document.getElementById('chartSym').textContent=sym.replace('-USD','').replace('=F','');
   tlRenderRpBody();
 }
  
-function tlSetInterval(el, v) {
-  document.querySelectorAll('.tl-ct-btn').forEach(b => { if (['1m','5m','15m','1H','1D','1W'].includes(b.textContent.trim())) b.classList.remove('active'); });
-  el.classList.add('active');
-  tlCurrentInterval = v;
-  tlLoadChart(tlCurrentSym, v, tlCurrentType);
+// ── LOAD CHART ──
+async function loadTlChart(sym,interval,range){
+  const loading=document.getElementById('chartLoading');
+  if(loading)loading.style.display='flex';
+  try {
+    tlRawData=await fetchQuoteData(sym,interval,range);
+    mmChart.setData(tlRawData);
+    updateChartInfo(sym,tlRawData);
+    refreshChipChanges();
+  } catch(e){ console.error(e); }
+  if(loading)loading.style.display='none';
 }
  
-function tlSetType(el, v) {
-  document.querySelectorAll('.tl-ct-btn').forEach(b => { if (['Candles','Line','Area'].includes(b.textContent.trim())) b.classList.remove('active'); });
-  el.classList.add('active');
-  tlCurrentType = v;
-  tlLoadChart(tlCurrentSym, tlCurrentInterval, v);
+function updateChartInfo(sym,data){
+  if(!data||!data.length)return;
+  const last=data[data.length-1]; const first=data[0];
+  const chgPct=((last.close-first.close)/first.close*100).toFixed(2);
+  const chgAbs=(last.close-first.close).toFixed(2);
+  const isUp=last.close>=first.close;
+  document.getElementById('chartSym').textContent=sym.replace('-USD','').replace('=F','');
+  document.getElementById('chartPrice').textContent=formatPrice(last.close);
+  document.getElementById('chartChg').textContent=(isUp?'+':'')+chgAbs+' ('+( isUp?'+':'')+chgPct+'%)';
+  document.getElementById('chartChg').style.color=isUp?'#26a69a':'#ef5350';
+  document.getElementById('chartOHLCV').textContent=`O: ${formatPrice(last.open)} H: ${formatPrice(last.high)} L: ${formatPrice(last.low)} C: ${formatPrice(last.close)} V: ${formatVol(last.volume)}`;
+}
+ 
+function formatPrice(v){ if(!v)return'—'; return v>=1000?'$'+v.toLocaleString('en',{maximumFractionDigits:2}):'$'+v.toFixed(2); }
+function formatVol(v){ if(!v)return'—'; if(v>=1e9)return(v/1e9).toFixed(1)+'B'; if(v>=1e6)return(v/1e6).toFixed(1)+'M'; if(v>=1e3)return(v/1e3).toFixed(1)+'K'; return v; }
+ 
+async function refreshChipChanges(){
+  const syms=['AAPL','MSFT','NVDA','TSLA','GOOGL','AMZN','SPY','QQQ','BTC-USD','ETH-USD','GC=F'];
+  for(const s of syms){
+    try{
+      const data=await fetchQuoteData(s,'1d','7d');
+      if(!data||data.length<2)continue;
+      const last=data[data.length-1]; const prev=data[data.length-2];
+      const chg=((last.close-prev.close)/prev.close*100).toFixed(2);
+      const isUp=last.close>=prev.close;
+      const id='chg-'+s.replace('=','');
+      const el=document.getElementById(id);
+      if(el){ el.textContent=(isUp?'+':'')+chg+'%'; el.className='tl-chip-chg '+(isUp?'tl-up':'tl-down'); }
+    }catch(e){}
+  }
+}
+ 
+/* ────────────────────────────────────────────────
+   CUSTOM CHART ENGINE (mmChart)
+──────────────────────────────────────────────── */
+const mmChart = (() => {
+  let data = [];
+  let viewStart = 0, viewEnd = 1; // 0..1 normalized
+  let isPanning = false, panStartX = 0, panStartView = [0,1];
+  let mouseX = -1, mouseY = -1;
+  let canvas, ctx, rsiCanvas, rsiCtx, wrap;
+  let animFrame = null;
+ 
+  const BG = '#0b0e11', BG2 = '#131722';
+  const GREEN = '#26a69a', RED = '#ef5350';
+  const BLUE = '#5c8df6', PURPLE = '#9b5de5', ORANGE = '#ff9800';
+  const MUTED = '#787b86', BRIGHT = '#f0f3fa', GRID = 'rgba(255,255,255,0.04)';
+ 
+  function init() {
+    wrap = document.getElementById('tlChartWrap');
+    canvas = document.getElementById('mmMainCanvas');
+    rsiCanvas = document.getElementById('mmRsiCanvas');
+    if (!canvas || !wrap) return;
+    ctx = canvas.getContext('2d');
+    rsiCtx = rsiCanvas.getContext('2d');
+    resize();
+    window.addEventListener('resize', resize);
+    // Mouse events
+    canvas.addEventListener('mousemove', onMouseMove);
+    canvas.addEventListener('mousedown', onMouseDown);
+    canvas.addEventListener('mouseup', onMouseUp);
+    canvas.addEventListener('mouseleave', ()=>{ mouseX=-1;mouseY=-1; schedRender(); });
+    canvas.addEventListener('wheel', onWheel, {passive:false});
+    // Touch
+    canvas.addEventListener('touchstart', onTouchStart, {passive:true});
+    canvas.addEventListener('touchmove', onTouchMove, {passive:false});
+    canvas.addEventListener('touchend', onTouchEnd);
+  }
+ 
+  function resize() {
+    if(!canvas||!wrap)return;
+    const W=wrap.clientWidth||800, H=wrap.clientHeight||400;
+    canvas.width=W*devicePixelRatio; canvas.height=H*devicePixelRatio;
+    canvas.style.width=W+'px'; canvas.style.height=H+'px';
+    const rsiH=tlActiveIndicators.has('RSI')?80:0;
+    rsiCanvas.width=W*devicePixelRatio; rsiCanvas.height=rsiH*devicePixelRatio;
+    rsiCanvas.style.width=W+'px'; rsiCanvas.style.height=rsiH+'px';
+    rsiCanvas.style.display=tlActiveIndicators.has('RSI')?'block':'none';
+    schedRender();
+  }
+ 
+  function setData(d) { data=d; viewStart=0; viewEnd=1; schedRender(); }
+  function schedRender() { if(animFrame)cancelAnimationFrame(animFrame); animFrame=requestAnimationFrame(render); }
+ 
+  function getVisibleData() {
+    if(!data.length)return [];
+    const s=Math.floor(viewStart*data.length), e=Math.ceil(viewEnd*data.length);
+    return data.slice(Math.max(0,s), Math.min(data.length,e));
+  }
+ 
+  function render() {
+    if(!canvas||!ctx)return;
+    const W=canvas.width/devicePixelRatio, H=canvas.height/devicePixelRatio;
+    const hasRsi=tlActiveIndicators.has('RSI')&&rsiCanvas;
+    const rsiH=hasRsi?80:0;
+    const chartH=H-rsiH;
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.save(); ctx.scale(devicePixelRatio,devicePixelRatio);
+    ctx.fillStyle=BG2; ctx.fillRect(0,0,W,H);
+ 
+    const vd=getVisibleData();
+    if(!vd.length){ ctx.restore(); return; }
+ 
+    const PAD={t:10,r:72,b:28,l:4};
+    const cW=W-PAD.l-PAD.r, cH=chartH-PAD.t-PAD.b;
+ 
+    const hasVol=tlActiveIndicators.has('VOL');
+    const volH=hasVol?50:0;
+    const priceH=cH-volH;
+ 
+    // Price range
+    let minP=Infinity,maxP=-Infinity;
+    vd.forEach(d=>{ if(d.low<minP)minP=d.low; if(d.high>maxP)maxP=d.high; });
+    const pad=(maxP-minP)*0.05;
+    minP-=pad; maxP+=pad;
+ 
+    const toX=i=>PAD.l+(i/(vd.length-1||1))*cW;
+    const toY=v=>PAD.t+priceH-(v-minP)/(maxP-minP)*priceH;
+ 
+    // Grid
+    for(let g=0;g<=4;g++){
+      const y=PAD.t+(priceH/4)*g;
+      const v=maxP-(maxP-minP)*(g/4);
+      ctx.strokeStyle=GRID; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(PAD.l,y); ctx.lineTo(W-PAD.r,y); ctx.stroke();
+      ctx.fillStyle=MUTED; ctx.font=`10px JetBrains Mono`; ctx.textAlign='right';
+      ctx.fillText(v>=1000?v.toLocaleString('en',{maximumFractionDigits:0}):v.toFixed(2),W-4,y+3);
+    }
+    // X grid every ~40 bars
+    const xStep=Math.max(1,Math.floor(vd.length/8));
+    for(let i=0;i<vd.length;i+=xStep){
+      const x=toX(i);
+      ctx.strokeStyle=GRID; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(x,PAD.t); ctx.lineTo(x,PAD.t+priceH); ctx.stroke();
+      const d=new Date(vd[i].t);
+      const lbl=d.toLocaleDateString('en',{month:'short',day:'numeric'});
+      ctx.fillStyle=MUTED; ctx.font=`9px JetBrains Mono`; ctx.textAlign='center';
+      ctx.fillText(lbl,x,PAD.t+priceH+14);
+    }
+ 
+    // Indicators
+    if(tlActiveIndicators.has('BB')){
+      drawBollingerBands(ctx,vd,20,2,toX,toY,cW,PAD);
+    }
+    if(tlActiveIndicators.has('SMA')){
+      drawMA(ctx,vd,20,toX,toY,BLUE,1.2,'SMA20');
+      drawMA(ctx,vd,50,toX,toY,'#ffd60a',1,'SMA50');
+    }
+    if(tlActiveIndicators.has('EMA')){
+      drawEMA(ctx,vd,12,toX,toY,'#00e5c3',1.2,'EMA12');
+      drawEMA(ctx,vd,26,toX,toY,ORANGE,1,'EMA26');
+    }
+ 
+    // Candles / Line / Area
+    if(tlCurrentChartType==='candle'){ drawCandles(ctx,vd,toX,toY,cW); }
+    else if(tlCurrentChartType==='line'){ drawLine(ctx,vd,toX,toY); }
+    else { drawArea(ctx,vd,toX,toY,priceH,PAD); }
+ 
+    // Volume bars
+    if(hasVol){
+      const maxVol=Math.max(...vd.map(d=>d.volume||0));
+      const volY0=PAD.t+priceH; const volScale=volH/1.2;
+      vd.forEach((d,i)=>{
+        const x=toX(i); const barW=Math.max(1,cW/vd.length*0.6);
+        const h=(d.volume/maxVol)*volScale;
+        ctx.fillStyle=d.close>=d.open?'rgba(38,166,154,0.35)':'rgba(239,83,80,0.35)';
+        ctx.fillRect(x-barW/2,volY0+volH-h,barW,h);
+      });
+      // Vol grid line
+      ctx.strokeStyle='rgba(255,255,255,0.06)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(PAD.l,volY0); ctx.lineTo(W-PAD.r,volY0); ctx.stroke();
+    }
+ 
+    // Drawings
+    renderDrawings(ctx,vd,toX,toY,W,H,PAD);
+ 
+    // Crosshair
+    if(mouseX>PAD.l&&mouseX<W-PAD.r&&mouseY>PAD.t&&mouseY<PAD.t+priceH){
+      ctx.strokeStyle='rgba(255,255,255,0.15)'; ctx.lineWidth=1; ctx.setLineDash([4,4]);
+      ctx.beginPath(); ctx.moveTo(mouseX,PAD.t); ctx.lineTo(mouseX,PAD.t+priceH); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(PAD.l,mouseY); ctx.lineTo(W-PAD.r,mouseY); ctx.stroke();
+      ctx.setLineDash([]);
+      // Price label on Y axis
+      const pv=minP+(1-(mouseY-PAD.t)/priceH)*(maxP-minP);
+      ctx.fillStyle='#2962ff'; ctx.fillRect(W-PAD.r,mouseY-9,PAD.r-2,18);
+      ctx.fillStyle='white'; ctx.font='bold 10px JetBrains Mono'; ctx.textAlign='right';
+      ctx.fillText(pv>=1000?pv.toLocaleString('en',{maximumFractionDigits:0}):pv.toFixed(2),W-4,mouseY+3);
+      // Nearest bar tooltip
+      const idx=Math.round((mouseX-PAD.l)/cW*(vd.length-1));
+      const d=vd[Math.max(0,Math.min(vd.length-1,idx))];
+      if(d){
+        const tip=document.getElementById('crosshairTooltip');
+        if(tip){
+          const dt=new Date(d.t).toLocaleDateString('en',{month:'short',day:'numeric',year:'numeric'});
+          tip.innerHTML=`${dt} &nbsp;|&nbsp; O:${d.open?.toFixed(2)||'—'} H:${d.high?.toFixed(2)||'—'} L:${d.low?.toFixed(2)||'—'} C:<b style="color:${d.close>=d.open?GREEN:RED}">${d.close?.toFixed(2)||'—'}</b> V:${formatVol(d.volume)}`;
+          tip.style.display='block';
+          tip.style.left=(mouseX+10)+'px';
+          tip.style.top=(mouseY-36)+'px';
+        }
+      }
+    } else {
+      const tip=document.getElementById('crosshairTooltip');
+      if(tip)tip.style.display='none';
+    }
+ 
+    ctx.restore();
+ 
+    // RSI panel
+    if(hasRsi) renderRSI(vd);
+  }
+ 
+  function drawCandles(ctx,vd,toX,toY,cW){
+    const barW=Math.max(1,cW/vd.length*0.75);
+    vd.forEach((d,i)=>{
+      const x=toX(i);
+      const isUp=d.close>=d.open;
+      ctx.strokeStyle=isUp?GREEN:RED; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(x,toY(d.high)); ctx.lineTo(x,toY(d.low)); ctx.stroke();
+      ctx.fillStyle=isUp?GREEN:RED;
+      const y=toY(Math.max(d.open,d.close));
+      const h=Math.max(1,Math.abs(toY(d.open)-toY(d.close)));
+      ctx.fillRect(x-barW/2,y,barW,h);
+    });
+  }
+ 
+  function drawLine(ctx,vd,toX,toY){
+    const isUp=vd[vd.length-1].close>=vd[0].close;
+    ctx.beginPath(); ctx.strokeStyle=isUp?GREEN:RED; ctx.lineWidth=2;
+    vd.forEach((d,i)=>{ if(i===0)ctx.moveTo(toX(i),toY(d.close)); else ctx.lineTo(toX(i),toY(d.close)); });
+    ctx.stroke();
+  }
+ 
+  function drawArea(ctx,vd,toX,toY,priceH,PAD){
+    const isUp=vd[vd.length-1].close>=vd[0].close;
+    const col=isUp?GREEN:RED;
+    const grad=ctx.createLinearGradient(0,PAD.t,0,PAD.t+priceH);
+    grad.addColorStop(0,isUp?'rgba(38,166,154,0.25)':'rgba(239,83,80,0.25)');
+    grad.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.beginPath();
+    vd.forEach((d,i)=>{ if(i===0)ctx.moveTo(toX(i),toY(d.close)); else ctx.lineTo(toX(i),toY(d.close)); });
+    ctx.lineTo(toX(vd.length-1),PAD.t+priceH); ctx.lineTo(toX(0),PAD.t+priceH); ctx.closePath();
+    ctx.fillStyle=grad; ctx.fill();
+    drawLine(ctx,vd,toX,toY);
+  }
+ 
+  function drawMA(ctx,vd,period,toX,toY,color,lw,label){
+    const ma=[];
+    for(let i=0;i<vd.length;i++){
+      if(i<period-1){ma.push(null);continue;}
+      const sum=vd.slice(i-period+1,i+1).reduce((a,d)=>a+d.close,0);
+      ma.push(sum/period);
+    }
+    ctx.beginPath(); ctx.strokeStyle=color; ctx.lineWidth=lw; let started=false;
+    ma.forEach((v,i)=>{ if(v===null)return; if(!started){ctx.moveTo(toX(i),toY(v));started=true;}else ctx.lineTo(toX(i),toY(v)); });
+    ctx.stroke();
+  }
+ 
+  function drawEMA(ctx,vd,period,toX,toY,color,lw){
+    const k=2/(period+1); const emas=[];
+    let prev=null;
+    for(let i=0;i<vd.length;i++){
+      if(prev===null){prev=vd[i].close;emas.push(null);continue;}
+      prev=vd[i].close*k+prev*(1-k); emas.push(prev);
+    }
+    ctx.beginPath(); ctx.strokeStyle=color; ctx.lineWidth=lw; let started=false;
+    emas.forEach((v,i)=>{ if(v===null)return; if(!started){ctx.moveTo(toX(i),toY(v));started=true;}else ctx.lineTo(toX(i),toY(v)); });
+    ctx.stroke();
+  }
+ 
+  function drawBollingerBands(ctx,vd,period,stddev,toX,toY){
+    const upper=[],lower=[],mid=[];
+    for(let i=0;i<vd.length;i++){
+      if(i<period-1){upper.push(null);lower.push(null);mid.push(null);continue;}
+      const slice=vd.slice(i-period+1,i+1).map(d=>d.close);
+      const mean=slice.reduce((a,v)=>a+v,0)/period;
+      const std=Math.sqrt(slice.reduce((a,v)=>a+(v-mean)**2,0)/period);
+      upper.push(mean+stddev*std); lower.push(mean-stddev*std); mid.push(mean);
+    }
+    ctx.strokeStyle='rgba(155,93,229,0.5)'; ctx.lineWidth=1;
+    [[upper,'rgba(155,93,229,0.15)'],[lower,'rgba(155,93,229,0.15)'],[mid,'rgba(155,93,229,0.6)']].forEach(([arr,col],idx)=>{
+      ctx.beginPath(); if(idx<2)ctx.strokeStyle='rgba(155,93,229,0.5)'; else ctx.strokeStyle=col;
+      let started=false; arr.forEach((v,i)=>{ if(v===null)return; if(!started){ctx.moveTo(toX(i),toY(v));started=true;}else ctx.lineTo(toX(i),toY(v)); });
+      ctx.stroke();
+    });
+  }
+ 
+  function renderRSI(vd){
+    if(!rsiCtx||!rsiCanvas)return;
+    const W=rsiCanvas.width/devicePixelRatio, H=rsiCanvas.height/devicePixelRatio;
+    const PAD={t:5,r:72,b:18,l:4};
+    const cW=W-PAD.l-PAD.r, cH=H-PAD.t-PAD.b;
+    rsiCtx.clearRect(0,0,rsiCanvas.width,rsiCanvas.height);
+    rsiCtx.save(); rsiCtx.scale(devicePixelRatio,devicePixelRatio);
+    rsiCtx.fillStyle=BG2; rsiCtx.fillRect(0,0,W,H);
+    rsiCtx.strokeStyle='rgba(255,255,255,0.06)'; rsiCtx.lineWidth=1;
+    rsiCtx.beginPath(); rsiCtx.moveTo(PAD.l,PAD.t); rsiCtx.lineTo(W-PAD.r,PAD.t); rsiCtx.stroke();
+    // RSI levels 30/70
+    const toRY=v=>PAD.t+cH-(v/100)*cH;
+    [30,50,70].forEach(v=>{
+      const y=toRY(v); rsiCtx.strokeStyle=v===50?'rgba(255,255,255,0.06)':'rgba(255,255,255,0.1)';
+      rsiCtx.setLineDash(v===50?[]:[3,3]); rsiCtx.beginPath(); rsiCtx.moveTo(PAD.l,y); rsiCtx.lineTo(W-PAD.r,y); rsiCtx.stroke();
+      rsiCtx.setLineDash([]); rsiCtx.fillStyle=MUTED; rsiCtx.font='9px JetBrains Mono'; rsiCtx.textAlign='right';
+      rsiCtx.fillText(v,W-4,y+3);
+    });
+    rsiCtx.fillStyle=MUTED; rsiCtx.font='bold 9px JetBrains Mono'; rsiCtx.textAlign='left';
+    rsiCtx.fillText('RSI(14)',PAD.l+4,PAD.t+11);
+    const period=14; const gains=[],losses=[];
+    for(let i=1;i<vd.length;i++){
+      const d=vd[i].close-vd[i-1].close; gains.push(Math.max(0,d)); losses.push(Math.max(0,-d));
+    }
+    const rsiVals=[];
+    for(let i=period-1;i<gains.length;i++){
+      const ag=gains.slice(i-period+1,i+1).reduce((a,v)=>a+v,0)/period;
+      const al=losses.slice(i-period+1,i+1).reduce((a,v)=>a+v,0)/period;
+      rsiVals.push(al===0?100:100-(100/(1+ag/al)));
+    }
+    const offset=vd.length-rsiVals.length-1;
+    const toX2=i=>PAD.l+(i/(vd.length-1||1))*cW;
+    rsiCtx.beginPath(); rsiCtx.strokeStyle='#5c8df6'; rsiCtx.lineWidth=1.5;
+    rsiVals.forEach((v,i)=>{
+      const xi=toX2(i+offset+1), y=toRY(v);
+      if(i===0)rsiCtx.moveTo(xi,y); else rsiCtx.lineTo(xi,y);
+    });
+    rsiCtx.stroke();
+    rsiCtx.restore();
+  }
+ 
+  // ── DRAWINGS ──
+  function renderDrawings(ctx,vd,toX,toY,W,H,PAD){
+    drawings.forEach(d=>{
+      ctx.strokeStyle=d.color||'#ffd60a'; ctx.lineWidth=1.5; ctx.setLineDash([]);
+      if(d.type==='trendline'&&d.points.length>=2){
+        const [p1,p2]=d.points;
+        ctx.beginPath(); ctx.moveTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.stroke();
+      } else if(d.type==='horizontal'&&d.points.length>=1){
+        const y=d.points[0].y;
+        ctx.beginPath(); ctx.moveTo(PAD.l,y); ctx.lineTo(W-PAD.r,y); ctx.stroke();
+      } else if(d.type==='rect'&&d.points.length>=2){
+        const [p1,p2]=d.points;
+        ctx.strokeRect(Math.min(p1.x,p2.x),Math.min(p1.y,p2.y),Math.abs(p2.x-p1.x),Math.abs(p2.y-p1.y));
+        ctx.fillStyle=(d.color||'rgba(255,214,10,0.07)'); ctx.globalAlpha=0.12;
+        ctx.fillRect(Math.min(p1.x,p2.x),Math.min(p1.y,p2.y),Math.abs(p2.x-p1.x),Math.abs(p2.y-p1.y));
+        ctx.globalAlpha=1;
+      } else if(d.type==='arrow'&&d.points.length>=2){
+        const [p1,p2]=d.points;
+        drawArrow(ctx,p1.x,p1.y,p2.x,p2.y,d.color||'#ffd60a');
+      } else if(d.type==='text'&&d.points.length>=1){
+        ctx.fillStyle=d.color||'#ffd60a'; ctx.font='bold 12px Syne'; ctx.textAlign='left';
+        ctx.fillText(d.text||'Note',d.points[0].x,d.points[0].y);
+      } else if(d.type==='fib'&&d.points.length>=2){
+        drawFib(ctx,d.points[0],d.points[1],W,PAD);
+      }
+    });
+    // Drawing in progress
+    if(drawingInProgress&&drawingInProgress.points.length>=1){
+      ctx.strokeStyle='rgba(255,214,10,0.7)'; ctx.lineWidth=1.5; ctx.setLineDash([4,4]);
+      const p1=drawingInProgress.points[0];
+      const p2={x:mouseX,y:mouseY};
+      if(drawingInProgress.type==='trendline'||drawingInProgress.type==='arrow'){
+        ctx.beginPath(); ctx.moveTo(p1.x,p1.y); ctx.lineTo(p2.x,p2.y); ctx.stroke();
+      } else if(drawingInProgress.type==='rect'||drawingInProgress.type==='fib'){
+        ctx.strokeRect(Math.min(p1.x,p2.x),Math.min(p1.y,p2.y),Math.abs(p2.x-p1.x),Math.abs(p2.y-p1.y));
+      }
+      ctx.setLineDash([]);
+    }
+  }
+ 
+  function drawArrow(ctx,x1,y1,x2,y2,color){
+    const angle=Math.atan2(y2-y1,x2-x1);
+    const len=8;
+    ctx.strokeStyle=color; ctx.fillStyle=color; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x2,y2);
+    ctx.lineTo(x2-len*Math.cos(angle-0.4),y2-len*Math.sin(angle-0.4));
+    ctx.lineTo(x2-len*Math.cos(angle+0.4),y2-len*Math.sin(angle+0.4));
+    ctx.closePath(); ctx.fill();
+  }
+ 
+  function drawFib(ctx,p1,p2,W,PAD){
+    const levels=[0,0.236,0.382,0.5,0.618,0.786,1];
+    const colors=['#ef5350','#ff9800','#ffd60a','#26a69a','#5c8df6','#9b5de5','#ef5350'];
+    const dy=p2.y-p1.y;
+    levels.forEach((l,i)=>{
+      const y=p1.y+dy*l;
+      ctx.strokeStyle=colors[i]+'80'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(PAD.l,y); ctx.lineTo(W-PAD.r,y); ctx.stroke();
+      ctx.fillStyle=colors[i]; ctx.font='9px JetBrains Mono'; ctx.textAlign='left';
+      ctx.fillText((l*100).toFixed(1)+'%',PAD.l+4,y-3);
+    });
+  }
+ 
+  // ── MOUSE ──
+  function getCanvasPos(e){
+    const r=canvas.getBoundingClientRect();
+    return {x:e.clientX-r.left,y:e.clientY-r.top};
+  }
+  function onMouseMove(e){
+    const pos=getCanvasPos(e); mouseX=pos.x; mouseY=pos.y;
+    if(isPanning){
+      const dx=(pos.x-panStartX)/canvas.getBoundingClientRect().width;
+      const span=panStartView[1]-panStartView[0];
+      let ns=panStartView[0]-dx*span*0.8, ne=panStartView[1]-dx*span*0.8;
+      ns=Math.max(0,ns); ne=Math.min(1,ne);
+      if(ne-ns>=0.02){ viewStart=ns; viewEnd=ne; }
+    }
+    schedRender();
+  }
+  function onMouseDown(e){
+    const pos=getCanvasPos(e);
+    if(currentDrawTool==='cursor'){ isPanning=true; panStartX=pos.x; panStartView=[viewStart,viewEnd]; canvas.style.cursor='grabbing'; return; }
+    if(currentDrawTool==='horizontal'){
+      drawings.push({type:'horizontal',points:[{x:pos.x,y:pos.y}],color:'#ffd60a'}); schedRender(); return;
+    }
+    if(currentDrawTool==='text'){
+      const txt=prompt('Enter label text:','Support'); if(!txt)return;
+      drawings.push({type:'text',points:[{x:pos.x,y:pos.y}],text:txt,color:'#ffd60a'}); schedRender(); return;
+    }
+    if(['trendline','rect','arrow','fib'].includes(currentDrawTool)){
+      if(!drawingInProgress){ drawingInProgress={type:currentDrawTool,points:[{x:pos.x,y:pos.y}],color:'#ffd60a'}; }
+      else {
+        drawingInProgress.points.push({x:pos.x,y:pos.y});
+        drawings.push({...drawingInProgress}); drawingInProgress=null;
+        schedRender();
+      }
+    }
+  }
+  function onMouseUp(){ isPanning=false; canvas.style.cursor=currentDrawTool==='cursor'?'default':'crosshair'; }
+  function onWheel(e){
+    e.preventDefault();
+    const delta=e.deltaY>0?0.1:-0.1;
+    const span=viewEnd-viewStart;
+    const newSpan=Math.max(0.05,Math.min(1,span*(1+delta)));
+    const center=(viewStart+viewEnd)/2;
+    viewStart=Math.max(0,center-newSpan/2);
+    viewEnd=Math.min(1,center+newSpan/2);
+    schedRender();
+  }
+ 
+  // Touch pan
+  let touchStartX=0, touchStartView=[0,1];
+  function onTouchStart(e){ if(e.touches.length===1){touchStartX=e.touches[0].clientX;touchStartView=[viewStart,viewEnd];} }
+  function onTouchMove(e){ e.preventDefault(); if(e.touches.length===1){const dx=(e.touches[0].clientX-touchStartX)/canvas.getBoundingClientRect().width;const span=touchStartView[1]-touchStartView[0];let ns=touchStartView[0]-dx*span,ne=touchStartView[1]-dx*span;ns=Math.max(0,ns);ne=Math.min(1,ne);if(ne-ns>=0.02){viewStart=ns;viewEnd=ne;}schedRender();} }
+  function onTouchEnd(){}
+ 
+  return {
+    init, setData, render: schedRender,
+    zoomIn(){ const c=(viewStart+viewEnd)/2,s=(viewEnd-viewStart)*0.7;viewStart=Math.max(0,c-s/2);viewEnd=Math.min(1,c+s/2);schedRender(); },
+    zoomOut(){ const c=(viewStart+viewEnd)/2,s=Math.min(1,(viewEnd-viewStart)*1.3);viewStart=Math.max(0,c-s/2);viewEnd=Math.min(1,c+s/2);schedRender(); },
+    resetView(){ viewStart=0;viewEnd=1;schedRender(); }
+  };
+})();
+ 
+function setDrawTool(tool, el){
+  currentDrawTool=tool; drawingInProgress=null;
+  document.querySelectorAll('.tl-sb-btn[id^="tool-"]').forEach(b=>b.classList.remove('tool-active'));
+  if(el)el.classList.add('tool-active');
+  const canvas=document.getElementById('mmMainCanvas');
+  if(canvas)canvas.style.cursor=tool==='cursor'?'default':'crosshair';
+}
+function clearDrawings(){ drawings=[]; drawingInProgress=null; if(mmChart)mmChart.render(); }
+ 
+// ── SYMBOL SEARCH ──
+function openSymSearch(){
+  const modal=document.getElementById('symSearchModal');
+  modal.classList.add('open');
+  const input=document.getElementById('symSearchInput');
+  input.value=''; input.focus();
+  renderSearchResults('');
+}
+function closeSymSearch(){ document.getElementById('symSearchModal').classList.remove('open'); }
+ 
+document.getElementById('symSearchInput').addEventListener('input',e=>{ renderSearchResults(e.target.value); });
+document.getElementById('symSearchInput').addEventListener('keydown',e=>{
+  if(e.key==='Enter'){
+    const val=e.target.value.trim().toUpperCase();
+    if(val){ selectSymbol(val,val,'Custom',''); }
+  }
+});
+ 
+function renderSearchResults(q){
+  const body=document.getElementById('symSearchResults');
+  const term=q.toLowerCase();
+  const hits=term.length===0
+    ? SYMBOL_DB.slice(0,20)
+    : SYMBOL_DB.filter(s=>s.sym.toLowerCase().includes(term)||s.name.toLowerCase().includes(term)).slice(0,25);
+  if(!hits.length){
+    body.innerHTML=`<div class="ssr-item" onclick="selectSymbol('${q.toUpperCase()}','${q.toUpperCase()}','Stock','')"><div class="ssr-sym">${q.toUpperCase()}</div><div class="ssr-name">Search for this symbol</div><div class="ssr-type">CUSTOM</div></div>`;
+    return;
+  }
+  body.innerHTML=hits.map(s=>`
+    <div class="ssr-item" onclick="selectSymbol('${s.sym}','${s.name}','${s.type}','${s.region}')">
+      <div class="ssr-sym">${s.sym}</div>
+      <div class="ssr-name">${s.name}</div>
+      <div class="ssr-type">${s.type}</div>
+      <div class="ssr-region">${s.region}</div>
+    </div>`).join('');
+}
+ 
+function selectSymbol(sym,name,type,region){
+  closeSymSearch();
+  tlCurrentSym=sym;
+  document.getElementById('chartSym').textContent=sym.replace('-USD','').replace('=F','');
+  // Remove active from all chips
+  document.querySelectorAll('.tl-sym-chip').forEach(c=>c.classList.remove('active'));
+  const existing=document.querySelector(`.tl-sym-chip[data-sym="${sym}"]`);
+  if(existing){ existing.classList.add('active'); }
+  else {
+    // Add new chip to strip
+    const strip=document.querySelector('.tl-sym-strip');
+    const addBtn=strip.querySelector('.tl-sym-add');
+    const chip=document.createElement('div');
+    chip.className='tl-sym-chip active'; chip.dataset.sym=sym;
+    chip.innerHTML=`<span class="tl-chip-name">${sym.replace('-USD','').replace('=F','')}</span><span class="tl-chip-chg">…</span>`;
+    chip.onclick=()=>{ tlSwitchSym(chip,sym); };
+    strip.insertBefore(chip,addBtn);
+    // Cap watchlist
+    const chips=strip.querySelectorAll('.tl-sym-chip');
+    if(chips.length>15)chips[0].remove();
+  }
+  loadTlChart(sym,tlCurrentInterval,tlCurrentRange);
 }
  
 // ── RIGHT PANEL ──
 const tlWatchlist = [
-  { sym:'AAPL', name:'Apple Inc.', tv:'NASDAQ:AAPL', price:'189.42', chg:'+1.24%', up:true, pct:68 },
-  { sym:'MSFT', name:'Microsoft', tv:'NASDAQ:MSFT', price:'415.60', chg:'+0.87%', up:true, pct:72 },
-  { sym:'NVDA', name:'NVIDIA Corp.', tv:'NASDAQ:NVDA', price:'892.35', chg:'+3.12%', up:true, pct:85 },
-  { sym:'TSLA', name:'Tesla Inc.', tv:'NASDAQ:TSLA', price:'178.20', chg:'-1.45%', up:false, pct:42 },
-  { sym:'GOOGL', name:'Alphabet Inc.', tv:'NASDAQ:GOOGL', price:'171.90', chg:'+0.56%', up:true, pct:61 },
-  { sym:'AMZN', name:'Amazon', tv:'NASDAQ:AMZN', price:'186.75', chg:'+1.08%', up:true, pct:67 },
-  { sym:'SPY', name:'S&P 500 ETF', tv:'AMEX:SPY', price:'524.80', chg:'+0.42%', up:true, pct:58 },
-  { sym:'BTC', name:'Bitcoin/USD', tv:'BINANCE:BTCUSDT', price:'67,440', chg:'+2.31%', up:true, pct:77 },
-  { sym:'ETH', name:'Ethereum/USD', tv:'BINANCE:ETHUSDT', price:'3,512', chg:'+1.87%', up:true, pct:71 },
-  { sym:'GOLD', name:'Gold Spot', tv:'TVC:GOLD', price:'2,321', chg:'-0.22%', up:false, pct:49 },
-];
-const tlIndicators = [
-  { name:'RSI (14)', val:'57.4', sig:'neutral', color:'var(--tl-yellow)' },
-  { name:'MACD (12,26,9)', val:'2.84 ▲', sig:'buy', color:'var(--tl-green)' },
-  { name:'SMA (50)', val:'183.10', sig:'buy', color:'var(--tl-green)' },
-  { name:'EMA (20)', val:'187.42', sig:'neutral', color:'var(--tl-yellow)' },
-  { name:'Bollinger Bands', val:'Mid Band', sig:'neutral', color:'var(--tl-yellow)' },
-  { name:'Volume', val:'62.4M', sig:'buy', color:'var(--tl-green)' },
-  { name:'ATR (14)', val:'3.22', sig:'neutral', color:'var(--tl-yellow)' },
-  { name:'Stochastic', val:'68.2', sig:'neutral', color:'var(--tl-yellow)' },
+  { sym:'AAPL', name:'Apple Inc.', price:'189.42', chg:'+1.24%', up:true, pct:68 },
+  { sym:'MSFT', name:'Microsoft', price:'415.60', chg:'+0.87%', up:true, pct:72 },
+  { sym:'NVDA', name:'NVIDIA Corp.', price:'892.35', chg:'+3.12%', up:true, pct:85 },
+  { sym:'TSLA', name:'Tesla Inc.', price:'178.20', chg:'-1.45%', up:false, pct:42 },
+  { sym:'GOOGL', name:'Alphabet Inc.', price:'171.90', chg:'+0.56%', up:true, pct:61 },
+  { sym:'AMZN', name:'Amazon', price:'186.75', chg:'+1.08%', up:true, pct:67 },
+  { sym:'SPY', name:'S&P 500 ETF', price:'524.80', chg:'+0.42%', up:true, pct:58 },
+  { sym:'BTC-USD', name:'Bitcoin/USD', price:'67,440', chg:'+2.31%', up:true, pct:77 },
+  { sym:'ETH-USD', name:'Ethereum/USD', price:'3,512', chg:'+1.87%', up:true, pct:71 },
+  { sym:'GC=F', name:'Gold Spot', price:'2,321', chg:'-0.22%', up:false, pct:49 },
 ];
  
-function tlSetRpTab(tab, el) {
-  tlRpTab = tab;
-  document.querySelectorAll('.tl-rp-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  tlRenderRpBody();
-}
- 
-function tlRenderRpBody() {
-  const body = document.getElementById('tlRpBody');
-  if (!body) return;
-  if (tlRpTab === 'watchlist') {
-    body.innerHTML = tlWatchlist.map(w => `
-      <div class="tl-wl-item${w.tv===tlCurrentSym?' active':''}" onclick="tlSwitchByWl('${w.tv}')">
+function tlRenderRpBody(){
+  const body=document.getElementById('tlRpBody'); if(!body)return;
+  if(tlRpTabState==='watchlist'){
+    body.innerHTML=tlWatchlist.map(w=>`
+      <div class="tl-wl-item${w.sym===tlCurrentSym?' active':''}" onclick="selectSymbol('${w.sym}','${w.name}','Stock','US')">
         <div>
-          <div class="tl-wl-sym">${w.sym}</div>
+          <div class="tl-wl-sym">${w.sym.replace('-USD','')}</div>
           <div class="tl-wl-name">${w.name}</div>
           <div class="tl-wl-bar"><div class="tl-wl-bar-fill" style="width:${w.pct}%;background:${w.up?'var(--tl-green)':'var(--tl-red)'}"></div></div>
         </div>
@@ -1251,126 +1931,33 @@ function tlRenderRpBody() {
         </div>
       </div>`).join('');
   } else {
-    body.innerHTML = `
+    body.innerHTML=`
       <div class="tl-ind-card">
-        <div class="tl-ind-title">Technical Signals</div>
-        ${tlIndicators.map(ind => `
+        <div class="tl-ind-title">Active Indicators</div>
+        ${[['SMA','SMA (20/50)','buy'],['EMA','EMA (12/26)','neutral'],['BB','Bollinger Bands','neutral'],['RSI','RSI (14)','neutral'],['VOL','Volume Bars','buy']].map(([k,label,sig])=>`
           <div class="tl-ind-row">
-            <span class="tl-ind-label">${ind.name}</span>
-            <div style="display:flex;align-items:center;gap:8px">
-              <span class="tl-ind-val" style="color:${ind.color}">${ind.val}</span>
-              <span class="tl-sig tl-sig-${ind.sig}">${ind.sig.toUpperCase()}</span>
-            </div>
+            <span class="tl-ind-label">${label}</span>
+            <span class="tl-sig tl-sig-${tlActiveIndicators.has(k)?'buy':'neutral'}" style="cursor:pointer" onclick="document.getElementById('ind${k}').click()">${tlActiveIndicators.has(k)?'ON':'OFF'}</span>
           </div>`).join('')}
       </div>
       <div class="tl-ind-card">
-        <div class="tl-ind-title">Overall Signal</div>
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <span style="font-size:0.8rem;color:var(--tl-text)">Aggregate</span>
-          <span class="tl-sig tl-sig-buy" style="font-size:0.75rem;padding:5px 14px">BUY</span>
+        <div class="tl-ind-title">Chart Tips</div>
+        <div style="font-size:0.7rem;color:var(--tl-muted);line-height:1.6">
+          🖱️ <b>Pan:</b> Click and drag<br>
+          🔍 <b>Zoom:</b> Mouse wheel<br>
+          📏 <b>Draw:</b> Use sidebar tools<br>
+          🗑 <b>Clear:</b> Click the trash icon<br>
+          🔍 <b>Any stock:</b> Click + button
         </div>
-        <div style="margin-top:10px;font-size:0.72rem;color:var(--tl-muted)">Based on 8 indicators. Not financial advice.</div>
       </div>`;
   }
 }
  
-function tlSwitchByWl(sym) {
-  tlCurrentSym = sym;
-  document.querySelectorAll('.tl-sym-chip').forEach(c => c.classList.remove('active'));
-  const chip = document.querySelector(`.tl-sym-chip[data-sym="${sym}"]`);
-  if (chip) chip.classList.add('active');
-  tlLoadChart(sym, tlCurrentInterval, tlCurrentType);
-  tlRenderRpBody();
-}
- 
 // ── BOTTOM SECTION ──
-const tlDayTradingCards = [
-  { title:'Opening Range Breakout (ORB)', tag:'STRATEGY', tagBg:'rgba(41,98,255,0.15)', tagColor:'#5c8df6', desc:'Wait for the first 5-30 minutes of market open. Mark the high and low. Enter when price breaks above (long) or below (short) this range with volume confirmation.', stats:[{val:'9:30–10AM',lbl:'Setup Window'},{val:'1:2',lbl:'Min R:R'},{val:'HIGH VOL',lbl:'Confirmation'}] },
-  { title:'Momentum Trading', tag:'STRATEGY', tagBg:'rgba(38,166,154,0.15)', tagColor:'#26a69a', desc:'Find stocks up 5%+ premarket with a catalyst (earnings, news, FDA). Enter on the first pullback to VWAP or key support after the initial surge.', stats:[{val:'+5% PRE',lbl:'Min Move'},{val:'VWAP',lbl:'Key Level'},{val:'CATALYST',lbl:'Required'}] },
-  { title:'Risk Management Rules', tag:'MUST KNOW', tagBg:'rgba(239,83,80,0.15)', tagColor:'#ef5350', desc:'Never risk more than 1-2% of your account per trade. Always set a stop loss before entering. Size your position based on your stop distance, not gut feeling.', stats:[{val:'1-2%',lbl:'Max Risk/Trade'},{val:'ALWAYS',lbl:'Set Stop First'},{val:'3:1',lbl:'Target R:R'}] },
-  { title:'VWAP — Volume Weighted Average Price', tag:'INDICATOR', tagBg:'rgba(201,241,53,0.1)', tagColor:'#c9f135', desc:'VWAP is the average price weighted by volume. Institutions use it as a benchmark. Price above VWAP = bullish intraday. Below = bearish. Look for bounces.', stats:[{val:'INTRADAY',lbl:'Time Frame'},{val:'INST.',lbl:'Used By'},{val:'PIVOT',lbl:'Role'}] },
-  { title:'The 3 Biggest Day Trading Mistakes', tag:'WARNING', tagBg:'rgba(255,107,53,0.15)', tagColor:'#ff6b35', desc:'1) Revenge trading after a loss. 2) No stop loss "because it will come back". 3) Overtrading — taking 20 mediocre setups instead of 3 great ones.', stats:[{val:'STOP',lbl:'Revenge Trade'},{val:'ALWAYS',lbl:'Use Stops'},{val:'<5',lbl:'Trades/Day'}] },
-  { title:'Pre-Market Preparation', tag:'ROUTINE', tagBg:'rgba(155,93,229,0.15)', tagColor:'#9b5de5', desc:'Scan for gappers (stocks moving 5%+ premarket). Check earnings calendar. Mark key levels on charts. Know your max daily loss before markets open.', stats:[{val:'8:00AM',lbl:'Start Prep'},{val:'GAPPERS',lbl:'First Scan'},{val:'MAX LOSS',lbl:'Set Daily'}] },
-];
-const tlScreenerData = [
-  { sym:'NVDA', name:'NVIDIA', price:'892.35', chgUp:true, chg:'3.12', vol:'48.2M', mktcap:'$2.19T', pe:'65.2', pct:85 },
-  { sym:'TSLA', name:'Tesla', price:'178.20', chgUp:false, chg:'1.45', vol:'112.5M', mktcap:'$568B', pe:'38.1', pct:38 },
-  { sym:'AAPL', name:'Apple', price:'189.42', chgUp:true, chg:'1.24', vol:'62.4M', mktcap:'$2.94T', pe:'28.4', pct:68 },
-  { sym:'MSFT', name:'Microsoft', price:'415.60', chgUp:true, chg:'0.87', vol:'22.1M', mktcap:'$3.08T', pe:'34.8', pct:72 },
-  { sym:'AMZN', name:'Amazon', price:'186.75', chgUp:true, chg:'1.08', vol:'33.7M', mktcap:'$1.94T', pe:'42.1', pct:67 },
-  { sym:'GOOGL', name:'Alphabet', price:'171.90', chgUp:true, chg:'0.56', vol:'18.9M', mktcap:'$2.16T', pe:'24.5', pct:61 },
-  { sym:'META', name:'Meta Platforms', price:'492.60', chgUp:true, chg:'2.15', vol:'14.3M', mktcap:'$1.25T', pe:'26.8', pct:79 },
-  { sym:'BRK.B', name:'Berkshire Hath.', price:'408.10', chgUp:true, chg:'0.33', vol:'3.2M', mktcap:'$880B', pe:'22.1', pct:55 },
-];
-const tlGlossary = [
-  { term:'Candlestick', def:'A chart type showing open, high, low, and close prices. Green = closed higher, red = closed lower.' },
-  { term:'Support', def:'A price level where buying pressure prevents the price from falling further.' },
-  { term:'Resistance', def:'A price level where selling pressure prevents the price from rising further.' },
-  { term:'RSI', def:'Relative Strength Index. Ranges 0-100. Above 70 = overbought, below 30 = oversold.' },
-  { term:'MACD', def:'Shows momentum by comparing two EMAs. Crossovers signal potential trend changes.' },
-  { term:'SMA', def:'Simple Moving Average. Average closing price over N periods. 50-day and 200-day are most watched.' },
-  { term:'EMA', def:'Exponential Moving Average. Weights recent prices more. Reacts faster than SMA.' },
-  { term:'Bollinger Bands', def:'Price bands 2 standard deviations from SMA. Price touching upper band = overbought.' },
-  { term:'Volume', def:'Shares traded in a period. High volume confirms price moves. Low volume = weak signal.' },
-  { term:'Bull Flag', def:'Bullish continuation: sharp rise (flagpole), then consolidation, then breakout upward.' },
-  { term:'Head & Shoulders', def:'Reversal pattern with 3 peaks. Signals trend reversal downward when neckline breaks.' },
-  { term:'ATR', def:'Average True Range. Measures volatility. Higher ATR = bigger price swings expected.' },
-  { term:'Golden Cross', def:'50-day SMA crosses above 200-day SMA. Bullish signal. Opposite = Death Cross.' },
-  { term:'Liquidity', def:'Price zones where stop-loss orders cluster. Smart money often hunts these zones first.' },
-  { term:'Market Order', def:'An order to buy/sell immediately at the current market price.' },
-  { term:'Limit Order', def:'Buy/sell only at a specific price or better. More control, not guaranteed to fill.' },
-  { term:'Stop Loss', def:'Automatic sell order triggered when price drops to a set level. Limits your downside.' },
-  { term:'Risk/Reward Ratio', def:'Compare potential profit to potential loss. 3:1 R:R = risk $1 to gain $3.' },
-  { term:'Fibonacci Retracement', def:'Key levels (23.6%, 38.2%, 61.8%) where price may retrace before continuing.' },
-  { term:'Gap Up/Down', def:'When a stock opens significantly higher or lower than its previous closing price.' },
-  { term:'Premarket', def:'Trading before regular hours (4AM–9:30AM ET). Lower volume, higher volatility.' },
-  { term:'VWAP', def:'Volume Weighted Average Price. Institutions use it as a benchmark for fair value intraday.' },
-];
-const tlQuizBank = [
-  { q:"What does an RSI above 70 typically indicate?", opts:["Oversold — time to buy","Overbought — potential reversal","High trading volume","Strong uptrend momentum"], ans:1, exp:"RSI above 70 = overbought. Price may be due for a pullback. RSI below 30 = oversold." },
-  { q:"In a candlestick chart, what does a long upper wick mean?", opts:["Buyers pushed price up and held gains","Sellers pushed price back down from highs","Price gapped up at open","Heavy volume during the session"], ans:1, exp:"A long upper wick means sellers pushed price back down from the highs — bearish rejection." },
-  { q:"What is the 'Golden Cross' signal?", opts:["RSI crossing 50 from below","50-day SMA crossing above 200-day SMA","Price breaking above resistance","MACD crossing the signal line"], ans:1, exp:"Golden Cross = 50-day MA crosses above 200-day MA. Historically bullish. Opposite = Death Cross." },
-  { q:"What does 'support' mean in technical analysis?", opts:["A level where price tends to bounce upward","The highest price in a trend","A bearish candlestick pattern","The average daily trading volume"], ans:0, exp:"Support is a price floor where buying interest prevents further decline." },
-  { q:"What risk/reward ratio is generally recommended for day trading?", opts:["1:1","1:2 or better","3:1 (risk more)","Any ratio if you win often"], ans:1, exp:"Most traders aim for 1:2 R:R — risk $100 to gain $200. This way you can be right less than 50% and still profit." },
-  { q:"What does 'volume confirmation' mean?", opts:["Volume must match the index","A price move is more reliable when accompanied by high volume","Volume always spikes at open","Low volume = strong trend"], ans:1, exp:"Volume confirms price moves. A breakout on high volume = strong signal. On low volume = suspect." },
-  { q:"What is a 'stop loss' order?", opts:["An order that locks in profits","An automatic sell order if price falls to a set level","A limit order to buy lower","An order placed before market open"], ans:1, exp:"A stop loss auto-exits your position if price moves against you. Never trade without one!" },
-  { q:"What does MACD measure?", opts:["Market sentiment","Momentum using two moving averages","Daily volume changes","Price vs 52-week highs"], ans:1, exp:"MACD = Moving Average Convergence/Divergence. Shows momentum comparing 12-period EMA to 26-period EMA." },
-  { q:"In day trading, what is 'the opening range'?", opts:["Bid-ask spread","Price range in the first 5-30 minutes of trading","Gap between yesterday's close and today's open","Weekly high/low"], ans:1, exp:"The Opening Range is the high/low set in the first 5-30 minutes. Breakouts often signal the day's direction." },
-  { q:"What does it mean when price 'gaps up' at open?", opts:["Price slowly rises premarket","Stock opens above yesterday's close","Volume doubles at open","RSI jumps above 70"], ans:1, exp:"A gap up = stock opens higher than its previous close, often due to overnight news or earnings." },
-  { q:"What is a 'Head and Shoulders' pattern?", opts:["A bullish continuation","A neutral consolidation","A bearish reversal with 3 peaks","A crypto-only pattern"], ans:2, exp:"Head & Shoulders = 3 peaks (left shoulder, higher head, right shoulder). Bearish reversal signal." },
-  { q:"What does ATR measure?", opts:["Average daily returns","Typical price range / volatility","Bid-ask spread","Time between trend reversals"], ans:1, exp:"ATR measures volatility — the typical daily price range. Use 1-2x ATR to place your stop loss." },
-  { q:"Why do traders watch the 200-day moving average?", opts:["SEC requires it","Most-watched long-term trend indicator","Predicts earnings","Shows after-hours activity"], ans:1, exp:"The 200-day MA is the most watched indicator by institutions. Price above = uptrend. Below = downtrend." },
-  { q:"What is 'paper trading'?", opts:["Trading physical certificates","Practicing with fake money","Trading penny stocks","Buying via paper forms"], ans:1, exp:"Paper trading = simulated trading with virtual money. Zero risk, real market data. Essential before real trading." },
-  { q:"What percentage of retail day traders lose money?", opts:["~30%","~50%","~70-80%","Over 90% in some studies"], ans:3, exp:"Studies show 70-90%+ of retail day traders lose money. Education and risk management are essential." },
-];
- 
-function tlSetBsTab(tab, el) {
-  tlBsTab = tab;
-  document.querySelectorAll('.tl-bs-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  tlRenderBsBody();
-}
- 
-function tlRenderBsBody() {
-  const body = document.getElementById('tlBsBody');
-  if (!body) return;
-  if (tlBsTab === 'daytrading') {
-    body.innerHTML = `<div class="tl-dt-grid">${tlDayTradingCards.map(c => `
-      <div class="tl-dt-card">
-        <div class="tl-dt-hdr">
-          <div class="tl-dt-title">${c.title}</div>
-          <span class="tl-dt-tag" style="background:${c.tagBg};color:${c.tagColor}">${c.tag}</span>
-        </div>
-        <p>${c.desc}</p>
-        <div class="tl-dt-stats">${c.stats.map(s => `
-          <div class="tl-dt-stat">
-            <div class="tl-dt-stat-val" style="color:${c.tagColor}">${s.val}</div>
-            <div class="tl-dt-stat-lbl">${s.lbl}</div>
-          </div>`).join('')}
-        </div>
-      </div>`).join('')}</div>`;
-  } else if (tlBsTab === 'quiz') {
-    body.innerHTML = `<div class="tl-quiz" id="tlLabQuiz">
+function tlRenderBsBody(){
+  const body=document.getElementById('tlBsBody'); if(!body)return;
+  if(tlBsTabState==='quiz'){
+    body.innerHTML=`<div class="tl-quiz" id="tlLabQuiz">
       <div class="tl-lq-progress"><div class="tl-lq-fill" id="tlLqFill" style="width:0%"></div></div>
       <div class="tl-lq-q" id="tlLqQ"></div>
       <div class="tl-lq-opts" id="tlLqOpts"></div>
@@ -1378,103 +1965,120 @@ function tlRenderBsBody() {
       <div class="tl-lq-nav">
         <button class="tl-lq-next" id="tlLqNext" onclick="tlLqNext()">Next →</button>
         <span class="tl-lq-score">Score: <span id="tlLqScoreDisp">0</span>/15</span>
-      </div>
-    </div>`;
+      </div></div>`;
     tlStartQuiz();
-  } else if (tlBsTab === 'screener') {
-    body.innerHTML = `<div style="overflow-x:auto">
-      <table class="tl-screener">
-        <thead><tr><th>Symbol</th><th>Price</th><th>Change %</th><th>Volume</th><th>Market Cap</th><th>P/E</th><th>52W Range</th></tr></thead>
-        <tbody>${tlScreenerData.map(s => `<tr>
-          <td><div class="tl-scr-sym">${s.sym}</div><div class="tl-scr-name">${s.name}</div></td>
-          <td style="color:var(--tl-bright)">$${s.price}</td>
-          <td class="${s.chgUp?'tl-up':'tl-down'}">${s.chgUp?'+':'-'}${s.chg}%</td>
-          <td style="color:var(--tl-muted)">${s.vol}</td>
-          <td style="color:var(--tl-muted)">${s.mktcap}</td>
-          <td style="color:var(--tl-muted)">${s.pe}</td>
-          <td><div class="tl-minibar"><div class="tl-minibar-fill" style="width:${s.pct}%;background:${s.chgUp?'var(--tl-green)':'var(--tl-red)'}"></div></div></td>
-        </tr>`).join('')}</tbody>
-      </table>
-      <div style="margin-top:12px;font-size:0.7rem;color:var(--tl-muted)">* Educational reference only. Not real-time. Not financial advice.</div>
-    </div>`;
-  } else if (tlBsTab === 'glossary') {
-    body.innerHTML = `<div class="tl-gls-grid">${tlGlossary.map(t => `
-      <div class="tl-gls-item">
-        <div class="tl-gls-term">${t.term}</div>
-        <div class="tl-gls-def">${t.def}</div>
-      </div>`).join('')}</div>`;
+  } else if(tlBsTabState==='screener'){
+    const tlScreenerData=[
+      {sym:'NVDA',name:'NVIDIA',price:'892.35',chgUp:true,chg:'3.12',vol:'48.2M',mktcap:'$2.19T',pe:'65.2',pct:85},
+      {sym:'TSLA',name:'Tesla',price:'178.20',chgUp:false,chg:'1.45',vol:'112.5M',mktcap:'$568B',pe:'38.1',pct:38},
+      {sym:'AAPL',name:'Apple',price:'189.42',chgUp:true,chg:'1.24',vol:'62.4M',mktcap:'$2.94T',pe:'28.4',pct:68},
+      {sym:'MSFT',name:'Microsoft',price:'415.60',chgUp:true,chg:'0.87',vol:'22.1M',mktcap:'$3.08T',pe:'34.8',pct:72},
+      {sym:'AMZN',name:'Amazon',price:'186.75',chgUp:true,chg:'1.08',vol:'33.7M',mktcap:'$1.94T',pe:'42.1',pct:67},
+      {sym:'GOOGL',name:'Alphabet',price:'171.90',chgUp:true,chg:'0.56',vol:'18.9M',mktcap:'$2.16T',pe:'24.5',pct:61},
+      {sym:'META',name:'Meta Platforms',price:'492.60',chgUp:true,chg:'2.15',vol:'14.3M',mktcap:'$1.25T',pe:'26.8',pct:79},
+      {sym:'BRK-B',name:'Berkshire Hath.',price:'408.10',chgUp:true,chg:'0.33',vol:'3.2M',mktcap:'$880B',pe:'22.1',pct:55},
+    ];
+    body.innerHTML=`<div style="overflow-x:auto"><table class="tl-screener"><thead><tr><th>Symbol</th><th>Price</th><th>Change %</th><th>Volume</th><th>Market Cap</th><th>P/E</th><th>52W Range</th></tr></thead><tbody>${tlScreenerData.map(s=>`<tr style="cursor:pointer" onclick="selectSymbol('${s.sym}','${s.name}','Stock','US')"><td><div class="tl-scr-sym">${s.sym}</div><div class="tl-scr-name">${s.name}</div></td><td style="color:var(--tl-bright)">$${s.price}</td><td class="${s.chgUp?'tl-up':'tl-down'}">${s.chgUp?'+':'-'}${s.chg}%</td><td style="color:var(--tl-muted)">${s.vol}</td><td style="color:var(--tl-muted)">${s.mktcap}</td><td style="color:var(--tl-muted)">${s.pe}</td><td><div class="tl-minibar"><div class="tl-minibar-fill" style="width:${s.pct}%;background:${s.chgUp?'var(--tl-green)':'var(--tl-red)'}"></div></div></td></tr>`).join('')}</tbody></table><div style="margin-top:12px;font-size:0.7rem;color:var(--tl-muted)">* Click any row to load chart. Educational reference. Not financial advice.</div></div>`;
+  } else if(tlBsTabState==='glossary'){
+    const tlGlossary=[
+      {term:'Candlestick',def:'A chart type showing open, high, low, and close prices. Green = closed higher, red = closed lower.'},
+      {term:'Support',def:'A price level where buying pressure prevents the price from falling further.'},
+      {term:'Resistance',def:'A price level where selling pressure prevents the price from rising further.'},
+      {term:'RSI',def:'Relative Strength Index. Ranges 0-100. Above 70 = overbought, below 30 = oversold.'},
+      {term:'MACD',def:'Shows momentum by comparing two EMAs. Crossovers signal potential trend changes.'},
+      {term:'SMA',def:'Simple Moving Average. Average closing price over N periods. 50-day and 200-day are most watched.'},
+      {term:'EMA',def:'Exponential Moving Average. Weights recent prices more. Reacts faster than SMA.'},
+      {term:'Bollinger Bands',def:'Price bands 2 standard deviations from SMA. Price touching upper band = overbought.'},
+      {term:'Volume',def:'Shares traded in a period. High volume confirms price moves. Low volume = weak signal.'},
+      {term:'Bull Flag',def:'Bullish continuation: sharp rise (flagpole), then consolidation, then breakout upward.'},
+      {term:'Head & Shoulders',def:'Reversal pattern with 3 peaks. Signals trend reversal downward when neckline breaks.'},
+      {term:'ATR',def:'Average True Range. Measures volatility. Higher ATR = bigger price swings expected.'},
+      {term:'Golden Cross',def:'50-day SMA crosses above 200-day SMA. Bullish signal. Opposite = Death Cross.'},
+      {term:'Fibonacci',def:'Key levels (23.6%, 38.2%, 61.8%) where price may retrace before continuing trend.'},
+      {term:'Market Order',def:'An order to buy/sell immediately at the current market price.'},
+      {term:'Limit Order',def:'Buy/sell only at a specific price or better. More control, not guaranteed to fill.'},
+      {term:'Stop Loss',def:'Automatic sell order triggered when price drops to a set level. Limits your downside.'},
+      {term:'Risk/Reward',def:'Compare potential profit to potential loss. 3:1 R:R = risk $1 to gain $3.'},
+      {term:'VWAP',def:'Volume Weighted Average Price. Institutions use it as a benchmark for fair value intraday.'},
+      {term:'P/E Ratio',def:'Price-to-Earnings ratio. Stock price divided by EPS. Measures if a stock is cheap or expensive.'},
+      {term:'Market Cap',def:'Total company value = share price × shares outstanding. Mega cap = $200B+.'},
+      {term:'Dividend',def:'A portion of company profits paid regularly to shareholders in cash.'},
+    ];
+    body.innerHTML=`<div class="tl-gls-grid">${tlGlossary.map(t=>`<div class="tl-gls-item"><div class="tl-gls-term">${t.term}</div><div class="tl-gls-def">${t.def}</div></div>`).join('')}</div>`;
   }
 }
  
-// ── TL QUIZ ──
-function tlStartQuiz() {
-  tlLqCurrent = 0; tlLqScore = 0; tlLqAnswered = false;
-  tlLqQuestions = [...tlQuizBank].sort(() => Math.random()-0.5);
+// ── QUIZ ──
+const tlQuizBank=[
+  {q:"What does an RSI above 70 typically indicate?",opts:["Oversold — time to buy","Overbought — potential reversal","High trading volume","Strong uptrend momentum"],ans:1,exp:"RSI above 70 = overbought. Price may be due for a pullback. RSI below 30 = oversold."},
+  {q:"In a candlestick chart, what does a long upper wick mean?",opts:["Buyers pushed price up and held gains","Sellers pushed price back down from highs","Price gapped up at open","Heavy volume during the session"],ans:1,exp:"A long upper wick means sellers pushed price back down from the highs — bearish rejection."},
+  {q:"What is the 'Golden Cross' signal?",opts:["RSI crossing 50 from below","50-day SMA crossing above 200-day SMA","Price breaking above resistance","MACD crossing the signal line"],ans:1,exp:"Golden Cross = 50-day MA crosses above 200-day MA. Historically bullish. Opposite = Death Cross."},
+  {q:"What does 'support' mean in technical analysis?",opts:["A level where price tends to bounce upward","The highest price in a trend","A bearish candlestick pattern","The average daily trading volume"],ans:0,exp:"Support is a price floor where buying interest prevents further decline."},
+  {q:"What risk/reward ratio is generally recommended?",opts:["1:1","1:2 or better","3:1 (risk more)","Any ratio if you win often"],ans:1,exp:"Most traders aim for 1:2 R:R — risk $100 to gain $200. This way you can be right less than 50% and still profit."},
+  {q:"What does 'volume confirmation' mean?",opts:["Volume must match the index","A price move is more reliable when accompanied by high volume","Volume always spikes at open","Low volume = strong trend"],ans:1,exp:"Volume confirms price moves. A breakout on high volume = strong signal. On low volume = suspect."},
+  {q:"What does MACD measure?",opts:["Market sentiment","Momentum using two moving averages","Daily volume changes","Price vs 52-week highs"],ans:1,exp:"MACD = Moving Average Convergence/Divergence. Shows momentum comparing 12-period EMA to 26-period EMA."},
+  {q:"What does it mean when price 'gaps up' at open?",opts:["Price slowly rises premarket","Stock opens above yesterday's close","Volume doubles at open","RSI jumps above 70"],ans:1,exp:"A gap up = stock opens higher than its previous close, often due to overnight news or earnings."},
+  {q:"What is a 'Head and Shoulders' pattern?",opts:["A bullish continuation","A neutral consolidation","A bearish reversal with 3 peaks","A crypto-only pattern"],ans:2,exp:"Head & Shoulders = 3 peaks (left shoulder, higher head, right shoulder). Bearish reversal signal."},
+  {q:"What does ATR measure?",opts:["Average daily returns","Typical price range / volatility","Bid-ask spread","Time between trend reversals"],ans:1,exp:"ATR measures volatility — the typical daily price range. Use 1-2x ATR to place your stop loss."},
+  {q:"Why do traders watch the 200-day moving average?",opts:["SEC requires it","Most-watched long-term trend indicator","Predicts earnings","Shows after-hours activity"],ans:1,exp:"The 200-day MA is the most watched indicator by institutions. Price above = uptrend. Below = downtrend."},
+  {q:"What is 'paper trading'?",opts:["Trading physical certificates","Practicing with fake money","Trading penny stocks","Buying via paper forms"],ans:1,exp:"Paper trading = simulated trading with virtual money. Zero risk, real market data. Essential before real trading."},
+  {q:"What does Bollinger Band 'squeeze' suggest?",opts:["Price is stable forever","Low volatility, often preceding a big move","Stock is about to be delisted","High RSI reading"],ans:1,exp:"A Bollinger squeeze = bands narrowing = low volatility. Often precedes a major breakout or breakdown."},
+  {q:"What is a 'Fibonacci retracement'?",opts:["A chart of company earnings","Key price levels (23.6%–78.6%) where reversals often occur","A type of moving average","The dividend yield formula"],ans:1,exp:"Fibonacci levels (23.6%, 38.2%, 61.8%) are price zones where trends often pause or reverse before continuing."},
+  {q:"What percentage of retail day traders lose money?",opts:["~30%","~50%","~70-80%","Over 90% in some studies"],ans:3,exp:"Studies show 70-90%+ of retail day traders lose money. Education and risk management are essential."},
+];
+ 
+let tlLqCurrent=0,tlLqScore=0,tlLqAnswered=false,tlLqQuestions=[];
+function tlStartQuiz(){
+  tlLqCurrent=0;tlLqScore=0;tlLqAnswered=false;
+  tlLqQuestions=[...tlQuizBank].sort(()=>Math.random()-0.5);
   tlRenderLqQ();
 }
-function tlRenderLqQ() {
-  if (tlLqCurrent >= tlLqQuestions.length) { tlShowLqResult(); return; }
-  const q = tlLqQuestions[tlLqCurrent];
-  const total = tlLqQuestions.length;
-  const fill = document.getElementById('tlLqFill');
-  if (fill) fill.style.width = (tlLqCurrent/total*100)+'%';
-  const qEl = document.getElementById('tlLqQ');
-  if (qEl) qEl.innerHTML = `<strong style="color:var(--tl-muted);font-size:0.72rem;font-family:'JetBrains Mono',monospace">Q${tlLqCurrent+1}/${total}</strong><br>${q.q}`;
-  const optsEl = document.getElementById('tlLqOpts');
-  if (optsEl) optsEl.innerHTML = q.opts.map((o,i) => `<button class="tl-lq-opt" onclick="tlLqAnswer(${i})">${o}</button>`).join('');
-  const fb = document.getElementById('tlLqFb');
-  if (fb) fb.className = 'tl-lq-fb';
-  const nxt = document.getElementById('tlLqNext');
-  if (nxt) nxt.style.display = 'none';
-  tlLqAnswered = false;
+function tlRenderLqQ(){
+  if(tlLqCurrent>=tlLqQuestions.length){tlShowLqResult();return;}
+  const q=tlLqQuestions[tlLqCurrent];
+  const total=tlLqQuestions.length;
+  const fill=document.getElementById('tlLqFill');
+  if(fill)fill.style.width=(tlLqCurrent/total*100)+'%';
+  const qEl=document.getElementById('tlLqQ');
+  if(qEl)qEl.innerHTML=`<strong style="color:var(--tl-muted);font-size:0.72rem;font-family:'JetBrains Mono',monospace">Q${tlLqCurrent+1}/${total}</strong><br>${q.q}`;
+  const optsEl=document.getElementById('tlLqOpts');
+  if(optsEl)optsEl.innerHTML=q.opts.map((o,i)=>`<button class="tl-lq-opt" onclick="tlLqAnswer(${i})">${o}</button>`).join('');
+  const fb=document.getElementById('tlLqFb');
+  if(fb)fb.className='tl-lq-fb';
+  const nxt=document.getElementById('tlLqNext');
+  if(nxt)nxt.style.display='none';
+  tlLqAnswered=false;
 }
-function tlLqAnswer(idx) {
-  if (tlLqAnswered) return;
-  tlLqAnswered = true;
-  const q = tlLqQuestions[tlLqCurrent];
-  document.querySelectorAll('.tl-lq-opt').forEach((o,i) => {
-    o.style.pointerEvents = 'none';
-    if (i===q.ans) o.classList.add('correct');
-    else if (i===idx && idx!==q.ans) o.classList.add('wrong');
-  });
-  const fb = document.getElementById('tlLqFb');
-  if (idx===q.ans) {
-    tlLqScore++;
-    const sd = document.getElementById('tlLqScoreDisp');
-    if (sd) sd.textContent = tlLqScore;
-    fb.className = 'tl-lq-fb show good';
-    fb.textContent = '✅ '+q.exp;
-  } else {
-    fb.className = 'tl-lq-fb show bad';
-    fb.textContent = '❌ '+q.exp;
-  }
-  const nxt = document.getElementById('tlLqNext');
-  if (nxt) nxt.style.display = 'inline-block';
+function tlLqAnswer(idx){
+  if(tlLqAnswered)return; tlLqAnswered=true;
+  const q=tlLqQuestions[tlLqCurrent];
+  document.querySelectorAll('.tl-lq-opt').forEach((o,i)=>{ o.style.pointerEvents='none'; if(i===q.ans)o.classList.add('correct'); else if(i===idx&&idx!==q.ans)o.classList.add('wrong'); });
+  const fb=document.getElementById('tlLqFb');
+  if(idx===q.ans){ tlLqScore++; const sd=document.getElementById('tlLqScoreDisp'); if(sd)sd.textContent=tlLqScore; fb.className='tl-lq-fb show good'; fb.textContent='✅ '+q.exp; }
+  else { fb.className='tl-lq-fb show bad'; fb.textContent='❌ '+q.exp; }
+  const nxt=document.getElementById('tlLqNext'); if(nxt)nxt.style.display='inline-block';
 }
-function tlLqNext() { tlLqCurrent++; tlRenderLqQ(); }
-function tlShowLqResult() {
-  const pct = tlLqScore/tlLqQuestions.length;
+function tlLqNext(){tlLqCurrent++;tlRenderLqQ();}
+function tlShowLqResult(){
+  const pct=tlLqScore/tlLqQuestions.length;
   let emoji='🌱',title='Keep practicing!';
-  if (pct>=0.9){emoji='🏆';title='Trading Expert!';}
-  else if (pct>=0.7){emoji='🎯';title='Solid Knowledge!';}
-  else if (pct>=0.5){emoji='📚';title='Getting There!';}
-  const quiz = document.getElementById('tlLabQuiz');
-  if (quiz) quiz.innerHTML = `
-    <div style="text-align:center;padding:24px 0">
-      <div style="font-size:2.5rem;margin-bottom:12px">${emoji}</div>
-      <div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--tl-bright);margin-bottom:8px">${title}</div>
-      <div style="color:var(--tl-muted);font-size:0.82rem;margin-bottom:18px">You scored ${tlLqScore}/${tlLqQuestions.length} — ${Math.round(pct*100)}%</div>
-      <button onclick="tlStartQuiz()" style="background:var(--tl-blue);color:white;border:none;padding:9px 22px;border-radius:5px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer;">Try Again 🔄</button>
-    </div>`;
+  if(pct>=0.9){emoji='🏆';title='Chart Master!';}
+  else if(pct>=0.7){emoji='🎯';title='Solid Knowledge!';}
+  else if(pct>=0.5){emoji='📚';title='Getting There!';}
+  const quiz=document.getElementById('tlLabQuiz');
+  if(quiz)quiz.innerHTML=`<div style="text-align:center;padding:24px 0"><div style="font-size:2.5rem;margin-bottom:12px">${emoji}</div><div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--tl-bright);margin-bottom:8px">${title}</div><div style="color:var(--tl-muted);font-size:0.82rem;margin-bottom:18px">You scored ${tlLqScore}/${tlLqQuestions.length} — ${Math.round(pct*100)}%</div><button onclick="tlStartQuiz()" style="background:var(--tl-blue);color:white;border:none;padding:9px 22px;border-radius:5px;font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;cursor:pointer;">Try Again 🔄</button></div>`;
 }
  
-// Init TL render (no chart yet — loads on open)
-tlRenderRpBody();
-tlRenderBsBody();
+// ── INIT ──
+window.addEventListener('load', ()=>{
+  mmChart.init();
+  tlRenderRpBody();
+  tlRenderBsBody();
+  // Load mini page chart
+  setTimeout(()=>loadMiniPageChart('AAPL'),500);
+});
+window.addEventListener('resize', ()=>{ loadMiniPageChart(miniChartSym); });
  
 </script>
 </body>
 </html>
-
-
-i want you to get rid of the button Day trading lab and daytrading section
