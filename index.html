@@ -1315,3 +1315,711 @@ document.querySelectorAll('.modules-grid .module-card').forEach((card, i) => {
 </style>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budgeting & Saving — MoneyMoves</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#05050a;--surface:#0d0d16;--surface2:#141422;--surface3:#1c1c2e;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --text:#eeeef8;--muted:#6e6e92;
+  --lime:#c9f135;--teal:#00e5c3;--orange:#ff6b35;--purple:#9b5de5;--blue:#4a90f5;
+  --font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.35;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 5%;background:rgba(5,5,10,0.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.logo{font-family:var(--font-display);font-weight:800;font-size:1.2rem;background:linear-gradient(135deg,var(--lime),var(--teal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+.back-btn{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:0.85rem;text-decoration:none;font-weight:500;transition:color 0.2s;}
+.back-btn:hover{color:var(--text);}
+.nav-pills{display:flex;gap:8px;}
+.nav-pill{padding:7px 16px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:0.78rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.2s;font-family:var(--font-body);}
+.nav-pill:hover,.nav-pill.active{border-color:var(--lime);color:var(--lime);background:rgba(201,241,53,0.06);}
+
+.hero{padding:120px 5% 60px;position:relative;overflow:hidden;}
+.hero::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 80% 20%,rgba(201,241,53,0.08),transparent);}
+.breadcrumb{font-size:0.75rem;color:var(--muted);margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.breadcrumb a{color:var(--muted);text-decoration:none;}
+.breadcrumb a:hover{color:var(--lime);}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(201,241,53,0.08);border:1px solid rgba(201,241,53,0.2);border-radius:50px;padding:6px 14px;font-size:0.72rem;color:var(--lime);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:20px;}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.8rem,6vw,5rem);font-weight:800;letter-spacing:-0.04em;line-height:0.95;margin-bottom:20px;}
+.hero h1 span{color:var(--lime);}
+.hero-desc{max-width:600px;color:var(--muted);font-size:1.05rem;line-height:1.7;margin-bottom:32px;}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;}
+.meta-item{display:flex;align-items:center;gap:8px;font-size:0.82rem;color:var(--muted);}
+.meta-icon{width:32px;height:32px;border-radius:10px;background:rgba(201,241,53,0.1);display:flex;align-items:center;justify-content:center;font-size:0.9rem;}
+
+.course-layout{display:grid;grid-template-columns:260px 1fr;gap:0;max-width:1400px;margin:0 auto;padding:0 5% 80px;}
+.sidebar{position:sticky;top:80px;height:fit-content;padding:24px 0;max-height:calc(100vh - 100px);overflow-y:auto;}
+.sidebar::-webkit-scrollbar{width:3px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--surface2);}
+.sidebar-title{font-size:0.68rem;font-weight:700;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px;padding:0 12px;}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;cursor:pointer;margin-bottom:2px;transition:all 0.2s;font-size:0.85rem;color:var(--muted);border:1px solid transparent;}
+.sidebar-item:hover{color:var(--text);background:rgba(255,255,255,0.03);}
+.sidebar-item.active{color:var(--lime);background:rgba(201,241,53,0.06);border-color:rgba(201,241,53,0.15);}
+.sidebar-num{font-family:var(--font-mono);font-size:0.7rem;width:20px;flex-shrink:0;text-align:center;}
+.sidebar-check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.6rem;transition:all 0.3s;}
+.sidebar-check.done{background:var(--lime);border-color:var(--lime);color:#05050a;}
+
+.content{padding:32px 0 0 40px;border-left:1px solid var(--border);}
+.lesson{display:none;animation:fadeIn 0.4s both;}
+.lesson.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.lesson-header{margin-bottom:36px;}
+.lesson-num{font-family:var(--font-mono);font-size:0.72rem;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;}
+.lesson h2{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:14px;}
+.lesson-intro{color:var(--muted);font-size:1.05rem;line-height:1.75;max-width:680px;}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;margin-bottom:20px;}
+.card h3{font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.card p{color:var(--muted);font-size:0.92rem;line-height:1.7;}
+.highlight-box{background:rgba(201,241,53,0.04);border:1px solid rgba(201,241,53,0.15);border-radius:16px;padding:22px 24px;margin:20px 0;}
+.highlight-box .label{font-size:0.68rem;font-weight:700;color:var(--lime);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:20px 0;}
+.info-card{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:18px;}
+.info-card .ic-label{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+.info-card .ic-val{font-family:var(--font-display);font-size:1.5rem;font-weight:800;}
+.info-card .ic-desc{font-size:0.78rem;color:var(--muted);margin-top:4px;}
+.rule-split{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0;}
+.rule-seg{border-radius:14px;padding:20px;text-align:center;}
+.rule-seg .pct{font-family:var(--font-display);font-size:2.2rem;font-weight:800;line-height:1;}
+.rule-seg .name{font-size:0.72rem;font-weight:700;margin-top:6px;text-transform:uppercase;letter-spacing:0.06em;}
+.rule-seg .ex{font-size:0.78rem;color:var(--muted);margin-top:6px;line-height:1.4;}
+.tip-list{display:flex;flex-direction:column;gap:10px;margin-top:14px;}
+.tip{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--surface2);border-radius:12px;border:1px solid var(--border);}
+.tip-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+.tip-body strong{font-size:0.88rem;display:block;margin-bottom:2px;}
+.tip-body span{font-size:0.82rem;color:var(--muted);}
+.step-flow{display:flex;flex-direction:column;gap:0;}
+.step-item{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--border);}
+.step-item:last-child{border-bottom:none;}
+.step-circle{width:36px;height:36px;border-radius:50%;background:var(--lime);color:#05050a;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:0.82rem;flex-shrink:0;}
+.step-body h4{font-family:var(--font-display);font-size:0.96rem;font-weight:700;margin-bottom:4px;}
+.step-body p{font-size:0.86rem;color:var(--muted);line-height:1.6;}
+
+/* ── BUDGET PLANNER ── */
+.planner-section{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:32px;margin:28px 0;}
+.planner-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;}
+.planner-header h3{font-family:var(--font-display);font-size:1.25rem;font-weight:800;}
+.planner-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:28px;}
+.ps-item{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;}
+.ps-label{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
+.ps-val{font-family:var(--font-display);font-size:1.4rem;font-weight:800;}
+.ps-sub{font-size:0.72rem;color:var(--muted);margin-top:2px;}
+.ps-item.income .ps-val{color:var(--lime);}
+.ps-item.needs .ps-val{color:var(--teal);}
+.ps-item.wants .ps-val{color:var(--orange);}
+.ps-item.savings .ps-val{color:var(--purple);}
+
+.planner-table{width:100%;border-collapse:collapse;font-size:0.86rem;}
+.planner-table th{text-align:left;padding:10px 14px;font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;border-bottom:1px solid var(--border);font-family:var(--font-mono);}
+.planner-table td{padding:8px 6px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:middle;}
+.planner-table tr:last-child td{border-bottom:none;}
+.planner-table tr:hover td{background:rgba(255,255,255,0.015);}
+.category-label{display:flex;align-items:center;gap:8px;font-size:0.82rem;font-weight:500;}
+.cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.planner-input{background:var(--surface3);border:1px solid var(--border);border-radius:8px;padding:7px 12px;color:var(--text);font-family:var(--font-mono);font-size:0.82rem;width:120px;transition:border-color 0.2s;}
+.planner-input:focus{outline:none;border-color:rgba(201,241,53,0.4);}
+.planner-input::placeholder{color:var(--muted);}
+.pct-bar-wrap{width:80px;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;}
+.pct-bar{height:100%;border-radius:3px;transition:width 0.4s;}
+.section-divider{background:var(--surface2);border:none;font-size:0.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;padding:8px 14px;}
+.planner-result{margin-top:22px;padding:18px 22px;border-radius:14px;background:rgba(201,241,53,0.04);border:1px solid rgba(201,241,53,0.15);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.pr-label{font-size:0.82rem;color:var(--muted);}
+.pr-val{font-family:var(--font-display);font-size:1.4rem;font-weight:800;}
+.pr-val.positive{color:var(--lime);}
+.pr-val.negative{color:#ef4444;}
+
+/* chart */
+.donut-wrap{display:flex;align-items:center;gap:24px;margin:20px 0;}
+.donut-legend{display:flex;flex-direction:column;gap:8px;}
+.dl-item{display:flex;align-items:center;gap:8px;font-size:0.82rem;}
+.dl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
+.lesson-nav{display:flex;justify-content:space-between;align-items:center;margin-top:40px;padding-top:24px;border-top:1px solid var(--border);}
+.lesson-nav-btn{display:flex;align-items:center;gap:8px;padding:11px 24px;border-radius:50px;border:1px solid var(--border2);background:transparent;color:var(--text);font-family:var(--font-display);font-weight:700;font-size:0.84rem;cursor:pointer;transition:all 0.25s;}
+.lesson-nav-btn:hover{border-color:var(--lime);color:var(--lime);}
+.lesson-nav-btn.primary{background:var(--lime);color:#05050a;border-color:var(--lime);}
+.lesson-nav-btn.primary:hover{box-shadow:0 8px 24px rgba(201,241,53,0.4);transform:translateY(-2px);}
+.complete-btn{display:flex;align-items:center;gap:8px;padding:9px 20px;border-radius:50px;border:1px solid rgba(201,241,53,0.3);background:rgba(201,241,53,0.06);color:var(--lime);font-family:var(--font-display);font-weight:700;font-size:0.82rem;cursor:pointer;transition:all 0.25s;}
+.complete-btn:hover{background:rgba(201,241,53,0.12);}
+.complete-btn.done{background:var(--lime);color:#05050a;}
+.progress-track{height:3px;background:var(--surface2);position:fixed;top:64px;left:0;right:0;z-index:99;}
+.progress-done{height:100%;background:linear-gradient(90deg,var(--lime),var(--teal));transition:width 0.5s;}
+
+@media(max-width:900px){
+  .course-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .content{padding:24px 0 0;}
+  .planner-summary{grid-template-columns:repeat(2,1fr);}
+  .rule-split{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="progress-track"><div class="progress-done" id="progressDone" style="width:0%"></div></div>
+
+<nav>
+  <a href="index.html" class="logo">MoneyMoves 💸</a>
+  <div class="nav-pills">
+    <a href="investing.html" class="nav-pill">📈 Investing</a>
+    <a href="stocks.html" class="nav-pill">🏦 Stocks</a>
+    <a href="business.html" class="nav-pill">🚀 Business</a>
+    <a href="credit.html" class="nav-pill">💳 Credit</a>
+    <a href="taxes.html" class="nav-pill">🧾 Taxes</a>
+  </div>
+  <a href="index.html" class="back-btn">← Back to Home</a>
+</nav>
+
+<div class="hero">
+  <div class="breadcrumb"><a href="index.html">Home</a> › <span style="color:var(--lime)">Budgeting & Saving</span></div>
+  <div class="hero-tag">💰 Foundation Module</div>
+  <h1>Budgeting &<br><span>Saving</span></h1>
+  <p class="hero-desc">Master the fundamentals of money management — from tracking every dollar to building real wealth through smart saving habits.</p>
+  <div class="hero-meta">
+    <div class="meta-item"><div class="meta-icon">📚</div> 5 Lessons</div>
+    <div class="meta-item"><div class="meta-icon">⏱️</div> ~25 min</div>
+    <div class="meta-item"><div class="meta-icon">🔬</div> Interactive Planner</div>
+    <div class="meta-item"><div class="meta-icon">🎯</div> Foundation Level</div>
+  </div>
+</div>
+
+<div class="course-layout">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-title">Course Contents</div>
+    <div class="sidebar-item active" onclick="goLesson(0)">
+      <span class="sidebar-num">01</span>
+      <span style="flex:1">Why Budgets Fail</span>
+      <div class="sidebar-check" id="chk0"></div>
+    </div>
+    <div class="sidebar-item" onclick="goLesson(1)">
+      <span class="sidebar-num">02</span>
+      <span style="flex:1">The 50/30/20 Rule</span>
+      <div class="sidebar-check" id="chk1"></div>
+    </div>
+    <div class="sidebar-item" onclick="goLesson(2)">
+      <span class="sidebar-num">03</span>
+      <span style="flex:1">Emergency Fund Basics</span>
+      <div class="sidebar-check" id="chk2"></div>
+    </div>
+    <div class="sidebar-item" onclick="goLesson(3)">
+      <span class="sidebar-num">04</span>
+      <span style="flex:1">Budget Planner Tool</span>
+      <div class="sidebar-check" id="chk3"></div>
+    </div>
+    <div class="sidebar-item" onclick="goLesson(4)">
+      <span class="sidebar-num">05</span>
+      <span style="flex:1">Saving Strategies</span>
+      <div class="sidebar-check" id="chk4"></div>
+    </div>
+    <div style="height:1px;background:var(--border);margin:16px 0;"></div>
+    <div style="padding:0 12px;">
+      <div style="font-size:0.72rem;color:var(--muted);margin-bottom:6px;">Your Progress</div>
+      <div style="height:4px;background:var(--surface2);border-radius:3px;overflow:hidden;">
+        <div id="sidebarProg" style="height:100%;background:linear-gradient(90deg,var(--lime),var(--teal));width:0%;transition:width 0.4s;"></div>
+      </div>
+      <div style="font-size:0.72rem;color:var(--muted);margin-top:4px;" id="progLabel">0 / 5 completed</div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- LESSON 1 -->
+    <div class="lesson active" id="lesson0">
+      <div class="lesson-header">
+        <div class="lesson-num">LESSON 01 · FOUNDATION</div>
+        <h2>Why Most Budgets Fail<br>— And How to Fix It</h2>
+        <p class="lesson-intro">Most people fail at budgeting not because they're bad with money, but because they use the wrong system. Here's what actually works.</p>
+      </div>
+
+      <div class="card">
+        <h3>🧠 The Psychology of Spending</h3>
+        <p>Research from behavioral economists shows that willpower-based budgets fail within weeks. The problem isn't discipline — it's design. When you have to manually resist spending, you always eventually lose. The solution? Remove the choice entirely by automating your savings first.</p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="ic-label">People who stick to budgets</div>
+          <div class="ic-val" style="color:var(--lime)">~30%</div>
+          <div class="ic-desc">after 3 months without automation</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-label">With automation + tracking</div>
+          <div class="ic-val" style="color:var(--teal)">78%</div>
+          <div class="ic-desc">reach their savings goals</div>
+        </div>
+        <div class="info-card">
+          <div class="ic-label">Avg spending without a budget</div>
+          <div class="ic-val" style="color:var(--orange)">31%</div>
+          <div class="ic-desc">more than planned</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>❌ The 5 Biggest Budgeting Mistakes</h3>
+        <div class="tip-list">
+          <div class="tip"><div class="tip-icon">🎯</div><div class="tip-body"><strong>Setting unrealistic restrictions</strong><span>Cutting everything overnight leads to bingeing. Small, sustainable cuts win over extreme denial.</span></div></div>
+          <div class="tip"><div class="tip-icon">📱</div><div class="tip-body"><strong>Not tracking small purchases</strong><span>$4 coffee × 5 days = $80/month = $960/year. The "small" stuff adds up faster than anything.</span></div></div>
+          <div class="tip"><div class="tip-icon">🔄</div><div class="tip-body"><strong>Saving whatever is "leftover"</strong><span>There's never anything left over. Pay yourself first — automate savings the moment income arrives.</span></div></div>
+          <div class="tip"><div class="tip-icon">📊</div><div class="tip-body"><strong>No categories, just totals</strong><span>Knowing you spent "$400 this week" tells you nothing. You need to know WHERE it went.</span></div></div>
+          <div class="tip"><div class="tip-icon">🎁</div><div class="tip-body"><strong>Forgetting irregular expenses</strong><span>Annual subscriptions, car repairs, holidays — use "sinking funds" to save small monthly amounts for these.</span></div></div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="label">💡 Key Insight</div>
+        <p style="color:var(--text);font-size:0.92rem;line-height:1.7;">The most powerful shift in budgeting is going from reactive to proactive. Instead of looking at what's left after spending, you decide how to allocate money <strong>before you spend a single dollar</strong>. This is called a "zero-based budget" — every dollar gets assigned a job.</p>
+      </div>
+
+      <div class="lesson-nav">
+        <div></div>
+        <div style="display:flex;gap:10px;">
+          <button class="complete-btn" id="mark0" onclick="markDone(0)">Mark Complete ✓</button>
+          <button class="lesson-nav-btn primary" onclick="goLesson(1)">Next Lesson →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON 2 -->
+    <div class="lesson" id="lesson1">
+      <div class="lesson-header">
+        <div class="lesson-num">LESSON 02 · CORE FRAMEWORK</div>
+        <h2>The 50/30/20 Rule<br>That Changes Everything</h2>
+        <p class="lesson-intro">Created by US Senator Elizabeth Warren in her book "All Your Worth", the 50/30/20 rule is the simplest framework for healthy finances.</p>
+      </div>
+
+      <div class="rule-split">
+        <div class="rule-seg" style="background:rgba(0,229,195,0.06);border:1px solid rgba(0,229,195,0.2);">
+          <div class="pct" style="color:var(--teal)">50%</div>
+          <div class="name" style="color:var(--teal)">Needs</div>
+          <div class="ex">Rent, food, utilities, transport, insurance — things you must pay</div>
+        </div>
+        <div class="rule-seg" style="background:rgba(255,107,53,0.06);border:1px solid rgba(255,107,53,0.2);">
+          <div class="pct" style="color:var(--orange)">30%</div>
+          <div class="name" style="color:var(--orange)">Wants</div>
+          <div class="ex">Netflix, eating out, clothes, games — things that improve life but aren't essential</div>
+        </div>
+        <div class="rule-seg" style="background:rgba(201,241,53,0.06);border:1px solid rgba(201,241,53,0.2);">
+          <div class="pct" style="color:var(--lime)">20%</div>
+          <div class="name" style="color:var(--lime)">Savings</div>
+          <div class="ex">Emergency fund, investments, debt payoff — your future wealth</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📐 How to Apply It With Any Income</h3>
+        <p style="margin-bottom:14px;">The 50/30/20 rule works whether you earn $500/month from a part-time job or $5,000 from a salary. It scales perfectly.</p>
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="ic-label">Monthly Income</div>
+            <div class="ic-val" style="color:var(--text)">$1,000</div>
+            <div class="ic-desc">Needs: $500 · Wants: $300 · Save: $200</div>
+          </div>
+          <div class="info-card">
+            <div class="ic-label">Monthly Income</div>
+            <div class="ic-val" style="color:var(--text)">$3,000</div>
+            <div class="ic-desc">Needs: $1,500 · Wants: $900 · Save: $600</div>
+          </div>
+          <div class="info-card">
+            <div class="ic-label">Monthly Income</div>
+            <div class="ic-val" style="color:var(--text)">$500</div>
+            <div class="ic-desc">Needs: $250 · Wants: $150 · Save: $100</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🤔 Needs vs. Wants — The Grey Zone</h3>
+        <div class="tip-list">
+          <div class="tip"><div class="tip-icon">✅</div><div class="tip-body"><strong>Clearly Needs:</strong><span>Rent, groceries (basic), electricity, water, basic phone plan, transport to work</span></div></div>
+          <div class="tip"><div class="tip-icon">🎯</div><div class="tip-body"><strong>Depends (grey area):</strong><span>Gym (could be a want), internet (often a need for work/study), premium phone</span></div></div>
+          <div class="tip"><div class="tip-icon">🎮</div><div class="tip-body"><strong>Clearly Wants:</strong><span>Streaming services, dining out, gaming, luxury brands, travel, hobbies</span></div></div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="label">⚡ Advanced Tip — 70/20/10 for Students</div>
+        <p style="color:var(--text);font-size:0.92rem;line-height:1.7;">If your income is very low (student, part-time), adapt the rule: <strong>70% needs</strong>, <strong>20% wants</strong>, <strong>10% savings</strong>. Getting into the habit of saving 10% now creates the muscle memory that scales as your income grows. Even $20/month adds up to $240/year — and that habit is priceless.</p>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="lesson-nav-btn" onclick="goLesson(0)">← Previous</button>
+        <div style="display:flex;gap:10px;">
+          <button class="complete-btn" id="mark1" onclick="markDone(1)">Mark Complete ✓</button>
+          <button class="lesson-nav-btn primary" onclick="goLesson(2)">Next Lesson →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON 3 -->
+    <div class="lesson" id="lesson2">
+      <div class="lesson-header">
+        <div class="lesson-num">LESSON 03 · SAFETY NET</div>
+        <h2>Your Emergency Fund:<br>Financial Airbag</h2>
+        <p class="lesson-intro">Before you invest a single dollar, you need an emergency fund. It's not exciting — but it's the most important financial move you'll ever make.</p>
+      </div>
+
+      <div class="card">
+        <h3>🚨 Why It's Non-Negotiable</h3>
+        <p>Without an emergency fund, one bad event — a car repair, medical bill, unexpected job loss — forces you into debt. You'll borrow at 20%+ interest rates, undoing months of progress. The emergency fund is your financial shock absorber.</p>
+      </div>
+
+      <div class="step-flow">
+        <div class="step-item">
+          <div class="step-circle">1</div>
+          <div class="step-body">
+            <h4>Start With $1,000 (Mini Fund)</h4>
+            <p>Your first goal is $1,000. This covers most emergencies. At $50/week, you hit this in 5 months. This alone breaks the cycle of going into debt for small emergencies.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-circle">2</div>
+          <div class="step-body">
+            <h4>Build to 3–6 Months of Expenses</h4>
+            <p>Calculate your monthly essential expenses (rent + food + utilities + transport). Multiply by 3 for your target. This covers job loss, illness, or major unexpected costs.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-circle">3</div>
+          <div class="step-body">
+            <h4>Keep It in a High-Yield Savings Account</h4>
+            <p>A High-Yield Savings Account (HYSA) pays 4-5% interest vs 0.01% at traditional banks. Same FDIC protection, 10× the interest. Good options: Marcus, Ally, SoFi, Discover.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-circle">4</div>
+          <div class="step-body">
+            <h4>NEVER Touch It for Non-Emergencies</h4>
+            <p>A concert ticket, sale, or vacation is NOT an emergency. Define your rules in advance: "I only use this for unexpected essential expenses (medical, car, housing, job loss)."</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="label">🏦 HYSA Math — What You're Leaving On the Table</div>
+        <p style="color:var(--text);font-size:0.92rem;line-height:1.7;">$3,000 in a regular savings account at 0.01% APY = <strong>$0.30/year</strong>.<br>$3,000 in a HYSA at 4.5% APY = <strong>$135/year</strong>.<br>That's $134.70/year of free money just for switching. On $10,000 it's $450/year. Do it today.</p>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="lesson-nav-btn" onclick="goLesson(1)">← Previous</button>
+        <div style="display:flex;gap:10px;">
+          <button class="complete-btn" id="mark2" onclick="markDone(2)">Mark Complete ✓</button>
+          <button class="lesson-nav-btn primary" onclick="goLesson(3)">Next: Budget Planner →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON 4 — PLANNER -->
+    <div class="lesson" id="lesson3">
+      <div class="lesson-header">
+        <div class="lesson-num">LESSON 04 · INTERACTIVE TOOL</div>
+        <h2>Your Personal<br>Budget Planner</h2>
+        <p class="lesson-intro">Enter your real numbers below. The planner calculates your 50/30/20 split automatically and shows where your money actually goes.</p>
+      </div>
+
+      <div class="planner-section">
+        <div class="planner-header">
+          <h3>📊 Monthly Budget Planner</h3>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <button onclick="resetPlanner()" style="background:transparent;border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:50px;font-size:0.75rem;cursor:pointer;font-family:var(--font-body);">Reset</button>
+            <button onclick="exportBudget()" style="background:var(--lime);color:#05050a;border:none;padding:7px 16px;border-radius:50px;font-size:0.75rem;font-weight:700;cursor:pointer;font-family:var(--font-display);">Export CSV</button>
+          </div>
+        </div>
+
+        <!-- Income Row -->
+        <div style="background:rgba(201,241,53,0.04);border:1px solid rgba(201,241,53,0.15);border-radius:14px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Monthly Take-Home Income</div>
+            <div style="font-size:0.82rem;color:var(--muted);">Enter your income after tax</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span style="color:var(--muted);font-family:var(--font-mono);">$</span>
+            <input class="planner-input" style="width:150px;font-size:1rem;" id="income" type="number" placeholder="0" oninput="recalc()" value="2000">
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="planner-summary" id="summaryCards">
+          <div class="ps-item income">
+            <div class="ps-label">Total Income</div>
+            <div class="ps-val" id="sumIncome">$2,000</div>
+            <div class="ps-sub">monthly</div>
+          </div>
+          <div class="ps-item needs">
+            <div class="ps-label">Total Needs</div>
+            <div class="ps-val" id="sumNeeds">$0</div>
+            <div class="ps-sub" id="sumNeedsPct">of 50% target ($1,000)</div>
+          </div>
+          <div class="ps-item wants">
+            <div class="ps-label">Total Wants</div>
+            <div class="ps-val" id="sumWants">$0</div>
+            <div class="ps-sub" id="sumWantsPct">of 30% target ($600)</div>
+          </div>
+          <div class="ps-item savings">
+            <div class="ps-label">Savings / Investment</div>
+            <div class="ps-val" id="sumSavings">$0</div>
+            <div class="ps-sub" id="sumSavingsPct">of 20% target ($400)</div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <table class="planner-table">
+          <thead>
+            <tr>
+              <th style="width:40%">Category</th>
+              <th>Budgeted</th>
+              <th>Actual</th>
+              <th style="width:90px">% of Income</th>
+              <th>Diff</th>
+            </tr>
+          </thead>
+          <tbody id="plannerBody">
+          </tbody>
+        </table>
+
+        <div class="planner-result">
+          <div>
+            <div class="pr-label">💰 Monthly Surplus / Deficit</div>
+            <div style="font-size:0.78rem;color:var(--muted);margin-top:2px;">Income minus all planned expenses</div>
+          </div>
+          <div id="surplusVal" class="pr-val positive">$2,000</div>
+        </div>
+
+        <!-- Donut Chart -->
+        <div class="donut-wrap" style="margin-top:24px;">
+          <canvas id="donutCanvas" width="160" height="160"></canvas>
+          <div class="donut-legend" id="donutLegend"></div>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="lesson-nav-btn" onclick="goLesson(2)">← Previous</button>
+        <div style="display:flex;gap:10px;">
+          <button class="complete-btn" id="mark3" onclick="markDone(3)">Mark Complete ✓</button>
+          <button class="lesson-nav-btn primary" onclick="goLesson(4)">Next Lesson →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LESSON 5 -->
+    <div class="lesson" id="lesson4">
+      <div class="lesson-header">
+        <div class="lesson-num">LESSON 05 · ADVANCED STRATEGIES</div>
+        <h2>Saving Hacks That<br>Actually Work</h2>
+        <p class="lesson-intro">Beyond the basics — these are the specific tactics that separate people who save occasionally from people who build real wealth consistently.</p>
+      </div>
+
+      <div class="card">
+        <h3>🏦 The Sinking Fund System</h3>
+        <p style="margin-bottom:14px;">A sinking fund is a dedicated savings bucket for a planned future expense. Instead of getting hit with a $600 car insurance bill out of nowhere, you save $50/month for 12 months. Zero stress.</p>
+        <div class="info-grid">
+          <div class="info-card"><div class="ic-label">Car insurance ($600/yr)</div><div class="ic-val" style="color:var(--teal)">$50/mo</div><div class="ic-desc">12 months to goal</div></div>
+          <div class="info-card"><div class="ic-label">Holiday gifts ($300/yr)</div><div class="ic-val" style="color:var(--orange)">$25/mo</div><div class="ic-desc">12 months to goal</div></div>
+          <div class="info-card"><div class="ic-label">New laptop ($1,200)</div><div class="ic-val" style="color:var(--purple)">$100/mo</div><div class="ic-desc">12 months to goal</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>⚡ The Latte Factor — Real Math</h3>
+        <p style="margin-bottom:14px;">Small daily expenses compound into massive yearly sums. Here's what giving up small habits could actually earn if invested instead:</p>
+        <div class="tip-list">
+          <div class="tip"><div class="tip-icon">☕</div><div class="tip-body"><strong>$5 coffee daily</strong><span>= $1,825/year → invested at 10% for 30 years = <strong style="color:var(--lime)">$328,000</strong></span></div></div>
+          <div class="tip"><div class="tip-icon">🛒</div><div class="tip-body"><strong>Reducing grocery waste by $50/mo</strong><span>= $600/year → invested for 20 years = <strong style="color:var(--lime)">$38,000</strong></span></div></div>
+          <div class="tip"><div class="tip-icon">📺</div><div class="tip-body"><strong>Cutting 3 unused subscriptions ($40/mo)</strong><span>= $480/year → invested for 10 years = <strong style="color:var(--lime)">$8,300</strong></span></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>🤖 Automation Stack — Set It and Forget It</h3>
+        <div class="step-flow">
+          <div class="step-item">
+            <div class="step-circle" style="background:var(--teal)">1</div>
+            <div class="step-body"><h4>Payday → Auto-transfer to HYSA (20%)</h4><p>Set a standing order the same day your paycheck arrives. Pay future-you first.</p></div>
+          </div>
+          <div class="step-item">
+            <div class="step-circle" style="background:var(--purple)">2</div>
+            <div class="step-body"><h4>HYSA → Auto-invest to Roth IRA/Index Fund</h4><p>Set monthly auto-buy of $100+ into a low-cost index fund. Never touches your spending account.</p></div>
+          </div>
+          <div class="step-item">
+            <div class="step-circle" style="background:var(--orange)">3</div>
+            <div class="step-body"><h4>Bills → Auto-pay from dedicated bill account</h4><p>Keep a separate account just for bills. Transfer the exact bill total on payday. Never miss a payment.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="label">🎓 You've Completed This Module!</div>
+        <p style="color:var(--text);font-size:0.95rem;line-height:1.7;margin-bottom:16px;">Great work. You now understand the psychology of budgeting, the 50/30/20 framework, emergency funds, and the automation stack. Apply the Budget Planner to your own numbers — then move on to Investing Basics to make that 20% work even harder.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="investing.html" style="background:var(--lime);color:#05050a;border:none;padding:11px 24px;border-radius:50px;font-family:var(--font-display);font-weight:700;font-size:0.85rem;text-decoration:none;display:inline-flex;align-items:center;gap:8px;">Next: Investing Basics →</a>
+          <a href="index.html" style="background:transparent;color:var(--text);border:1px solid var(--border2);padding:11px 24px;border-radius:50px;font-family:var(--font-display);font-weight:600;font-size:0.85rem;text-decoration:none;">Back to Home</a>
+        </div>
+      </div>
+
+      <div class="lesson-nav">
+        <button class="lesson-nav-btn" onclick="goLesson(3)">← Previous</button>
+        <button class="complete-btn" id="mark4" onclick="markDone(4)">Mark Complete ✓</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── LESSON NAV ──
+let completed = new Set();
+function goLesson(n) {
+  document.querySelectorAll('.lesson').forEach(l => l.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  document.getElementById('lesson' + n).classList.add('active');
+  document.querySelectorAll('.sidebar-item')[n].classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function markDone(n) {
+  completed.add(n);
+  const btn = document.getElementById('mark' + n);
+  btn.textContent = 'Completed ✓';
+  btn.classList.add('done');
+  document.getElementById('chk' + n).textContent = '✓';
+  document.getElementById('chk' + n).classList.add('done');
+  const pct = (completed.size / 5) * 100;
+  document.getElementById('progressDone').style.width = pct + '%';
+  document.getElementById('sidebarProg').style.width = pct + '%';
+  document.getElementById('progLabel').textContent = completed.size + ' / 5 completed';
+}
+
+// ── PLANNER DATA ──
+const categories = [
+  {name:'🏠 Housing / Rent', type:'need', color:'#00e5c3'},
+  {name:'🛒 Groceries', type:'need', color:'#00c4a8'},
+  {name:'⚡ Utilities', type:'need', color:'#00a890'},
+  {name:'🚗 Transport', type:'need', color:'#008f78'},
+  {name:'📱 Phone Bill', type:'need', color:'#007560'},
+  {name:'🏥 Insurance', type:'need', color:'#005c4a'},
+  {name:'🎬 Entertainment', type:'want', color:'#ff6b35'},
+  {name:'🍕 Dining Out', type:'want', color:'#e55a28'},
+  {name:'👕 Clothing', type:'want', color:'#cb491c'},
+  {name:'📦 Subscriptions', type:'want', color:'#b13810'},
+  {name:'🎮 Hobbies', type:'want', color:'#973005'},
+  {name:'💰 Emergency Fund', type:'saving', color:'#9b5de5'},
+  {name:'📈 Investments', type:'saving', color:'#8249cc'},
+  {name:'🎓 Education / Skills', type:'saving', color:'#6a35b3'},
+  {name:'🏦 Other Savings', type:'saving', color:'#52219a'},
+];
+
+function buildTable() {
+  const tbody = document.getElementById('plannerBody');
+  tbody.innerHTML = '';
+  let lastType = '';
+  categories.forEach((cat, i) => {
+    if (cat.type !== lastType) {
+      const header = document.createElement('tr');
+      header.innerHTML = `<td colspan="5" class="section-divider">${cat.type === 'need' ? '🟢 Needs (target: 50%)' : cat.type === 'want' ? '🟠 Wants (target: 30%)' : '🟣 Savings & Investments (target: 20%)'}</td>`;
+      tbody.appendChild(header);
+      lastType = cat.type;
+    }
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><div class="category-label"><div class="cat-dot" style="background:${cat.color}"></div>${cat.name}</div></td>
+      <td><input class="planner-input" type="number" id="bud${i}" placeholder="0" oninput="recalc()" style="width:110px;"></td>
+      <td><input class="planner-input" type="number" id="act${i}" placeholder="0" oninput="recalc()" style="width:110px;"></td>
+      <td><div class="pct-bar-wrap"><div class="pct-bar" id="bar${i}" style="background:${cat.color};width:0%"></div></div><div id="pctLabel${i}" style="font-size:0.68rem;color:var(--muted);margin-top:2px;">0%</div></td>
+      <td id="diff${i}" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--muted);">—</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function recalc() {
+  const income = parseFloat(document.getElementById('income').value) || 0;
+  let totalNeeds = 0, totalWants = 0, totalSavings = 0;
+  categories.forEach((cat, i) => {
+    const bud = parseFloat(document.getElementById('bud' + i).value) || 0;
+    const act = parseFloat(document.getElementById('act' + i).value) || 0;
+    if (cat.type === 'need') totalNeeds += bud;
+    else if (cat.type === 'want') totalWants += bud;
+    else totalSavings += bud;
+    const pct = income > 0 ? Math.min((bud / income) * 100, 100) : 0;
+    document.getElementById('bar' + i).style.width = pct + '%';
+    document.getElementById('pctLabel' + i).textContent = pct.toFixed(1) + '%';
+    const diff = act - bud;
+    const diffEl = document.getElementById('diff' + i);
+    if (act === 0) { diffEl.textContent = '—'; diffEl.style.color = 'var(--muted)'; }
+    else if (diff > 0) { diffEl.textContent = '+$' + diff.toFixed(0); diffEl.style.color = '#ef4444'; }
+    else if (diff < 0) { diffEl.textContent = '-$' + Math.abs(diff).toFixed(0); diffEl.style.color = '#22c55e'; }
+    else { diffEl.textContent = '✓'; diffEl.style.color = 'var(--lime)'; }
+  });
+  const totalExpenses = totalNeeds + totalWants + totalSavings;
+  const surplus = income - totalExpenses;
+  document.getElementById('sumIncome').textContent = '$' + income.toLocaleString();
+  document.getElementById('sumNeeds').textContent = '$' + totalNeeds.toLocaleString();
+  document.getElementById('sumWants').textContent = '$' + totalWants.toLocaleString();
+  document.getElementById('sumSavings').textContent = '$' + totalSavings.toLocaleString();
+  document.getElementById('sumNeedsPct').textContent = income > 0 ? `${((totalNeeds/income)*100).toFixed(1)}% of 50% target ($${(income*0.5).toFixed(0)})` : 'of 50% target';
+  document.getElementById('sumWantsPct').textContent = income > 0 ? `${((totalWants/income)*100).toFixed(1)}% of 30% target ($${(income*0.3).toFixed(0)})` : 'of 30% target';
+  document.getElementById('sumSavingsPct').textContent = income > 0 ? `${((totalSavings/income)*100).toFixed(1)}% of 20% target ($${(income*0.2).toFixed(0)})` : 'of 20% target';
+  const sv = document.getElementById('surplusVal');
+  sv.textContent = (surplus >= 0 ? '+$' : '-$') + Math.abs(surplus).toLocaleString();
+  sv.className = 'pr-val ' + (surplus >= 0 ? 'positive' : 'negative');
+  drawDonut(totalNeeds, totalWants, totalSavings, surplus > 0 ? surplus : 0);
+}
+
+function drawDonut(needs, wants, savings, other) {
+  const canvas = document.getElementById('donutCanvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, 160, 160);
+  const total = needs + wants + savings + other;
+  if (total <= 0) return;
+  const data = [{val:needs,color:'#00e5c3',label:'Needs'},{val:wants,color:'#ff6b35',label:'Wants'},{val:savings,color:'#9b5de5',label:'Savings'},{val:other,color:'#1c1c2e',label:'Unallocated'}];
+  let start = -Math.PI / 2;
+  data.forEach(d => {
+    const sweep = (d.val / total) * 2 * Math.PI;
+    ctx.beginPath(); ctx.moveTo(80, 80);
+    ctx.arc(80, 80, 72, start, start + sweep);
+    ctx.closePath(); ctx.fillStyle = d.color; ctx.fill();
+    start += sweep;
+  });
+  ctx.beginPath(); ctx.arc(80, 80, 44, 0, Math.PI * 2); ctx.fillStyle = '#0d0d16'; ctx.fill();
+  const legend = document.getElementById('donutLegend');
+  legend.innerHTML = data.filter(d => d.val > 0).map(d => `<div class="dl-item"><div class="dl-dot" style="background:${d.color}"></div><span style="color:var(--muted)">${d.label}: <strong style="color:var(--text)">$${d.val.toFixed(0)}</strong></span></div>`).join('');
+}
+
+function resetPlanner() {
+  categories.forEach((_, i) => {
+    document.getElementById('bud' + i).value = '';
+    document.getElementById('act' + i).value = '';
+  });
+  document.getElementById('income').value = '2000';
+  recalc();
+}
+
+function exportBudget() {
+  const income = document.getElementById('income').value || 0;
+  let csv = 'Category,Type,Budgeted,Actual,Difference\n';
+  csv += `Total Income,,${income},,\n`;
+  categories.forEach((cat, i) => {
+    const bud = document.getElementById('bud' + i).value || 0;
+    const act = document.getElementById('act' + i).value || 0;
+    csv += `${cat.name.replace(/[^\w\s]/g, '')},${cat.type},${bud},${act},${(act - bud)}\n`;
+  });
+  const blob = new Blob([csv], {type: 'text/csv'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'monthly-budget.csv'; a.click();
+}
+
+buildTable();
+recalc();
+</script>
+</body>
+</html>
